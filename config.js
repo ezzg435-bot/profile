@@ -18,9 +18,9 @@ const PORTFOLIO_CONFIG = {
     // 🔗 روابط السوشيال ميديا
     // ═══════════════════════════════════════════════════════════════
     socialLinks: {
-        instagram: "https://instagram.com/your_username",
+        instagram: "https://instagram.com/ezz44210",
         discord: "https://discord.com/users/1000711739031162910",
-        github: "https://github.com/your_username",
+        github: "https://github.com/Lazy-01",
         youtube: "https://www.youtube.com/@LLazyReal"
     },
 
@@ -50,7 +50,7 @@ const PORTFOLIO_CONFIG = {
     // ═══════════════════════════════════════════════════════════════
     services: {
         title: "My Expertise",
-        list: "UI & UX Design • Web Development • Graphic Design • Branding & Identity • Wireframing & Prototyping • User Research • Responsive Design • Front-end Development • Creative Solutions • Digital Marketing"
+        list: "Web Development • Graphic Design • Branding & Identity • User Research • Creative Solutions • Digital Marketing"
     },
 
     // ═══════════════════════════════════════════════════════════════
@@ -58,7 +58,7 @@ const PORTFOLIO_CONFIG = {
     // ═══════════════════════════════════════════════════════════════
     about: {
         title: "Let me introduce myself",
-        paragraph1: "I have a strong passion for design and development. I specialize in UI/UX Design and my passion is all about building elegant and professional user interfaces and websites.",
+        paragraph1: "I have a strong passion for design and development. I specialize in Design and my passion is all about building elegant and professional user interfaces and websites.",
         paragraph2: "I also do branding and identity design such as logo design, letterhead and business card, along with photo editing, image cropping and other graphic design services.",
         
         // الإحصائيات
