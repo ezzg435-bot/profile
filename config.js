@@ -39,9 +39,9 @@ const PORTFOLIO_CONFIG = {
         // الطريقة 3: EmailJS (أكثر احترافية)
         // سجل في emailjs.com وحط المعلومات هنا
         emailJS: {
-            serviceID: "your_service_id",
-            templateID: "your_template_id",
-            publicKey: "your_public_key"
+            serviceID: "service_h4pze6l",
+            templateID: "template_4m1ow82",
+            publicKey: "9yHG4h5JQ3gs7i1QA"
         }
     },
 
