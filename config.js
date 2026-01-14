@@ -8,8 +8,8 @@ const PORTFOLIO_CONFIG = {
     // 📝 المعلومات الشخصية
     // ═══════════════════════════════════════════════════════════════
     personalInfo: {
-        name: "Alex",                           // اسمك
-        title: "Web Developer",                 // المسمى الوظيفي
+        name: "Lazy",                           // اسمك
+        title: "Web & Bots Developer",                 // المسمى الوظيفي
         description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus labore dolores esse. Odit similique doloribus tenetur doloremque, sunt commodi in ipsa repudiandae debitis deleniti blanditiis quibusdam quaerat neque asperiores ea.",
         profileImage: "main.jpg"                // اسم ملف الصورة
     },
@@ -19,9 +19,9 @@ const PORTFOLIO_CONFIG = {
     // ═══════════════════════════════════════════════════════════════
     socialLinks: {
         instagram: "https://instagram.com/your_username",
-        discord: "https://discord.gg/your_server",
+        discord: "https://discord.com/users/1000711739031162910",
         github: "https://github.com/your_username",
-        youtube: "https://youtube.com/@your_channel"
+        youtube: "https://www.youtube.com/@LLazyReal"
     },
 
     // ═══════════════════════════════════════════════════════════════
@@ -30,11 +30,11 @@ const PORTFOLIO_CONFIG = {
     email: {
         // الطريقة 1: إرسال مباشر عبر mailto (سهلة لكن محدودة)
         useMailto: true,
-        recipientEmail: "your.email@example.com",
+        recipientEmail: "alikalbouneh268@gmail.com",
         
         // الطريقة 2: استخدام خدمة خارجية مثل FormSubmit أو EmailJS
         // إذا تبي تستخدم FormSubmit، حط الإيميل هنا وغير useMailto إلى false
-        formSubmitEmail: "your.email@example.com",  // FormSubmit.co
+        formSubmitEmail: "alikalbouneh268@gmail.com",  // FormSubmit.co
         
         // الطريقة 3: EmailJS (أكثر احترافية)
         // سجل في emailjs.com وحط المعلومات هنا
