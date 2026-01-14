@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     body: formData
                 })
                 .then(response => {
-                    alert('شكراً! تم إرسال رسالتك بنجاح! 🎉');
+                    alert('شكراً! تم إرسال رسالتك بنجاح!');
                     contactForm.reset();
                 })
                 .catch(error => {
