@@ -82,7 +82,7 @@ nav {
 .nav-links a {
     color: var(--text-white);
     text-decoration: none;
-    font-size: 15px;
+    font-size: 16px;
     transition: all 0.3s;
     position: relative;
 }
@@ -111,24 +111,23 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 100px 50px 50px;
+    padding: var(--spacing-xl) 50px 50px;
     position: relative;
     background: #000000;
-    flex-direction: row-reverse;
 }
 
 .hero-image {
     flex: 1;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     position: relative;
     max-width: 500px;
 }
 
 .profile-container {
     position: relative;
-    width: 400px;
-    height: 400px;
+    width: 450px;
+    height: 450px;
     animation: float 3s ease-in-out infinite;
 }
 
@@ -240,14 +239,14 @@ nav {
 .hero-content {
     flex: 1;
     max-width: 600px;
-    padding-right: 80px;
-    animation: fadeInLeft 1s ease-out;
+    padding-left: 80px;
+    animation: fadeInRight 1s ease-out;
 }
 
-@keyframes fadeInLeft {
+@keyframes fadeInRight {
     from {
         opacity: 0;
-        transform: translateX(50px);
+        transform: translateX(-50px);
     }
     to {
         opacity: 1;
@@ -256,7 +255,7 @@ nav {
 }
 
 .hero-content h1 {
-    font-size: 56px;
+    font-size: 64px;
     margin-bottom: var(--spacing-sm);
     color: var(--text-white);
 }
@@ -276,7 +275,7 @@ nav {
 }
 
 .hero-content h2 {
-    font-size: 38px;
+    font-size: 42px;
     color: var(--text-white);
     margin-bottom: var(--spacing-sm);
 }
@@ -286,21 +285,21 @@ nav {
 }
 
 .hero-content p {
-    font-size: 15px;
+    font-size: 16px;
     color: var(--text-gray);
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     line-height: 1.8;
 }
 
 .social-links {
     display: flex;
     gap: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .social-links a {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     border: 2px solid var(--purple-main);
     border-radius: 50%;
     display: flex;
@@ -313,8 +312,8 @@ nav {
 }
 
 .social-links a svg {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     transition: all 0.4s;
 }
 
@@ -561,33 +560,26 @@ footer p {
 
 @media (max-width: 768px) {
     .hero {
-        flex-direction: column;
+        flex-direction: column-reverse;
         text-align: center;
-        padding-top: 80px;
     }
 
     .hero-content {
-        padding-right: 0;
-        order: 2;
-    }
-
-    .hero-image {
-        order: 1;
-        justify-content: center;
-        margin-bottom: 30px;
+        padding-left: 0;
     }
 
     .hero-content h1 {
-        font-size: 36px;
+        font-size: 42px;
     }
 
     .hero-content h2 {
-        font-size: 28px;
+        font-size: 32px;
     }
 
     .profile-container {
-        width: 280px;
-        height: 280px;
+        width: 300px;
+        height: 300px;
+        margin-bottom: var(--spacing-md);
     }
 
     .about-content {
@@ -595,16 +587,12 @@ footer p {
     }
 
     .nav-links {
-        gap: 15px;
-        font-size: 13px;
+        gap: var(--spacing-sm);
+        font-size: 14px;
     }
 
     header {
-        padding: 12px 20px;
-    }
-
-    .logo {
-        font-size: 20px;
+        padding: var(--spacing-sm);
     }
 
     section {
