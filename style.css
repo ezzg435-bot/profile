@@ -61,7 +61,7 @@ nav {
     font-size: 24px;
     font-weight: bold;
     color: var(--purple-main);
-    animation: glow 2s ease-in-out infinite;
+    animation: glow 1.5s ease-in-out infinite;
 }
 
 @keyframes glow {
@@ -82,7 +82,7 @@ nav {
 .nav-links a {
     color: var(--text-white);
     text-decoration: none;
-    font-size: 16px;
+    font-size: 15px;
     transition: all 0.3s;
     position: relative;
 }
@@ -111,9 +111,10 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--spacing-xl) 50px 50px;
+    padding: 100px 50px 50px;
     position: relative;
     background: #000000;
+    flex-direction: row;
 }
 
 .hero-image {
@@ -126,9 +127,9 @@ nav {
 
 .profile-container {
     position: relative;
-    width: 450px;
-    height: 450px;
-    animation: float 3s ease-in-out infinite;
+    width: 400px;
+    height: 400px;
+    animation: float 2s ease-in-out infinite;
 }
 
 @keyframes float {
@@ -136,7 +137,7 @@ nav {
         transform: translateY(0);
     }
     50% {
-        transform: translateY(-20px);
+        transform: translateY(-15px);
     }
 }
 
@@ -148,7 +149,7 @@ nav {
     position: relative;
     overflow: hidden;
     box-shadow: 0 0 60px rgba(138, 43, 226, 0.6);
-    animation: pulse 2s ease-in-out infinite;
+    animation: pulse 1.5s ease-in-out infinite;
 }
 
 @keyframes pulse {
@@ -187,7 +188,7 @@ nav {
     height: 80px;
     top: -20px;
     right: -20px;
-    animation: orbit1 8s linear infinite;
+    animation: orbit1 6s linear infinite;
 }
 
 .shape-2 {
@@ -195,7 +196,7 @@ nav {
     height: 60px;
     bottom: -10px;
     left: -10px;
-    animation: orbit2 10s linear infinite;
+    animation: orbit2 7s linear infinite;
 }
 
 .shape-3 {
@@ -206,7 +207,7 @@ nav {
     right: -30px;
     background: rgba(218, 112, 214, 0.4);
     border-radius: 50%;
-    animation: orbit3 6s linear infinite;
+    animation: orbit3 5s linear infinite;
 }
 
 @keyframes orbit1 {
@@ -240,13 +241,13 @@ nav {
     flex: 1;
     max-width: 600px;
     padding-left: 80px;
-    animation: fadeInRight 1s ease-out;
+    animation: fadeInRight 0.8s ease-out;
 }
 
 @keyframes fadeInRight {
     from {
         opacity: 0;
-        transform: translateX(-50px);
+        transform: translateX(-30px);
     }
     to {
         opacity: 1;
@@ -255,14 +256,14 @@ nav {
 }
 
 .hero-content h1 {
-    font-size: 64px;
+    font-size: 56px;
     margin-bottom: var(--spacing-sm);
     color: var(--text-white);
 }
 
 .hero-content h1 .highlight {
     color: var(--purple-main);
-    animation: colorChange 3s ease-in-out infinite;
+    animation: colorChange 2s ease-in-out infinite;
 }
 
 @keyframes colorChange {
@@ -275,7 +276,7 @@ nav {
 }
 
 .hero-content h2 {
-    font-size: 42px;
+    font-size: 38px;
     color: var(--text-white);
     margin-bottom: var(--spacing-sm);
 }
@@ -285,21 +286,21 @@ nav {
 }
 
 .hero-content p {
-    font-size: 16px;
+    font-size: 15px;
     color: var(--text-gray);
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     line-height: 1.8;
 }
 
 .social-links {
     display: flex;
     gap: 15px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .social-links a {
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
     border: 2px solid var(--purple-main);
     border-radius: 50%;
     display: flex;
@@ -307,14 +308,14 @@ nav {
     justify-content: center;
     color: var(--text-white);
     text-decoration: none;
-    transition: all 0.4s;
+    transition: all 0.3s;
     position: relative;
 }
 
 .social-links a svg {
-    width: 20px;
-    height: 20px;
-    transition: all 0.4s;
+    width: 22px;
+    height: 22px;
+    transition: all 0.3s;
 }
 
 .social-links a:hover {
@@ -335,7 +336,7 @@ nav {
     text-decoration: none;
     border-radius: 50px;
     font-weight: bold;
-    transition: all 0.4s;
+    transition: all 0.3s;
     border: 2px solid var(--purple-main);
     cursor: pointer;
     position: relative;
@@ -351,7 +352,7 @@ nav {
     height: 0;
     border-radius: 50%;
     background: var(--purple-main);
-    transition: width 0.5s, height 0.5s, top 0.5s, left 0.5s;
+    transition: width 0.4s, height 0.4s, top 0.4s, left 0.4s;
     transform: translate(-50%, -50%);
     z-index: -1;
 }
@@ -439,7 +440,7 @@ section {
     background: rgba(138, 43, 226, 0.1);
     border-radius: 15px;
     border: 1px solid rgba(138, 43, 226, 0.2);
-    transition: all 0.3s;
+    transition: all 0.25s;
 }
 
 .stat-item:hover {
@@ -476,7 +477,7 @@ section {
     padding: var(--spacing-md);
     border-radius: 20px;
     border: 1px solid rgba(138, 43, 226, 0.3);
-    transition: all 0.3s;
+    transition: all 0.25s;
 }
 
 .services-list:hover {
@@ -531,7 +532,7 @@ section {
     border-radius: 10px;
     color: var(--text-white);
     font-size: 16px;
-    transition: all 0.3s;
+    transition: all 0.25s;
 }
 
 .form-group input:focus,
@@ -560,26 +561,33 @@ footer p {
 
 @media (max-width: 768px) {
     .hero {
-        flex-direction: column-reverse;
+        flex-direction: column;
         text-align: center;
+        padding-top: 80px;
+    }
+
+    .hero-image {
+        order: 1;
+        justify-content: center;
+        margin-bottom: 30px;
     }
 
     .hero-content {
         padding-left: 0;
+        order: 2;
     }
 
     .hero-content h1 {
-        font-size: 42px;
+        font-size: 36px;
     }
 
     .hero-content h2 {
-        font-size: 32px;
+        font-size: 28px;
     }
 
     .profile-container {
-        width: 300px;
-        height: 300px;
-        margin-bottom: var(--spacing-md);
+        width: 280px;
+        height: 280px;
     }
 
     .about-content {
@@ -587,12 +595,16 @@ footer p {
     }
 
     .nav-links {
-        gap: var(--spacing-sm);
-        font-size: 14px;
+        gap: 15px;
+        font-size: 13px;
     }
 
     header {
-        padding: var(--spacing-sm);
+        padding: 12px 20px;
+    }
+
+    .logo {
+        font-size: 20px;
     }
 
     section {
