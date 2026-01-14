@@ -186,4 +186,107 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // إضافة الدعم الديناميكي لبطاقة Discord باستخدام Lanyard API (غير متزامن لتجنب تبطيئ الصفحة)
+    const DISCORD_USER_ID = '1000711739031162910';
+    fetch(`https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const discordData = data.data;
+
+                // Banner
+                if (discordData.discord_user.banner) {
+                    document.getElementById('discord-banner').style.backgroundImage = `ur[](https://cdn.discordapp.com/banners/${DISCORD_USER_ID}/${discordData.discord_user.banner}.png?size=600)`;
+                }
+
+                // Profile Picture
+                document.getElementById('discord-avatar').src = `https://cdn.discordapp.com/avatars/${DISCORD_USER_ID}/${discordData.discord_user.avatar}.png?size=256`;
+
+                // Display Name
+                document.getElementById('discord-displayname').textContent = discordData.discord_user.global_name || discordData.discord_user.username;
+
+                // Status (Online/Offline/DND/Idle)
+                const status = discordData.discord_status;
+                document.getElementById('discord-status').textContent = status.charAt(0).toUpperCase() + status.slice(1);
+                document.getElementById('discord-status-indicator').classList.add(status);
+
+                // Bio
+                if (discordData.discord_user.bio) {
+                    document.getElementById('discord-bio').textContent = discordData.discord_user.bio;
+                } else {
+                    document.getElementById('discord-bio').textContent = 'No bio available.';
+                }
+
+                // Badges (بناءً على public_flags و premium_type)
+                const badgesContainer = document.getElementById('discord-badges');
+                const publicFlags = discordData.discord_user.public_flags;
+                const badges = [];
+
+                if (publicFlags & 1) badges.push('Discord Staff');
+                if (publicFlags & 2) badges.push('Partnered Server Owner');
+                if (publicFlags & 4) badges.push('HypeSquad Events');
+                if (publicFlags & 64) badges.push('HypeSquad Bravery');
+                if (publicFlags & 128) badges.push('HypeSquad Brilliance');
+                if (publicFlags & 256) badges.push('HypeSquad Balance');
+                if (publicFlags & 512) badges.push('Early Supporter');
+                if (publicFlags & 16384) badges.push('Bug Hunter Level 2');
+                if (publicFlags & 131072) badges.push('Verified Bot Developer');
+                if (publicFlags & 262144) badges.push('Certified Moderator');
+                if (publicFlags & 4194304) badges.push('Active Developer');
+
+                if (discordData.discord_user.premium_type === 1) badges.push('Nitro Classic');
+                if (discordData.discord_user.premium_type === 2) badges.push('Nitro');
+
+                if (badges.length > 0) {
+                    badges.forEach(badge => {
+                        const badgeEl = document.createElement('span');
+                        badgeEl.classList.add('badge');
+                        badgeEl.textContent = badge;
+                        badgesContainer.appendChild(badgeEl);
+                    });
+                } else {
+                    badgesContainer.innerHTML = '<span>No badges available.</span>';
+                }
+
+                // Custom Status
+                const customStatus = discordData.activities.find(act => act.type === 4);
+                if (customStatus && customStatus.state) {
+                    document.getElementById('discord-custom-status').textContent = `Custom Status: ${customStatus.state}`;
+                } else {
+                    document.getElementById('discord-custom-status').textContent = 'No custom status.';
+                }
+
+                // RPC / Activities
+                const activitiesContainer = document.getElementById('discord-activities');
+                const activities = discordData.activities.filter(act => act.type !== 4); // استبعاد Custom Status
+                if (activities.length > 0) {
+                    activities.forEach(act => {
+                        const actEl = document.createElement('p');
+                        let activityText = '';
+                        switch (act.type) {
+                            case 0: activityText = `Playing: ${act.name}`; break;
+                            case 1: activityText = `Streaming: ${act.name}`; break;
+                            case 2: activityText = `Listening to: ${act.name}`; break;
+                            case 3: activityText = `Watching: ${act.name}`; break;
+                            case 5: activityText = `Competing in: ${act.name}`; break;
+                            default: activityText = `Activity: ${act.name}`;
+                        }
+                        if (act.details) activityText += ` - ${act.details}`;
+                        if (act.state) activityText += ` (${act.state})`;
+                        actEl.textContent = activityText;
+                        activitiesContainer.appendChild(actEl);
+                    });
+                } else {
+                    activitiesContainer.innerHTML = '<p>No current activities.</p>';
+                }
+            } else {
+                // في حال فشل الجلب، عرض رسالة افتراضية
+                document.querySelector('.discord-container').innerHTML = '<p>Unable to load Discord profile. Please check your connection or try later.</p>';
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching Discord data:', error);
+            document.querySelector('.discord-container').innerHTML = '<p>Error loading Discord profile.</p>';
+        });
 });
