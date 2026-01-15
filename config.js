@@ -63,7 +63,7 @@ const PORTFOLIO_CONFIG = {
     // ═══════════════════════════════════════════════════════════════
     // 📧 إعدادات الإيميل للـ Contact Form
     // ═══════════════════════════════════════════════════════════════
-  email: {
+    email: {
         // الطريقة 1: إرسال مباشر عبر mailto (سهلة لكن محدودة)
         useMailto: true,
         recipientEmail: "alikalbouneh268@gmail.com",
@@ -80,7 +80,6 @@ const PORTFOLIO_CONFIG = {
             publicKey: "9yHG4h5JQ3gs7i1QA"
         }
     },
-
     // ═══════════════════════════════════════════════════════════════
     // 💼 الخدمات
     // ═══════════════════════════════════════════════════════════════
@@ -88,6 +87,7 @@ const PORTFOLIO_CONFIG = {
         title: "My Expertise",
         list: "Web Development • Graphic Design • Branding & Identity • User Research • Creative Solutions • Digital Marketing"
     },
+
     // ═══════════════════════════════════════════════════════════════
     // 👤 قسم About Me
     // ═══════════════════════════════════════════════════════════════
@@ -103,6 +103,7 @@ const PORTFOLIO_CONFIG = {
             satisfaction: "95%"
         }
     },
+
     // ═══════════════════════════════════════════════════════════════
     // 🎨 الألوان (اختياري - إذا تبي تغير الألوان)
     // ═══════════════════════════════════════════════════════════════
@@ -112,6 +113,7 @@ const PORTFOLIO_CONFIG = {
         purpleDark: "#6a1bb2"       // البنفسجي الغامق
     }
 };
+
 // ═══════════════════════════════════════════════════════════════
 // ⚠️ لا تعدل تحت هذا الخط - الكود التلقائي
 // ═══════════════════════════════════════════════════════════════
@@ -250,17 +252,52 @@ document.addEventListener('DOMContentLoaded', function() {
                     memberSince.textContent = data.fallback?.memberSince || 'Unknown';
                 }
             }
+            
+            // رسالة الحالة
+            const statusEl = document.getElementById('discordApiStatus');
+            if(statusEl) {
+                if(data.id) {
+                    statusEl.className = 'discord-api-status success';
+                    statusEl.innerHTML = '✅ Live data from Discord';
+                } else {
+                    statusEl.className = 'discord-api-status error';
+                    statusEl.innerHTML = '⚠️ Using fallback data. <a href="https://discord.gg/lanyard" target="_blank">Join Lanyard</a> for live updates';
+                }
+            }
         }
         
         // جلب البيانات من Lanyard API
         async function fetchLanyardData() {
             try {
                 const userId = PORTFOLIO_CONFIG.discord.lanyardUserId;
+                console.log('🎮 Fetching Discord data for user:', userId);
+                
                 const response = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
+                
+                if(!response.ok) {
+                    if(response.status === 404) {
+                        console.error('❌ Error 404: User not found in Lanyard');
+                        console.log('');
+                        console.log('🔧 How to fix:');
+                        console.log('   1. Join Lanyard Discord Server: https://discord.gg/lanyard');
+                        console.log('   2. Wait 2-3 minutes for sync');
+                        console.log('   3. Refresh this page');
+                        console.log('');
+                        console.log('✅ Verify your User ID is correct:', userId);
+                        return null;
+                    }
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
                 const result = await response.json();
+                
+                console.log('📦 Lanyard Response:', result);
                 
                 if(result.success && result.data) {
                     const data = result.data;
+                    console.log('✅ Discord data loaded successfully!');
+                    console.log('👤 Username:', data.discord_user.username);
+                    console.log('🟢 Status:', data.discord_status);
                     return {
                         id: data.discord_user.id,
                         username: data.discord_user.username,
@@ -276,27 +313,48 @@ document.addEventListener('DOMContentLoaded', function() {
                         created_at: data.discord_user.created_at,
                         fallback: PORTFOLIO_CONFIG.discord.fallback
                     };
+                } else {
+                    console.warn('⚠️ Lanyard API returned unsuccessful response');
                 }
             } catch(error) {
-                console.error('Lanyard API Error:', error);
+                console.error('❌ Lanyard API Error:', error);
             }
             return null;
         }
         
         // تحميل البيانات
         if(PORTFOLIO_CONFIG.discord.useLanyard && PORTFOLIO_CONFIG.discord.lanyardUserId) {
+            console.log('🚀 Starting Discord API integration...');
+            
+            // التحقق من وجود User ID
+            if(PORTFOLIO_CONFIG.discord.lanyardUserId === 'YOUR_DISCORD_USER_ID') {
+                console.error('❌ Please set your Discord User ID in config.js!');
+                console.log('📝 How to get your Discord ID:');
+                console.log('   1. Open Discord Settings → Advanced');
+                console.log('   2. Enable "Developer Mode"');
+                console.log('   3. Right-click your profile → Copy User ID');
+                console.log('   4. Paste it in config.js → lanyardUserId');
+                
+                updateDiscordCard({
+                    fallback: PORTFOLIO_CONFIG.discord.fallback
+                });
+                return;
+            }
+            
             fetchLanyardData().then(data => {
                 if(data) {
+                    console.log('Discord Card updated with live data!');
                     updateDiscordCard(data);
                 } else {
-                    // استخدام البيانات الاحتياطية
+                    console.warn('⚠️ Using fallback data');
+                    console.log('💡 Make sure you joined Lanyard server: https://discord.gg/lanyard');
                     updateDiscordCard({
                         fallback: PORTFOLIO_CONFIG.discord.fallback
                     });
                 }
             });
         } else {
-            // استخدام البيانات الاحتياطية مباشرة
+            console.log('ℹ️ Lanyard API disabled, using manual data');
             updateDiscordCard({
                 fallback: PORTFOLIO_CONFIG.discord.fallback
             });
@@ -369,7 +427,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     body: formData
                 })
                 .then(response => {
-                    alert('شكراً! تم إرسال رسالتك بنجاح! 🎉');
+                    alert('شكراً! تم إرسال رسالتك بنجاح!');
                     contactForm.reset();
                 })
                 .catch(error => {
