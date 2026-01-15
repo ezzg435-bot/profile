@@ -1,8 +1,4 @@
-// دالة لتحديث Discord Card
-        async function updateDiscordCard(data) {
-            const config = PORTFOLIO_CONFIG.discord;
-        }
-            // ═══════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 // 🎨 إعدادات الموقع - عدل هنا فقط
 // ═══════════════════════════════════════════════════════════════
 
@@ -12,34 +8,26 @@ const PORTFOLIO_CONFIG = {
     // 📝 المعلومات الشخصية
     // ═══════════════════════════════════════════════════════════════
     personalInfo: {
-        name: "Lazy",                           // اسمك
-        title: "Web Developer",                 // المسمى الوظيفي
+        name: "Lazy",
+        title: "Web Developer",
         description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus labore dolores esse. Odit similique doloribus tenetur doloremque, sunt commodi in ipsa repudiandae debitis deleniti blanditiis quibusdam quaerat neque asperiores ea.",
-        profileImage: "main.jpg"                // اسم ملف الصورة
+        profileImage: "main.jpg"
     },
 
     // ═══════════════════════════════════════════════════════════════
     // 🎮 إعدادات Discord Card
     // ═══════════════════════════════════════════════════════════════
     discord: {
-        // استخدام API لجلب البيانات الحقيقية
-        useLanyard: true,                       // true = جلب الصورة والحالة من API
-        lanyardUserId: "1000711739031162910",   // Discord User ID
+        useLanyard: true,
+        lanyardUserId: "1000711739031162910",
         
-        // البيانات اليدوية (تظهر دائماً)
-        // هذي ما تنجلب من API، لازم تكتبها يدوي
-        username: "._idc",                       // اسمك (اختياري - API يجيبه)
-        discriminator: "",                      // الرقم (اتركه فاضي إذا ما عندك)
-        
-        // البنر - API ما يجيبه، حطه يدوي
-        banner: "linear-gradient(135deg, #8a2be2, #da70d6)", 
-        // أو استخدم صورة: banner: "url('banner.jpg')"
-        
-        // البايو والوصف - يدوي
+        // البيانات اليدوية (تظهر عند فشل API)
+        username: "._idc",
+        discriminator: "",
+        banner: "linear-gradient(135deg, #8a2be2, #da70d6)",
         bio: "Bot Developer • Designer • Gamer",
         aboutMe: "Passionate developer specializing in Discord bots and web development. Love creating interactive experiences and building cool stuff!",
         
-        // الشارات - يدوي (ما تنجلب من API)
         badges: [
             { icon: "👑", tooltip: "Server Owner" },
             { icon: "⚡", tooltip: "Early Supporter" },
@@ -47,18 +35,15 @@ const PORTFOLIO_CONFIG = {
             { icon: "🛠️", tooltip: "Developer" }
         ],
         
-        // الأدوار - يدوي
         roles: [
             { name: "Owner", color: "#ff0000" },
             { name: "Developer", color: "#8a2be2" },
             { name: "Designer", color: "#00d4ff" }
         ],
         
-        // تاريخ الانضمام - يدوي
         memberSince: "Jan 15, 2020"
     },
 
- 
     // ═══════════════════════════════════════════════════════════════
     // 🔗 روابط السوشيال ميديا
     // ═══════════════════════════════════════════════════════════════
@@ -70,25 +55,20 @@ const PORTFOLIO_CONFIG = {
     },
 
     // ═══════════════════════════════════════════════════════════════
-    // 📧 إعدادات الإيميل للـ Contact Form
+    // 📧 إعدادات الإيميل
     // ═══════════════════════════════════════════════════════════════
     email: {
-        // الطريقة 1: إرسال مباشر عبر mailto (سهلة لكن محدودة)
         useMailto: true,
         recipientEmail: "alikalbouneh268@gmail.com",
+        formSubmitEmail: "alikalbouneh268@gmail.com",
         
-        // الطريقة 2: استخدام خدمة خارجية مثل FormSubmit أو EmailJS
-        // إذا تبي تستخدم FormSubmit، حط الإيميل هنا وغير useMailto إلى false
-        formSubmitEmail: "alikalbouneh268@gmail.com",  // FormSubmit.co
-        
-        // الطريقة 3: EmailJS (أكثر احترافية)
-        // سجل في emailjs.com وحط المعلومات هنا
         emailJS: {
             serviceID: "service_h4pze6l",
             templateID: "template_4m1ow82",
             publicKey: "9yHG4h5JQ3gs7i1QA"
         }
     },
+
     // ═══════════════════════════════════════════════════════════════
     // 💼 الخدمات
     // ═══════════════════════════════════════════════════════════════
@@ -105,7 +85,6 @@ const PORTFOLIO_CONFIG = {
         paragraph1: "I have a strong passion for design and development. I specialize in Design and my passion is all about building elegant and professional user interfaces and websites.",
         paragraph2: "I also do branding and identity design such as logo design, letterhead and business card, along with photo editing, image cropping and other graphic design services.",
         
-        // الإحصائيات
         stats: {
             projects: "250+",
             clients: "290+",
@@ -114,19 +93,19 @@ const PORTFOLIO_CONFIG = {
     },
 
     // ═══════════════════════════════════════════════════════════════
-    // 🎨 الألوان (اختياري - إذا تبي تغير الألوان)
+    // 🎨 الألوان
     // ═══════════════════════════════════════════════════════════════
     colors: {
-        purpleMain: "#8a2be2",      // اللون البنفسجي الرئيسي
-        purpleLight: "#da70d6",     // البنفسجي الفاتح
-        purpleDark: "#6a1bb2"       // البنفسجي الغامق
+        purpleMain: "#8a2be2",
+        purpleLight: "#da70d6",
+        purpleDark: "#6a1bb2"
     }
 };
 
 // ═══════════════════════════════════════════════════════════════
 // ⚠️ لا تعدل تحت هذا الخط - الكود التلقائي
 // ═══════════════════════════════════════════════════════════════
-// تطبيق الإعدادات عند تحميل الصفحة
+
 document.addEventListener('DOMContentLoaded', function() {
     
     // تحديث المعلومات الشخصية
@@ -139,39 +118,60 @@ document.addEventListener('DOMContentLoaded', function() {
     const descElements = document.querySelectorAll('.hero-content p');
     if(descElements[0]) descElements[0].textContent = PORTFOLIO_CONFIG.personalInfo.description;
     
-    // تحديث الصورة
     const profileImg = document.querySelector('.profile-image');
     
-    // تحديث Discord Card
+    // ═══════════════════════════════════════════════════════════════
+    // 🎮 Discord Card Integration
+    // ═══════════════════════════════════════════════════════════════
+    
     if(PORTFOLIO_CONFIG.discord) {
         
         // دالة لتحديث Discord Card
-        async function updateDiscordCard(data) {
+        async function updateDiscordCard(apiData) {
+            const config = PORTFOLIO_CONFIG.discord;
+            
+            // تحضير البيانات - إما من API أو من الإعدادات اليدوية
+            const data = {
+                id: apiData?.discord_user?.id || null,
+                username: apiData?.discord_user?.username || config.username,
+                global_name: apiData?.discord_user?.global_name || config.username,
+                discriminator: apiData?.discord_user?.discriminator || config.discriminator,
+                avatar: apiData?.discord_user?.avatar || null,
+                banner: apiData?.discord_user?.banner || null,
+                banner_color: apiData?.discord_user?.banner_color || null,
+                discord_status: apiData?.discord_status || 'offline',
+                fallback: config
+            };
+            
             // البانر
             const banner = document.getElementById('discordBanner');
             if(banner) {
                 if(data.banner) {
-                    banner.style.backgroundImage = `url(https://cdn.discordapp.com/banners/${data.id}/${data.banner}.${data.banner.startsWith('a_') ? 'gif' : 'png'}?size=600)`;
+                    const bannerExt = data.banner.startsWith('a_') ? 'gif' : 'png';
+                    banner.style.backgroundImage = `url(https://cdn.discordapp.com/banners/${data.id}/${data.banner}.${bannerExt}?size=600)`;
                     banner.style.backgroundSize = 'cover';
                     banner.style.backgroundPosition = 'center';
                 } else if(data.banner_color) {
                     banner.style.background = data.banner_color;
-                } else if(data.fallback?.banner) {
-                    if(data.fallback.banner.includes('url')) {
-                        banner.style.backgroundImage = data.fallback.banner;
+                } else {
+                    if(config.banner.includes('url')) {
+                        banner.style.backgroundImage = config.banner;
                         banner.style.backgroundSize = 'cover';
                         banner.style.backgroundPosition = 'center';
                     } else {
-                        banner.style.background = data.fallback.banner;
+                        banner.style.background = config.banner;
                     }
                 }
             }
             
             // الأفاتار
             const avatar = document.getElementById('discordAvatar');
-            const avatarUrl = data.avatar 
-                ? `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.${data.avatar.startsWith('a_') ? 'gif' : 'png'}?size=128`
-                : data.fallback?.avatar || 'main.jpg';
+            let avatarUrl = 'main.jpg';
+            
+            if(data.avatar && data.id) {
+                const avatarExt = data.avatar.startsWith('a_') ? 'gif' : 'png';
+                avatarUrl = `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.${avatarExt}?size=128`;
+            }
             
             if(avatar) avatar.src = avatarUrl;
             if(profileImg) profileImg.src = avatarUrl;
@@ -185,17 +185,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     dnd: '#f23f43',
                     offline: '#80848e'
                 };
-                status.style.background = statusColors[data.discord_status || data.fallback?.status] || statusColors.offline;
+                status.style.background = statusColors[data.discord_status] || statusColors.offline;
             }
             
             // اسم المستخدم
             const username = document.getElementById('discordUsername');
-            if(username) username.textContent = data.global_name || data.username || data.fallback?.username;
+            if(username) username.textContent = data.global_name || data.username;
             
             const discriminator = document.getElementById('discordDiscriminator');
             if(discriminator) {
                 if(data.discriminator && data.discriminator !== '0') {
                     discriminator.textContent = '#' + data.discriminator;
+                    discriminator.style.display = 'inline';
                 } else {
                     discriminator.style.display = 'none';
                 }
@@ -203,18 +204,17 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // البايو
             const bio = document.getElementById('discordBio');
-            if(bio) bio.textContent = data.bio || data.fallback?.bio;
+            if(bio) bio.textContent = config.bio;
             
             // About Me
             const about = document.getElementById('discordAbout');
-            if(about) about.textContent = data.aboutMe || data.fallback?.aboutMe;
+            if(about) about.textContent = config.aboutMe;
             
             // الشارات
             const badgesContainer = document.getElementById('discordBadges');
             if(badgesContainer) {
                 badgesContainer.innerHTML = '';
-                const badgesList = data.badges || data.fallback?.badges || [];
-                badgesList.forEach(badge => {
+                config.badges.forEach(badge => {
                     const badgeEl = document.createElement('div');
                     badgeEl.className = 'discord-badge';
                     badgeEl.textContent = badge.icon;
@@ -226,50 +226,36 @@ document.addEventListener('DOMContentLoaded', function() {
             // الأدوار
             const rolesContainer = document.getElementById('discordRoles');
             const rolesSection = document.getElementById('rolesSection');
-            if(rolesContainer) {
-                const rolesList = data.roles || data.fallback?.roles || [];
-                if(rolesList.length > 0) {
-                    rolesContainer.innerHTML = '';
-                    rolesList.forEach(role => {
-                        const roleEl = document.createElement('div');
-                        roleEl.className = 'discord-role';
-                        roleEl.style.background = role.color + '20';
-                        roleEl.style.border = '1px solid ' + role.color;
-                        roleEl.innerHTML = `
-                            <div class="discord-role-dot" style="background: ${role.color}"></div>
-                            <span style="color: ${role.color}">${role.name}</span>
-                        `;
-                        rolesContainer.appendChild(roleEl);
-                    });
-                } else {
-                    rolesSection.style.display = 'none';
-                }
+            if(rolesContainer && config.roles.length > 0) {
+                rolesContainer.innerHTML = '';
+                config.roles.forEach(role => {
+                    const roleEl = document.createElement('div');
+                    roleEl.className = 'discord-role';
+                    roleEl.style.background = role.color + '20';
+                    roleEl.style.border = '1px solid ' + role.color;
+                    roleEl.innerHTML = `
+                        <div class="discord-role-dot" style="background: ${role.color}"></div>
+                        <span style="color: ${role.color}">${role.name}</span>
+                    `;
+                    rolesContainer.appendChild(roleEl);
+                });
+            } else if(rolesSection) {
+                rolesSection.style.display = 'none';
             }
             
             // تاريخ الانضمام
             const memberSince = document.getElementById('discordMemberSince');
-            if(memberSince) {
-                if(data.created_at) {
-                    const date = new Date(data.created_at);
-                    memberSince.textContent = date.toLocaleDateString('en-US', { 
-                        month: 'short', 
-                        day: 'numeric', 
-                        year: 'numeric' 
-                    });
-                } else {
-                    memberSince.textContent = data.fallback?.memberSince || 'Unknown';
-                }
-            }
+            if(memberSince) memberSince.textContent = config.memberSince;
             
             // رسالة الحالة
             const statusEl = document.getElementById('discordApiStatus');
             if(statusEl) {
                 if(data.id) {
                     statusEl.className = 'discord-api-status success';
-                    statusEl.innerHTML = '✅ Live data from Discord';
+                    statusEl.innerHTML = '✅ Live data from Discord API';
                 } else {
                     statusEl.className = 'discord-api-status error';
-                    statusEl.innerHTML = '⚠️ Using fallback data. <a href="https://discord.gg/lanyard" target="_blank">Join Lanyard</a> for live updates';
+                    statusEl.innerHTML = '⚠️ Using fallback data. Check Discord User ID in config.js';
                 }
             }
         }
@@ -278,33 +264,29 @@ document.addEventListener('DOMContentLoaded', function() {
         async function fetchLanyardData() {
             try {
                 const userId = PORTFOLIO_CONFIG.discord.lanyardUserId;
-                console.log('🎮 Fetching Discord data...');
+                console.log('🎮 Fetching Discord data from Lanyard API...');
                 
                 const response = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
                 
                 if(!response.ok) {
-                    console.warn('⚠️ Lanyard API failed, using local avatar');
+                    console.warn('⚠️ Lanyard API request failed:', response.status);
                     return null;
                 }
                 
                 const result = await response.json();
                 
                 if(result.success && result.data) {
-                    console.log('✅ Got avatar & status from Discord!');
-                    return {
-                        id: result.data.discord_user.id,
-                        username: result.data.discord_user.username,
-                        global_name: result.data.discord_user.global_name,
-                        discriminator: result.data.discord_user.discriminator,
-                        avatar: result.data.discord_user.avatar,
-                        banner: result.data.discord_user.banner,
-                        discord_status: result.data.discord_status
-                    };
+                    console.log('✅ Successfully fetched Discord data!');
+                    console.log('📊 Data:', result.data);
+                    return result.data;
+                } else {
+                    console.warn('⚠️ Lanyard API returned unsuccessful response');
+                    return null;
                 }
             } catch(error) {
-                console.warn('⚠️ API Error, using local data');
+                console.warn('⚠️ Error fetching from Lanyard API:', error.message);
+                return null;
             }
-            return null;
         }
         
         // تحميل البيانات
@@ -317,7 +299,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // تحديث روابط السوشيال ميديا
+    // ═══════════════════════════════════════════════════════════════
+    // 🔗 تحديث روابط السوشيال ميديا
+    // ═══════════════════════════════════════════════════════════════
+    
     const socialLinks = document.querySelectorAll('.social-links a');
     const socialOrder = ['instagram', 'discord', 'github', 'youtube'];
     socialLinks.forEach((link, index) => {
@@ -326,6 +311,10 @@ document.addEventListener('DOMContentLoaded', function() {
             link.href = PORTFOLIO_CONFIG.socialLinks[platform];
         }
     });
+    
+    // ═══════════════════════════════════════════════════════════════
+    // 📋 تحديث المحتوى
+    // ═══════════════════════════════════════════════════════════════
     
     // تحديث قسم الخدمات
     const servicesTitle = document.querySelector('.services-list h3');
@@ -355,7 +344,10 @@ document.addEventListener('DOMContentLoaded', function() {
         document.documentElement.style.setProperty('--purple-dark', PORTFOLIO_CONFIG.colors.purpleDark);
     }
     
-    // معالجة نموذج الاتصال
+    // ═══════════════════════════════════════════════════════════════
+    // 📧 معالجة نموذج الاتصال
+    // ═══════════════════════════════════════════════════════════════
+    
     const contactForm = document.querySelector('.contact-form');
     if(contactForm) {
         contactForm.addEventListener('submit', function(e) {
@@ -366,13 +358,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const message = document.getElementById('message').value;
             
             if(PORTFOLIO_CONFIG.email.useMailto) {
-                // الطريقة 1: mailto (يفتح برنامج الإيميل)
                 const subject = `رسالة من ${name}`;
                 const body = `الاسم: ${name}%0D%0Aالإيميل: ${email}%0D%0A%0D%0Aالرسالة:%0D%0A${message}`;
                 window.location.href = `mailto:${PORTFOLIO_CONFIG.email.recipientEmail}?subject=${subject}&body=${body}`;
                 alert('سيتم فتح برنامج البريد الإلكتروني... ✉️');
             } else {
-                // الطريقة 2: FormSubmit
                 const formData = new FormData();
                 formData.append('name', name);
                 formData.append('email', email);
@@ -393,7 +383,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Smooth scrolling
+    // ═══════════════════════════════════════════════════════════════
+    // 🔄 Smooth Scrolling
+    // ═══════════════════════════════════════════════════════════════
+    
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
