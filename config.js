@@ -1,4 +1,7 @@
-// ═══════════════════════════════════════════════════════════════
+// دالة لتحديث Discord Card
+        async function updateDiscordCard(data) {
+            const config = PORTFOLIO_CONFIG.discord;
+            // ═══════════════════════════════════════════════════════════════
 // 🎨 إعدادات الموقع - عدل هنا فقط
 // ═══════════════════════════════════════════════════════════════
 
@@ -9,47 +12,52 @@ const PORTFOLIO_CONFIG = {
     // ═══════════════════════════════════════════════════════════════
     personalInfo: {
         name: "Lazy",                           // اسمك
-        title: "Bots Developer",                 // المسمى الوظيفي
+        title: "Web Developer",                 // المسمى الوظيفي
         description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus labore dolores esse. Odit similique doloribus tenetur doloremque, sunt commodi in ipsa repudiandae debitis deleniti blanditiis quibusdam quaerat neque asperiores ea.",
         profileImage: "main.jpg"                // اسم ملف الصورة
     },
 
     // ═══════════════════════════════════════════════════════════════
-    // 🎮 إعدادات Discord Card (باستخدام API)
+    // 🎮 إعدادات Discord Card
     // ═══════════════════════════════════════════════════════════════
     discord: {
         // استخدام API لجلب البيانات الحقيقية
-        useAPI: true,                           // true = استخدام API | false = بيانات يدوية
-        userId: "1000711739031162910",         // ضع Discord User ID هنا
+        useLanyard: true,                       // true = جلب الصورة والحالة من API
+        lanyardUserId: "1000711739031162910",   // Discord User ID
         
-        // أو استخدم Lanyard API (أسهل - يعرض الحالة المباشرة)
-        useLanyard: false,                       // true = استخدام Lanyard
-        lanyardUserId: "1000711739031162910",  // نفس الـ ID
+        // البيانات اليدوية (تظهر دائماً)
+        // هذي ما تنجلب من API، لازم تكتبها يدوي
+        username: "._idc",                       // اسمك (اختياري - API يجيبه)
+        discriminator: "",                      // الرقم (اتركه فاضي إذا ما عندك)
         
-        // بيانات احتياطية (في حال فشل API)
-        fallback: {
-            username: "Lazy",
-            discriminator: "#1234",
-            avatar: "main.jpg",
-            banner: "linear-gradient(135deg, #8a2be2, #da70d6)",
-            status: "online",
-            bio: "Bot Developer • Designer • Gamer",
-            aboutMe: "Passionate developer specializing in Discord bots and web development.",
-            badges: [
-                { icon: "👑", tooltip: "Server Owner" },
-                { icon: "⚡", tooltip: "Early Supporter" },
-                { icon: "💎", tooltip: "Nitro" },
-                { icon: "🛠️", tooltip: "Developer" }
-            ],
-            roles: [
-                { name: "Owner", color: "#ff0000" },
-                { name: "Developer", color: "#8a2be2" },
-                { name: "Designer", color: "#00d4ff" }
-            ],
-            memberSince: "Jan 15, 2020"
-        }
+        // البنر - API ما يجيبه، حطه يدوي
+        banner: "linear-gradient(135deg, #8a2be2, #da70d6)", 
+        // أو استخدم صورة: banner: "url('banner.jpg')"
+        
+        // البايو والوصف - يدوي
+        bio: "Bot Developer • Designer • Gamer",
+        aboutMe: "Passionate developer specializing in Discord bots and web development. Love creating interactive experiences and building cool stuff!",
+        
+        // الشارات - يدوي (ما تنجلب من API)
+        badges: [
+            { icon: "👑", tooltip: "Server Owner" },
+            { icon: "⚡", tooltip: "Early Supporter" },
+            { icon: "💎", tooltip: "Nitro" },
+            { icon: "🛠️", tooltip: "Developer" }
+        ],
+        
+        // الأدوار - يدوي
+        roles: [
+            { name: "Owner", color: "#ff0000" },
+            { name: "Developer", color: "#8a2be2" },
+            { name: "Designer", color: "#00d4ff" }
+        ],
+        
+        // تاريخ الانضمام - يدوي
+        memberSince: "Jan 15, 2020"
     },
 
+ 
     // ═══════════════════════════════════════════════════════════════
     // 🔗 روابط السوشيال ميديا
     // ═══════════════════════════════════════════════════════════════
@@ -117,7 +125,6 @@ const PORTFOLIO_CONFIG = {
 // ═══════════════════════════════════════════════════════════════
 // ⚠️ لا تعدل تحت هذا الخط - الكود التلقائي
 // ═══════════════════════════════════════════════════════════════
-
 // تطبيق الإعدادات عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', function() {
     
@@ -270,94 +277,42 @@ document.addEventListener('DOMContentLoaded', function() {
         async function fetchLanyardData() {
             try {
                 const userId = PORTFOLIO_CONFIG.discord.lanyardUserId;
-                console.log('🎮 Fetching Discord data for user:', userId);
+                console.log('🎮 Fetching Discord data...');
                 
                 const response = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
                 
                 if(!response.ok) {
-                    if(response.status === 404) {
-                        console.error('❌ Error 404: User not found in Lanyard');
-                        console.log('');
-                        console.log('🔧 How to fix:');
-                        console.log('   1. Join Lanyard Discord Server: https://discord.gg/lanyard');
-                        console.log('   2. Wait 2-3 minutes for sync');
-                        console.log('   3. Refresh this page');
-                        console.log('');
-                        console.log('✅ Verify your User ID is correct:', userId);
-                        return null;
-                    }
-                    throw new Error(`HTTP ${response.status}`);
+                    console.warn('⚠️ Lanyard API failed, using local avatar');
+                    return null;
                 }
                 
                 const result = await response.json();
                 
-                console.log('📦 Lanyard Response:', result);
-                
                 if(result.success && result.data) {
-                    const data = result.data;
-                    console.log('✅ Discord data loaded successfully!');
-                    console.log('👤 Username:', data.discord_user.username);
-                    console.log('🟢 Status:', data.discord_status);
+                    console.log('✅ Got avatar & status from Discord!');
                     return {
-                        id: data.discord_user.id,
-                        username: data.discord_user.username,
-                        global_name: data.discord_user.global_name,
-                        discriminator: data.discord_user.discriminator,
-                        avatar: data.discord_user.avatar,
-                        banner: data.discord_user.banner,
-                        banner_color: data.discord_user.banner_color,
-                        bio: data.discord_user.bio,
-                        discord_status: data.discord_status,
-                        activities: data.activities,
-                        spotify: data.spotify,
-                        created_at: data.discord_user.created_at,
-                        fallback: PORTFOLIO_CONFIG.discord.fallback
+                        id: result.data.discord_user.id,
+                        username: result.data.discord_user.username,
+                        global_name: result.data.discord_user.global_name,
+                        discriminator: result.data.discord_user.discriminator,
+                        avatar: result.data.discord_user.avatar,
+                        banner: result.data.discord_user.banner,
+                        discord_status: result.data.discord_status
                     };
-                } else {
-                    console.warn('⚠️ Lanyard API returned unsuccessful response');
                 }
             } catch(error) {
-                console.error('❌ Lanyard API Error:', error);
+                console.warn('⚠️ API Error, using local data');
             }
             return null;
         }
         
         // تحميل البيانات
         if(PORTFOLIO_CONFIG.discord.useLanyard && PORTFOLIO_CONFIG.discord.lanyardUserId) {
-            console.log('🚀 Starting Discord API integration...');
-            
-            // التحقق من وجود User ID
-            if(PORTFOLIO_CONFIG.discord.lanyardUserId === 'YOUR_DISCORD_USER_ID') {
-                console.error('❌ Please set your Discord User ID in config.js!');
-                console.log('📝 How to get your Discord ID:');
-                console.log('   1. Open Discord Settings → Advanced');
-                console.log('   2. Enable "Developer Mode"');
-                console.log('   3. Right-click your profile → Copy User ID');
-                console.log('   4. Paste it in config.js → lanyardUserId');
-                
-                updateDiscordCard({
-                    fallback: PORTFOLIO_CONFIG.discord.fallback
-                });
-                return;
-            }
-            
-            fetchLanyardData().then(data => {
-                if(data) {
-                    console.log('Discord Card updated with live data!');
-                    updateDiscordCard(data);
-                } else {
-                    console.warn('⚠️ Using fallback data');
-                    console.log('💡 Make sure you joined Lanyard server: https://discord.gg/lanyard');
-                    updateDiscordCard({
-                        fallback: PORTFOLIO_CONFIG.discord.fallback
-                    });
-                }
+            fetchLanyardData().then(apiData => {
+                updateDiscordCard(apiData);
             });
         } else {
-            console.log('ℹ️ Lanyard API disabled, using manual data');
-            updateDiscordCard({
-                fallback: PORTFOLIO_CONFIG.discord.fallback
-            });
+            updateDiscordCard(null);
         }
     }
     
@@ -427,7 +382,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     body: formData
                 })
                 .then(response => {
-                    alert('شكراً! تم إرسال رسالتك بنجاح!');
+                    alert('شكراً! تم إرسال رسالتك بنجاح! 🎉');
                     contactForm.reset();
                 })
                 .catch(error => {
