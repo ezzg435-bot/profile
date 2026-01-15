@@ -593,6 +593,35 @@ section {
     color: #dbdee1;
 }
 
+.discord-api-status {
+    margin-top: 12px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    text-align: center;
+    display: none;
+}
+
+.discord-api-status.error {
+    display: block;
+    background: rgba(242, 63, 67, 0.1);
+    border: 1px solid #f23f43;
+    color: #f23f43;
+}
+
+.discord-api-status.success {
+    display: block;
+    background: rgba(35, 165, 89, 0.1);
+    border: 1px solid #23a559;
+    color: #23a559;
+}
+
+.discord-api-status a {
+    color: inherit;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
 .about-content {
     display: flex;
     gap: 80px;
