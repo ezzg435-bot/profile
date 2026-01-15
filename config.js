@@ -23,7 +23,7 @@ const PORTFOLIO_CONFIG = {
         userId: "1000711739031162910",         // ضع Discord User ID هنا
         
         // أو استخدم Lanyard API (أسهل - يعرض الحالة المباشرة)
-        useLanyard: true,                       // true = استخدام Lanyard
+        useLanyard: false,                       // true = استخدام Lanyard
         lanyardUserId: "1000711739031162910",  // نفس الـ ID
         
         // بيانات احتياطية (في حال فشل API)
