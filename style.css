@@ -403,6 +403,196 @@ section {
     background: linear-gradient(180deg, #000, #0a0a0a, #000);
 }
 
+.discord-card-container {
+    max-width: 400px;
+    margin: 0 auto 60px;
+    animation: fadeInUp 0.8s ease-out;
+    position: relative;
+}
+
+.discord-card-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--purple-main);
+    font-size: 14px;
+    display: none;
+}
+
+.discord-card-container.loading .discord-card-loading {
+    display: block;
+}
+
+.discord-card-container.loading .discord-card {
+    opacity: 0.5;
+}
+
+.discord-card {
+    background: #18191c;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.discord-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(138, 43, 226, 0.3);
+}
+
+.discord-banner {
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(135deg, var(--purple-main), var(--purple-light));
+    position: relative;
+}
+
+.discord-profile-section {
+    padding: 0 16px;
+    position: relative;
+    margin-top: -50px;
+}
+
+.discord-avatar-wrapper {
+    position: relative;
+    width: 92px;
+    height: 92px;
+}
+
+.discord-avatar {
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    border: 8px solid #18191c;
+    object-fit: cover;
+}
+
+.discord-status {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: 20px;
+    height: 20px;
+    background: #23a559;
+    border-radius: 50%;
+    border: 4px solid #18191c;
+}
+
+.discord-badges {
+    position: absolute;
+    top: 50px;
+    left: 110px;
+    display: flex;
+    gap: 6px;
+}
+
+.discord-badge {
+    width: 24px;
+    height: 24px;
+    background: var(--purple-main);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.discord-badge:hover {
+    transform: scale(1.15);
+}
+
+.discord-info {
+    padding: 16px;
+    background: #2b2d31;
+    color: #f2f3f5;
+}
+
+.discord-username {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.discriminator {
+    color: #b5bac1;
+    font-weight: 400;
+}
+
+.discord-bio {
+    font-size: 14px;
+    color: #f2f3f5;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.discord-divider {
+    height: 1px;
+    background: #3f4147;
+    margin: 12px 0;
+}
+
+.discord-section {
+    margin-bottom: 16px;
+}
+
+.discord-section:last-child {
+    margin-bottom: 0;
+}
+
+.discord-section h4 {
+    font-size: 12px;
+    font-weight: 700;
+    color: #b5bac1;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.discord-about {
+    font-size: 14px;
+    color: #dbdee1;
+    line-height: 1.5;
+}
+
+.discord-roles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.discord-role {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    gap: 4px;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.discord-role:hover {
+    transform: translateY(-2px);
+}
+
+.discord-role-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.discord-date {
+    font-size: 14px;
+    color: #dbdee1;
+}
+
 .about-content {
     display: flex;
     gap: 80px;
@@ -588,6 +778,34 @@ footer p {
     .profile-container {
         width: 280px;
         height: 280px;
+    }
+
+    .discord-card-container {
+        max-width: 95%;
+        margin-bottom: 40px;
+    }
+
+    .discord-banner {
+        height: 100px;
+    }
+
+    .discord-avatar-wrapper,
+    .discord-avatar {
+        width: 80px;
+        height: 80px;
+    }
+
+    .discord-profile-section {
+        margin-top: -40px;
+    }
+
+    .discord-badges {
+        top: 40px;
+        left: 95px;
+    }
+
+    .discord-username {
+        font-size: 18px;
     }
 
     .about-content {
