@@ -9,46 +9,9 @@ const PORTFOLIO_CONFIG = {
     // ═══════════════════════════════════════════════════════════════
     personalInfo: {
         name: "Lazy",                           // اسمك
-        title: "Web Developer",                 // المسمى الوظيفي
+        title: "Bots Developer",                 // المسمى الوظيفي
         description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus labore dolores esse. Odit similique doloribus tenetur doloremque, sunt commodi in ipsa repudiandae debitis deleniti blanditiis quibusdam quaerat neque asperiores ea.",
         profileImage: "main.jpg"                // اسم ملف الصورة
-    },
-
-    // ═══════════════════════════════════════════════════════════════
-    // 🎮 إعدادات Discord Card
-    // ═══════════════════════════════════════════════════════════════
-    discord: {
-        // البيانات اليدوية فقط
-        username: "._idc",
-        discriminator: "",
-        
-        // صورة الملف الشخصي
-        profileImage: "main.jpg",
-        
-        // البنر
-        banner: "linear-gradient(135deg, #8a2be2, #da70d6)",
-        
-        // البايو والوصف
-        bio: "Bot Developer • Designer • Gamer",
-        aboutMe: "Passionate developer specializing in Discord bots and web development. Love creating interactive experiences and building cool stuff!",
-        
-        // الشارات
-        badges: [
-            { icon: "👑", tooltip: "Server Owner" },
-            { icon: "⚡", tooltip: "Early Supporter" },
-            { icon: "💎", tooltip: "Nitro" },
-            { icon: "🛠️", tooltip: "Developer" }
-        ],
-        
-        // الأدوار
-        roles: [
-            { name: "Owner", color: "#ff0000" },
-            { name: "Developer", color: "#8a2be2" },
-            { name: "Designer", color: "#00d4ff" }
-        ],
-        
-        // تاريخ الانضمام
-        memberSince: "Jan 15, 2020"
     },
 
     // ═══════════════════════════════════════════════════════════════
@@ -81,7 +44,7 @@ const PORTFOLIO_CONFIG = {
             publicKey: "9yHG4h5JQ3gs7i1QA"
         }
     },
-    
+
     // ═══════════════════════════════════════════════════════════════
     // 💼 الخدمات
     // ═══════════════════════════════════════════════════════════════
@@ -120,123 +83,6 @@ const PORTFOLIO_CONFIG = {
 // ⚠️ لا تعدل تحت هذا الخط - الكود التلقائي
 // ═══════════════════════════════════════════════════════════════
 
-// دالة لتحديث Discord Card
-async function updateDiscordCard() {
-    const config = PORTFOLIO_CONFIG.discord;
-    
-    // البانر
-    const banner = document.getElementById('discordBanner');
-    if(banner) {
-        if(config.banner) {
-            if(config.banner.includes('url')) {
-                banner.style.backgroundImage = config.banner;
-                banner.style.backgroundSize = 'cover';
-                banner.style.backgroundPosition = 'center';
-            } else {
-                banner.style.background = config.banner;
-            }
-        }
-    }
-    
-    // الأفاتار
-    const avatar = document.getElementById('discordAvatar');
-    const profileImg = document.querySelector('.profile-image');
-    if(avatar) avatar.src = config.profileImage || 'main.jpg';
-    if(profileImg) profileImg.src = config.profileImage || 'main.jpg';
-    
-    // الحالة (Status) - ثابتة
-    const status = document.querySelector('.discord-status');
-    if(status) {
-        status.style.background = '#23a559'; // حالة Online ثابتة
-    }
-    
-    // اسم المستخدم
-    const username = document.getElementById('discordUsername');
-    if(username) username.textContent = config.username || 'Username';
-    
-    const discriminator = document.getElementById('discordDiscriminator');
-    if(discriminator) {
-        discriminator.style.display = 'none';
-    }
-    
-    // البايو
-    const bio = document.getElementById('discordBio');
-    if(bio) bio.textContent = config.bio || 'Your bio here';
-    
-    // About Me
-    const about = document.getElementById('discordAbout');
-    if(about) about.textContent = config.aboutMe || 'About me section';
-    
-    // الشارات
-    const badgesContainer = document.getElementById('discordBadges');
-    if(badgesContainer) {
-        badgesContainer.innerHTML = '';
-        config.badges.forEach(badge => {
-            const badgeEl = document.createElement('div');
-            badgeEl.className = 'discord-badge';
-            badgeEl.textContent = badge.icon;
-            badgeEl.title = badge.tooltip;
-            
-            // تأثير عند التمرير
-            badgeEl.addEventListener('mouseenter', () => {
-                badgeEl.style.transform = 'scale(1.2) rotate(5deg)';
-                badgeEl.style.boxShadow = '0 0 15px rgba(138, 43, 226, 0.5)';
-            });
-            badgeEl.addEventListener('mouseleave', () => {
-                badgeEl.style.transform = 'scale(1)';
-                badgeEl.style.boxShadow = 'none';
-            });
-            
-            badgesContainer.appendChild(badgeEl);
-        });
-    }
-    
-    // الأدوار
-    const rolesContainer = document.getElementById('discordRoles');
-    const rolesSection = document.getElementById('rolesSection');
-    if(rolesContainer) {
-        if(config.roles.length > 0) {
-            rolesContainer.innerHTML = '';
-            config.roles.forEach(role => {
-                const roleEl = document.createElement('div');
-                roleEl.className = 'discord-role';
-                roleEl.style.background = role.color + '20';
-                roleEl.style.border = '1px solid ' + role.color;
-                roleEl.innerHTML = `
-                    <div class="discord-role-dot" style="background: ${role.color}"></div>
-                    <span style="color: ${role.color}">${role.name}</span>
-                `;
-                
-                // تأثير عند التمرير
-                roleEl.addEventListener('mouseenter', () => {
-                    roleEl.style.transform = 'translateY(-3px)';
-                    roleEl.style.boxShadow = '0 5px 15px rgba(138, 43, 226, 0.3)';
-                });
-                roleEl.addEventListener('mouseleave', () => {
-                    roleEl.style.transform = 'translateY(0)';
-                    roleEl.style.boxShadow = 'none';
-                });
-                
-                rolesContainer.appendChild(roleEl);
-            });
-        } else {
-            rolesSection.style.display = 'none';
-        }
-    }
-    
-    // تاريخ الانضمام
-    const memberSince = document.getElementById('discordMemberSince');
-    if(memberSince) {
-        memberSince.textContent = config.memberSince || 'Unknown';
-    }
-    
-    // إخفاء رسالة الحالة API
-    const statusEl = document.getElementById('discordApiStatus');
-    if(statusEl) {
-        statusEl.style.display = 'none';
-    }
-}
-
 // تطبيق الإعدادات عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', function() {
     
@@ -254,11 +100,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const profileImg = document.querySelector('.profile-image');
     if(profileImg) profileImg.src = PORTFOLIO_CONFIG.personalInfo.profileImage;
     
-    // تحديث Discord Card
-    if(PORTFOLIO_CONFIG.discord) {
-        updateDiscordCard();
-    }
-    
     // تحديث روابط السوشيال ميديا
     const socialLinks = document.querySelectorAll('.social-links a');
     const socialOrder = ['instagram', 'discord', 'github', 'youtube'];
@@ -266,7 +107,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const platform = socialOrder[index];
         if(platform && PORTFOLIO_CONFIG.socialLinks[platform]) {
             link.href = PORTFOLIO_CONFIG.socialLinks[platform];
-            link.target = "_blank"; // فتح الرابط في تبويب جديد
         }
     });
     
@@ -326,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     body: formData
                 })
                 .then(response => {
-                    alert('شكراً! تم إرسال رسالتك بنجاح! 🎉');
+                    alert('شكراً! تم إرسال رسالتك بنجاح!');
                     contactForm.reset();
                 })
                 .catch(error => {
@@ -346,55 +186,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
-    // إضافة تأثيرات تفاعلية
-    addInteractionEffects();
 });
-
-// دالة لإضافة تأثيرات تفاعلية
-function addInteractionEffects() {
-    // تأثيرات للأزرار
-    const buttons = document.querySelectorAll('.btn');
-    buttons.forEach(btn => {
-        btn.classList.add('btn-pulse');
-        
-        btn.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-3px) scale(1.05)';
-        });
-        
-        btn.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-        });
-    });
-    
-    // تأثيرات للبطاقات
-    const cards = document.querySelectorAll('.discord-card, .services-list, .stat-item');
-    cards.forEach(card => {
-        card.classList.add('card-hover');
-    });
-    
-    // تأثيرات للشكل العائم الجديد
-    const floatingShapes = document.querySelector('.floating-shapes');
-    if(floatingShapes) {
-        const shape4 = document.createElement('div');
-        shape4.className = 'shape shape-4';
-        floatingShapes.appendChild(shape4);
-    }
-    
-    // تأثيرات عند التمرير
-    const revealElements = document.querySelectorAll('.section-title, .section-subtitle, .services-list, .discord-card, .about-text, .stat-item');
-    
-    const revealOnScroll = function() {
-        revealElements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const elementVisible = 150;
-            
-            if (elementTop < window.innerHeight - elementVisible) {
-                element.classList.add('active');
-            }
-        });
-    };
-    
-    window.addEventListener('scroll', revealOnScroll);
-    revealOnScroll(); // تنفيذ مرة أولى عند التحميل
-}
