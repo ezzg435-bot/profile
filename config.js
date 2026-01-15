@@ -15,6 +15,42 @@ const PORTFOLIO_CONFIG = {
     },
 
     // ═══════════════════════════════════════════════════════════════
+    // 🎮 إعدادات Discord Card (باستخدام API)
+    // ═══════════════════════════════════════════════════════════════
+    discord: {
+        // استخدام API لجلب البيانات الحقيقية
+        useAPI: true,                           // true = استخدام API | false = بيانات يدوية
+        userId: "1000711739031162910",         // ضع Discord User ID هنا
+        
+        // أو استخدم Lanyard API (أسهل - يعرض الحالة المباشرة)
+        useLanyard: true,                       // true = استخدام Lanyard
+        lanyardUserId: "1000711739031162910",  // نفس الـ ID
+        
+        // بيانات احتياطية (في حال فشل API)
+        fallback: {
+            username: "Lazy",
+            discriminator: "#1234",
+            avatar: "main.jpg",
+            banner: "linear-gradient(135deg, #8a2be2, #da70d6)",
+            status: "online",
+            bio: "Bot Developer • Designer • Gamer",
+            aboutMe: "Passionate developer specializing in Discord bots and web development.",
+            badges: [
+                { icon: "👑", tooltip: "Server Owner" },
+                { icon: "⚡", tooltip: "Early Supporter" },
+                { icon: "💎", tooltip: "Nitro" },
+                { icon: "🛠️", tooltip: "Developer" }
+            ],
+            roles: [
+                { name: "Owner", color: "#ff0000" },
+                { name: "Developer", color: "#8a2be2" },
+                { name: "Designer", color: "#00d4ff" }
+            ],
+            memberSince: "Jan 15, 2020"
+        }
+    },
+
+    // ═══════════════════════════════════════════════════════════════
     // 🔗 روابط السوشيال ميديا
     // ═══════════════════════════════════════════════════════════════
     socialLinks: {
@@ -27,7 +63,7 @@ const PORTFOLIO_CONFIG = {
     // ═══════════════════════════════════════════════════════════════
     // 📧 إعدادات الإيميل للـ Contact Form
     // ═══════════════════════════════════════════════════════════════
-    email: {
+  email: {
         // الطريقة 1: إرسال مباشر عبر mailto (سهلة لكن محدودة)
         useMailto: true,
         recipientEmail: "alikalbouneh268@gmail.com",
@@ -52,7 +88,6 @@ const PORTFOLIO_CONFIG = {
         title: "My Expertise",
         list: "Web Development • Graphic Design • Branding & Identity • User Research • Creative Solutions • Digital Marketing"
     },
-
     // ═══════════════════════════════════════════════════════════════
     // 👤 قسم About Me
     // ═══════════════════════════════════════════════════════════════
@@ -68,7 +103,6 @@ const PORTFOLIO_CONFIG = {
             satisfaction: "95%"
         }
     },
-
     // ═══════════════════════════════════════════════════════════════
     // 🎨 الألوان (اختياري - إذا تبي تغير الألوان)
     // ═══════════════════════════════════════════════════════════════
@@ -78,7 +112,6 @@ const PORTFOLIO_CONFIG = {
         purpleDark: "#6a1bb2"       // البنفسجي الغامق
     }
 };
-
 // ═══════════════════════════════════════════════════════════════
 // ⚠️ لا تعدل تحت هذا الخط - الكود التلقائي
 // ═══════════════════════════════════════════════════════════════
@@ -98,7 +131,177 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // تحديث الصورة
     const profileImg = document.querySelector('.profile-image');
-    if(profileImg) profileImg.src = PORTFOLIO_CONFIG.personalInfo.profileImage;
+    
+    // تحديث Discord Card
+    if(PORTFOLIO_CONFIG.discord) {
+        
+        // دالة لتحديث Discord Card
+        async function updateDiscordCard(data) {
+            // البانر
+            const banner = document.getElementById('discordBanner');
+            if(banner) {
+                if(data.banner) {
+                    banner.style.backgroundImage = `url(https://cdn.discordapp.com/banners/${data.id}/${data.banner}.${data.banner.startsWith('a_') ? 'gif' : 'png'}?size=600)`;
+                    banner.style.backgroundSize = 'cover';
+                    banner.style.backgroundPosition = 'center';
+                } else if(data.banner_color) {
+                    banner.style.background = data.banner_color;
+                } else if(data.fallback?.banner) {
+                    if(data.fallback.banner.includes('url')) {
+                        banner.style.backgroundImage = data.fallback.banner;
+                        banner.style.backgroundSize = 'cover';
+                        banner.style.backgroundPosition = 'center';
+                    } else {
+                        banner.style.background = data.fallback.banner;
+                    }
+                }
+            }
+            
+            // الأفاتار
+            const avatar = document.getElementById('discordAvatar');
+            const avatarUrl = data.avatar 
+                ? `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.${data.avatar.startsWith('a_') ? 'gif' : 'png'}?size=128`
+                : data.fallback?.avatar || 'main.jpg';
+            
+            if(avatar) avatar.src = avatarUrl;
+            if(profileImg) profileImg.src = avatarUrl;
+            
+            // الحالة (Status)
+            const status = document.querySelector('.discord-status');
+            if(status) {
+                const statusColors = {
+                    online: '#23a559',
+                    idle: '#f0b232',
+                    dnd: '#f23f43',
+                    offline: '#80848e'
+                };
+                status.style.background = statusColors[data.discord_status || data.fallback?.status] || statusColors.offline;
+            }
+            
+            // اسم المستخدم
+            const username = document.getElementById('discordUsername');
+            if(username) username.textContent = data.global_name || data.username || data.fallback?.username;
+            
+            const discriminator = document.getElementById('discordDiscriminator');
+            if(discriminator) {
+                if(data.discriminator && data.discriminator !== '0') {
+                    discriminator.textContent = '#' + data.discriminator;
+                } else {
+                    discriminator.style.display = 'none';
+                }
+            }
+            
+            // البايو
+            const bio = document.getElementById('discordBio');
+            if(bio) bio.textContent = data.bio || data.fallback?.bio;
+            
+            // About Me
+            const about = document.getElementById('discordAbout');
+            if(about) about.textContent = data.aboutMe || data.fallback?.aboutMe;
+            
+            // الشارات
+            const badgesContainer = document.getElementById('discordBadges');
+            if(badgesContainer) {
+                badgesContainer.innerHTML = '';
+                const badgesList = data.badges || data.fallback?.badges || [];
+                badgesList.forEach(badge => {
+                    const badgeEl = document.createElement('div');
+                    badgeEl.className = 'discord-badge';
+                    badgeEl.textContent = badge.icon;
+                    badgeEl.title = badge.tooltip;
+                    badgesContainer.appendChild(badgeEl);
+                });
+            }
+            
+            // الأدوار
+            const rolesContainer = document.getElementById('discordRoles');
+            const rolesSection = document.getElementById('rolesSection');
+            if(rolesContainer) {
+                const rolesList = data.roles || data.fallback?.roles || [];
+                if(rolesList.length > 0) {
+                    rolesContainer.innerHTML = '';
+                    rolesList.forEach(role => {
+                        const roleEl = document.createElement('div');
+                        roleEl.className = 'discord-role';
+                        roleEl.style.background = role.color + '20';
+                        roleEl.style.border = '1px solid ' + role.color;
+                        roleEl.innerHTML = `
+                            <div class="discord-role-dot" style="background: ${role.color}"></div>
+                            <span style="color: ${role.color}">${role.name}</span>
+                        `;
+                        rolesContainer.appendChild(roleEl);
+                    });
+                } else {
+                    rolesSection.style.display = 'none';
+                }
+            }
+            
+            // تاريخ الانضمام
+            const memberSince = document.getElementById('discordMemberSince');
+            if(memberSince) {
+                if(data.created_at) {
+                    const date = new Date(data.created_at);
+                    memberSince.textContent = date.toLocaleDateString('en-US', { 
+                        month: 'short', 
+                        day: 'numeric', 
+                        year: 'numeric' 
+                    });
+                } else {
+                    memberSince.textContent = data.fallback?.memberSince || 'Unknown';
+                }
+            }
+        }
+        
+        // جلب البيانات من Lanyard API
+        async function fetchLanyardData() {
+            try {
+                const userId = PORTFOLIO_CONFIG.discord.lanyardUserId;
+                const response = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
+                const result = await response.json();
+                
+                if(result.success && result.data) {
+                    const data = result.data;
+                    return {
+                        id: data.discord_user.id,
+                        username: data.discord_user.username,
+                        global_name: data.discord_user.global_name,
+                        discriminator: data.discord_user.discriminator,
+                        avatar: data.discord_user.avatar,
+                        banner: data.discord_user.banner,
+                        banner_color: data.discord_user.banner_color,
+                        bio: data.discord_user.bio,
+                        discord_status: data.discord_status,
+                        activities: data.activities,
+                        spotify: data.spotify,
+                        created_at: data.discord_user.created_at,
+                        fallback: PORTFOLIO_CONFIG.discord.fallback
+                    };
+                }
+            } catch(error) {
+                console.error('Lanyard API Error:', error);
+            }
+            return null;
+        }
+        
+        // تحميل البيانات
+        if(PORTFOLIO_CONFIG.discord.useLanyard && PORTFOLIO_CONFIG.discord.lanyardUserId) {
+            fetchLanyardData().then(data => {
+                if(data) {
+                    updateDiscordCard(data);
+                } else {
+                    // استخدام البيانات الاحتياطية
+                    updateDiscordCard({
+                        fallback: PORTFOLIO_CONFIG.discord.fallback
+                    });
+                }
+            });
+        } else {
+            // استخدام البيانات الاحتياطية مباشرة
+            updateDiscordCard({
+                fallback: PORTFOLIO_CONFIG.discord.fallback
+            });
+        }
+    }
     
     // تحديث روابط السوشيال ميديا
     const socialLinks = document.querySelectorAll('.social-links a');
@@ -166,7 +369,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     body: formData
                 })
                 .then(response => {
-                    alert('شكراً! تم إرسال رسالتك بنجاح!');
+                    alert('شكراً! تم إرسال رسالتك بنجاح! 🎉');
                     contactForm.reset();
                 })
                 .catch(error => {
