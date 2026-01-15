@@ -210,6 +210,17 @@ nav {
     animation: orbit3 5s linear infinite;
 }
 
+.shape-4 {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    bottom: 50px;
+    right: -15px;
+    background: rgba(138, 43, 226, 0.2);
+    border-radius: 50%;
+    animation: orbit4 8s linear infinite;
+}
+
 @keyframes orbit1 {
     from {
         transform: rotate(0deg) translateX(60px) rotate(0deg);
@@ -234,6 +245,15 @@ nav {
     }
     to {
         transform: rotate(360deg) translateY(50px) rotate(-360deg);
+    }
+}
+
+@keyframes orbit4 {
+    from {
+        transform: rotate(0deg) translateX(40px) rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg) translateX(40px) rotate(-360deg);
     }
 }
 
@@ -368,6 +388,22 @@ nav {
     box-shadow: 0 10px 30px rgba(138, 43, 226, 0.4);
 }
 
+.btn-pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(138, 43, 226, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(138, 43, 226, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(138, 43, 226, 0);
+    }
+}
+
 section {
     padding: var(--spacing-xl) 50px;
     background: #000;
@@ -436,9 +472,13 @@ section {
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.discord-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 40px rgba(138, 43, 226, 0.3);
+.card-hover {
+    transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(138, 43, 226, 0.3);
 }
 
 .discord-banner {
@@ -466,6 +506,10 @@ section {
     border-radius: 50%;
     border: 8px solid #18191c;
     object-fit: cover;
+}
+
+.image-float {
+    animation: float 3s ease-in-out infinite;
 }
 
 .discord-status {
@@ -776,6 +820,38 @@ footer {
 
 footer p {
     color: var(--text-dark-gray);
+}
+
+/* تأثيرات إضافية */
+
+.text-gradient {
+    background: linear-gradient(90deg, var(--purple-main), var(--purple-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.list-item-hover {
+    transition: all 0.3s ease;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.list-item-hover:hover {
+    background: rgba(138, 43, 226, 0.1);
+    padding-left: 20px;
+    border-left: 3px solid var(--purple-main);
 }
 
 @media (max-width: 768px) {
