@@ -9,7 +9,7 @@ const PORTFOLIO_CONFIG = {
     // ═══════════════════════════════════════════════════════════════
     personalInfo: {
         name: "ϟ〢𝑳á𝒛𝒚",                           // اسمك
-        title: "Bots Developer",                 // المسمى الوظيفي
+        title: "Bots & Web Developer",                 // المسمى الوظيفي
         description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus labore dolores esse. Odit similique doloribus tenetur doloremque, sunt commodi in ipsa repudiandae debitis deleniti blanditiis quibusdam quaerat neque asperiores ea.",
         profileImage: "main.jpg"                // اسم ملف الصورة
     },
