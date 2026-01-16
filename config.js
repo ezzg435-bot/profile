@@ -44,14 +44,12 @@ const PORTFOLIO_CONFIG = {
         primaryColor: "#231646",
         accentColor: "#09030e",
         badges: [
-    { src: "https://discordresources.com/img/verified.svg", title: "Blue Feather" },
-    { src: "https://discordresources.com/img/earlysupporter.svg", title: "Lazy" },
     { src: "https://discordresources.com/img/subscriptions/bronze.svg", title: "nitro" },
     { src: "https://discordresources.com/img/hypesquadbalance.svg", title: "HypeSquad" },
     { src: "https://discordresources.com/img/boosts/discordboost1.svg", title: "boost" },
     { src: "https://discordresources.com/img/username.png", title: "Originally Known as" },
-    { src: "https://discordresources.com/img/bughunter.svg", title: "Bug Hunter" },
-    { src: "https://discordresources.com/img/partner.svg", title: "Partner" },
+    { src: "https://cdn3.emoji.gg/emojis/4709-quest-badge.png", title: "quest" },
+    { src: "https://cdn3.emoji.gg/emojis/51616-orbs-animated.gif", title: "orbs" },
         ]
     },
 
@@ -418,28 +416,6 @@ function updateDiscordCard() {
             badgeImg.src = badge.src;
             badgeImg.alt = badge.title || 'Badge';
             badgeImg.title = badge.title || 'Badge';
-            
-            // معالجة أخطاء تحميل الصور
-            badgeImg.onerror = function() {
-                // إذا فشل التحميل، استخدم صورة بديلة SVG
-                const fallbackSVG = getFallbackBadgeSVG(badge.title);
-                if (fallbackSVG) {
-                    this.style.display = 'none';
-                    const svgElement = document.createElement('div');
-                    svgElement.className = 'discord-badge-img discord-badge-svg';
-                    svgElement.innerHTML = fallbackSVG;
-                    svgElement.title = badge.title || 'Badge';
-                    badgesContainer.appendChild(svgElement);
-                } else {
-                    this.style.display = 'none';
-                }
-                console.warn('Failed to load badge, using fallback:', badge.title);
-            };
-            
-            badgeImg.onload = function() {
-                this.style.display = 'block';
-            };
-            
             badgesContainer.appendChild(badgeImg);
         });
     }
@@ -449,19 +425,4 @@ function updateDiscordCard() {
     if (messageInput && config.displayName) {
         messageInput.placeholder = `Message @${config.displayName}`;
     }
-}
-
-// دالة للحصول على شارات SVG بديلة
-function getFallbackBadgeSVG(title) {
-    const badges = {
-        'Blue Feather': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#5865F2"/><path d="M12 6L14 10L18 11L15 14L15.5 18L12 16L8.5 18L9 14L6 11L10 10Z" fill="white"/></svg>',
-        'Lazy': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#8a2be2"/><text x="12" y="16" font-size="10" fill="white" text-anchor="middle" font-weight="bold">L</text></svg>',
-        'nitro': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#FF73FA"/><path d="M12 7L15 12L12 17L9 12Z" fill="white"/></svg>',
-        'HypeSquad': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7L12 12L22 7Z" fill="#FFD700"/><path d="M2 17L12 22L22 17V12L12 17L2 12Z" fill="#FFD700"/></svg>',
-        'boost': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#9C84EF"/><path d="M12 6V18M6 12H18" stroke="white" stroke-width="2"/></svg>',
-        'Originally Known as': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#5865F2"/><text x="12" y="16" font-size="8" fill="white" text-anchor="middle">OKA</text></svg>',
-        'Bug Hunter': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#FEE75C"/><path d="M12 8L14 12L18 13L15 16L15.5 20L12 18L8.5 20L9 16L6 13L10 12Z" fill="#23272A"/></svg>',
-        'Partner': '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#5865F2"/><path d="M12 6L14 10L18 11L15 14L15.5 18L12 16L8.5 18L9 14L6 11L10 10Z" fill="white"/></svg>'
-    };
-    return badges[title] || null;
 }
