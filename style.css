@@ -115,6 +115,7 @@ nav {
     position: relative;
     background: #000000;
     flex-direction: row;
+    z-index: 2;
 }
 
 .hero-image {
@@ -371,6 +372,8 @@ nav {
 section {
     padding: var(--spacing-xl) 50px;
     background: #000;
+    position: relative;
+    z-index: 2;
 }
 
 .section-title {
@@ -553,10 +556,490 @@ footer {
     padding: var(--spacing-md) 50px;
     text-align: center;
     border-top: 1px solid rgba(138, 43, 226, 0.2);
+    position: relative;
+    z-index: 2;
 }
 
 footer p {
     color: var(--text-dark-gray);
+}
+
+.discord-section-wrapper {
+    background: linear-gradient(180deg, #000, #0a0a0a, #000);
+    padding: var(--spacing-xl) 50px;
+    position: relative;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* Discord Card Styles */
+/* ═══════════════════════════════════════════════════════════════ */
+.discord-card {
+    background: #111214;
+    border-radius: 8px;
+    width: 340px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    font-family: 'Segoe UI', sans-serif;
+    margin: 40px auto;
+    animation: cardFloat 3s ease-in-out infinite;
+}
+
+@keyframes cardFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.discord-card:hover {
+    box-shadow: 0 15px 50px rgba(138, 43, 226, 0.3);
+}
+
+.discord-banner {
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(135deg, var(--purple-main), var(--purple-dark));
+    position: relative;
+}
+
+.discord-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.discord-avatar-wrapper {
+    position: absolute;
+    bottom: -40px;
+    left: 16px;
+}
+
+.discord-avatar {
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    border: 6px solid #111214;
+    background: #111214;
+    position: relative;
+}
+
+.discord-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.discord-status {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #23a55a;
+    border: 4px solid #111214;
+}
+
+.discord-status.idle {
+    background: #f0b232;
+}
+
+.discord-status.dnd {
+    background: #f23f43;
+}
+
+.discord-status.offline {
+    background: #80848e;
+}
+
+.discord-body {
+    padding: 48px 16px 16px;
+}
+
+.discord-badges {
+    display: flex;
+    gap: 6px;
+    position: absolute;
+    right: 16px;
+    top: 136px;
+}
+
+.discord-badge {
+    width: 24px;
+    height: 24px;
+    background: #1e1f22;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: transform 0.2s, background 0.2s;
+    cursor: pointer;
+}
+
+.discord-badge:hover {
+    transform: scale(1.2);
+    background: #2b2d31;
+}
+
+.discord-username {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 12px;
+}
+
+.discord-username h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+}
+
+.discord-username span {
+    color: #b5bac1;
+    font-size: 14px;
+}
+
+.discord-divider {
+    height: 1px;
+    background: #2e2f34;
+    margin: 12px 0;
+}
+
+.discord-section {
+    margin-bottom: 12px;
+}
+
+.discord-section-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #b5bac1;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+}
+
+.discord-section-content {
+    font-size: 14px;
+    color: #dbdee1;
+    line-height: 1.4;
+}
+
+.discord-member-since {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.discord-member-since svg {
+    width: 16px;
+    height: 16px;
+    fill: #5865f2;
+}
+
+.discord-member-since span {
+    font-size: 14px;
+    color: #dbdee1;
+}
+
+.discord-note {
+    background: #1e1f22;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.discord-note input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: #b5bac1;
+    font-size: 12px;
+    outline: none;
+}
+
+.discord-note input::placeholder {
+    color: #6d6f78;
+}
+
+.discord-message-box {
+    background: #1e1f22;
+    border-radius: 8px;
+    padding: 12px;
+    margin-top: 12px;
+}
+
+.discord-message-box input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: #dbdee1;
+    font-size: 14px;
+    outline: none;
+}
+
+.discord-message-box input::placeholder {
+    color: #6d6f78;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* More Visual Effects */
+/* ═══════════════════════════════════════════════════════════════ */
+
+/* Particles Background */
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--purple-main);
+    border-radius: 50%;
+    animation: particleFloat 15s infinite linear;
+    opacity: 0.6;
+    box-shadow: 0 0 6px var(--purple-main);
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* Glowing text effect */
+.glow-text {
+    animation: textGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+    from {
+        text-shadow: 0 0 5px var(--purple-main), 0 0 10px var(--purple-main), 0 0 15px var(--purple-main);
+    }
+    to {
+        text-shadow: 0 0 10px var(--purple-main), 0 0 20px var(--purple-main), 0 0 30px var(--purple-main), 0 0 40px var(--purple-light);
+    }
+}
+
+/* Typing cursor effect */
+.typing-cursor::after {
+    content: '|';
+    animation: blink 0.7s infinite;
+    color: var(--purple-main);
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Shine effect on hover */
+.shine-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.shine-effect::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(30deg);
+    transition: 0.5s;
+    opacity: 0;
+}
+
+.shine-effect:hover::after {
+    animation: shine 0.7s forwards;
+}
+
+@keyframes shine {
+    0% { left: -100%; opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+}
+
+/* Gradient border animation */
+.gradient-border {
+    position: relative;
+    background: #111;
+    border-radius: 15px;
+}
+
+.gradient-border::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--purple-main), var(--purple-light), var(--purple-dark), var(--purple-main));
+    background-size: 400% 400%;
+    border-radius: 17px;
+    z-index: -1;
+    animation: gradientMove 3s ease infinite;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Ripple effect */
+.ripple-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple-effect::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(138, 43, 226, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.ripple-effect:hover::before {
+    width: 300%;
+    height: 300%;
+}
+
+/* Scale up animation */
+.scale-up {
+    transition: transform 0.3s ease;
+}
+
+.scale-up:hover {
+    transform: scale(1.05);
+}
+
+/* Shake animation */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.shake-hover:hover {
+    animation: shake 0.3s ease-in-out;
+}
+
+/* Bounce animation */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.bounce-hover:hover {
+    animation: bounce 0.5s ease-in-out;
+}
+
+/* Rotate animation */
+@keyframes rotate360 {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.rotate-hover:hover {
+    animation: rotate360 0.6s ease-in-out;
+}
+
+/* Blur in animation */
+@keyframes blurIn {
+    from {
+        filter: blur(10px);
+        opacity: 0;
+    }
+    to {
+        filter: blur(0);
+        opacity: 1;
+    }
+}
+
+.blur-in {
+    animation: blurIn 0.8s ease-out;
+}
+
+/* Slide animations for sections */
+.slide-in-left {
+    animation: slideInLeft 0.8s ease-out;
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.slide-in-right {
+    animation: slideInRight 0.8s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Neon glow for borders */
+.neon-border {
+    box-shadow: 0 0 5px var(--purple-main),
+                0 0 10px var(--purple-main),
+                0 0 20px var(--purple-main),
+                0 0 40px var(--purple-main);
+}
+
+/* Heartbeat animation */
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.1); }
+}
+
+.heartbeat {
+    animation: heartbeat 1.5s ease-in-out infinite;
 }
 
 @media (max-width: 768px) {
@@ -617,5 +1100,14 @@ footer p {
 
     .social-links {
         justify-content: center;
+    }
+    
+    .discord-card {
+        width: 95%;
+        max-width: 340px;
+    }
+    
+    .discord-section-wrapper {
+        padding: var(--spacing-lg) var(--spacing-sm);
     }
 }

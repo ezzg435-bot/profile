@@ -25,6 +25,27 @@ const PORTFOLIO_CONFIG = {
     },
 
     // ═══════════════════════════════════════════════════════════════
+    // 💬 إعدادات Discord Card - عدل هنا
+    // ═══════════════════════════════════════════════════════════════
+    discordCard: {
+        displayName: "Lazy",                    // اسم العرض
+        avatar: "https://cdn.discordapp.com/attachments/1369976044374855753/1461506633615016061/038994609347b871e2ef5ff10346903f.jpg?ex=696acd9e&is=69697c1e&hm=52682461dc8087a01571adbe246f6768d7c451880a8535a121560d323f4e8521&",
+        banner: "https://cdn.discordapp.com/attachments/1369976044374855753/1461506633900232704/9bfc635a9bbfd6858c9b1d20cf3073a2.gif?ex=696acd9f&is=69697c1f&hm=72d4d5cecfbf81672efdcc2289a94d6ef66e81df3d185336cfd00692128f9115&",
+        bio: `**C/:Users/Lazy
+╠ Insta : ezz44210
+   ╠ Bots : Na7la / Valhalla soon..
+      ╠ Na7la Shop Developer
+         ╠ https://lazyidc.qzz.io
+             ╚ Advance Developer
+**`,                                // البايو - اكتب النص هنا
+        memberSince: "Jul 24,2022",                        // تاريخ الانضمام - مثل: "Jan 1, 2020"
+        status: "dnd",                       // الحالة: online, idle, dnd, offline
+        // الشارات مع الايموجيات
+        badges: [
+        ]
+    },
+
+    // ═══════════════════════════════════════════════════════════════
     // 📧 إعدادات الإيميل للـ Contact Form
     // ═══════════════════════════════════════════════════════════════
     email: {
@@ -186,4 +207,106 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+    
+    // ═══════════════════════════════════════════════════════════════
+    // ✨ إنشاء الجزيئات المتحركة (Particles)
+    // ═══════════════════════════════════════════════════════════════
+    createParticles();
+    
+    // ═══════════════════════════════════════════════════════════════
+    // 💬 تحديث Discord Card
+    // ═══════════════════════════════════════════════════════════════
+    updateDiscordCard();
 });
+
+// دالة إنشاء الجزيئات
+function createParticles() {
+    const particlesContainer = document.getElementById('particles');
+    if (!particlesContainer) return;
+    
+    const particleCount = 50;
+    
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        // موقع عشوائي
+        particle.style.left = Math.random() * 100 + '%';
+        
+        // حجم عشوائي
+        const size = Math.random() * 4 + 2;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        
+        // تأخير عشوائي
+        particle.style.animationDelay = Math.random() * 15 + 's';
+        particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+        
+        // لون عشوائي بين البنفسجي والوردي
+        const hue = Math.random() > 0.5 ? '270' : '300';
+        particle.style.background = `hsl(${hue}, 70%, 60%)`;
+        
+        particlesContainer.appendChild(particle);
+    }
+}
+
+// دالة تحديث Discord Card
+function updateDiscordCard() {
+    const config = PORTFOLIO_CONFIG.discordCard;
+    if (!config) return;
+    
+    // تحديث الاسم
+    const displayName = document.getElementById('discord-displayname');
+    if (displayName && config.displayName) {
+        displayName.textContent = config.displayName;
+    }
+    
+    // تحديث الأفاتار
+    const avatar = document.getElementById('discord-avatar-img');
+    if (avatar && config.avatar) {
+        avatar.src = config.avatar;
+    }
+    
+    // تحديث البانر
+    const banner = document.getElementById('discord-banner-img');
+    if (banner && config.banner) {
+        banner.src = config.banner;
+    }
+    
+    // تحديث البايو
+    const bio = document.getElementById('discord-bio');
+    if (bio && config.bio) {
+        bio.textContent = config.bio;
+    }
+    
+    // تحديث تاريخ الانضمام
+    const date = document.getElementById('discord-date');
+    if (date && config.memberSince) {
+        date.textContent = config.memberSince;
+    }
+    
+    // تحديث الحالة
+    const statusDot = document.querySelector('.discord-status');
+    if (statusDot && config.status) {
+        statusDot.className = 'discord-status ' + config.status;
+    }
+    
+    // تحديث الشارات
+    const badgesContainer = document.querySelector('.discord-badges');
+    if (badgesContainer && config.badges && config.badges.length > 0) {
+        badgesContainer.innerHTML = '';
+        config.badges.forEach(badge => {
+            const badgeEl = document.createElement('div');
+            badgeEl.className = 'discord-badge bounce-hover';
+            badgeEl.title = badge.title;
+            badgeEl.textContent = badge.emoji;
+            badgesContainer.appendChild(badgeEl);
+        });
+    }
+    
+    // تحديث placeholder الرسالة
+    const messageInput = document.querySelector('.discord-message-box input');
+    if (messageInput && config.displayName) {
+        messageInput.placeholder = `Message @${config.displayName}`;
+    }
+}
