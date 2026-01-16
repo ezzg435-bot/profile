@@ -1325,7 +1325,84 @@ footer p {
     .sidebar {
         transform: translateX(0) !important;
     }
-    
+
+    .discord-card {
+    background: #111214;
+    border-radius: 16px;               /* حواف أكثر نعومة */
+    width: 100%;
+    max-width: 400px;                  /* زيادة العرض شوية ليبين أحلى */
+    overflow: hidden;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(138, 43, 226, 0.4),
+        inset 0 0 20px rgba(138, 43, 226, 0.15);
+    margin: 30px auto;
+    position: relative;
+    border: 2px solid rgba(138, 43, 226, 0.6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.discord-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+        0 20px 50px rgba(0, 0, 0, 0.7),
+        0 0 0 2px rgba(138, 43, 226, 0.6),
+        inset 0 0 30px rgba(138, 43, 226, 0.25);
+}
+
+.discord-avatar {
+    width: 90px;
+    height: 90px;
+    border: 6px solid #111214;
+    background: #111214;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+}
+
+.discord-avatar-wrapper {
+    top: 70px;           /* تعديل الموقع ليبين أفضل مع الحواف الجديدة */
+    left: 20px;
+}
+
+.discord-status {
+    width: 28px;
+    height: 28px;
+    border: 6px solid #111214;
+    bottom: 4px;
+    right: 4px;
+}
+
+/* حجم الشارات موحد */
+.discord-badge-img {
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 6px;
+    object-fit: contain;
+    background: rgba(255,255,255,0.1);
+    padding: 4px;
+    transition: transform 0.25s ease;
+}
+
+.discord-badge-img:hover {
+    transform: scale(1.25);
+}
+
+/* تنسيق اليوزر نيم */
+.discord-username h3 {
+    font-size: 24px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.discord-tag {
+    font-size: 16px;
+    color: #b9bbbe;
+    font-weight: 500;
+}
     .content-area {
         padding-right: 320px;
     }
