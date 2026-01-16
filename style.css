@@ -120,6 +120,34 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 200;
+    background: var(--purple-main);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+    transition: all 0.3s;
+}
+
+.mobile-menu-toggle svg {
+    width: 24px;
+    height: 24px;
+}
+
+.mobile-menu-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(138, 43, 226, 0.7);
+}
+
 /* Sidebar */
 .sidebar {
     position: fixed;
@@ -133,6 +161,7 @@ body {
     display: flex;
     flex-direction: column;
     z-index: 100;
+    transition: transform 0.3s ease;
 }
 
 .sidebar-profile {
@@ -628,6 +657,43 @@ body {
     color: #fff;
 }
 
+/* Skills Grid */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.skill-card {
+    background: rgba(138, 43, 226, 0.1);
+    border: 1px solid rgba(138, 43, 226, 0.3);
+    border-radius: 15px;
+    padding: 30px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.skill-card:hover {
+    transform: translateY(-10px);
+    background: rgba(138, 43, 226, 0.2);
+    border-color: var(--purple-main);
+    box-shadow: 0 10px 30px rgba(138, 43, 226, 0.4);
+}
+
+.skill-icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+    color: var(--purple-main);
+}
+
+.skill-card h3 {
+    font-size: 18px;
+    color: var(--text-white);
+    margin: 0;
+}
+
 /* Glow Text Effect */
 .glow-text {
     animation: textGlow 2s ease-in-out infinite alternate;
@@ -655,12 +721,20 @@ footer p {
 
 /* Responsive */
 @media (max-width: 1024px) {
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
     .content-area {
         padding-right: 40px;
     }
     
     .sidebar {
-        display: none;
+        transform: translateX(100%);
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
     }
     
     footer {
@@ -698,5 +772,10 @@ footer p {
     
     .discord-card {
         max-width: 100%;
+    }
+    
+    .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 15px;
     }
 }
