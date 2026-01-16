@@ -8,7 +8,7 @@ const PORTFOLIO_CONFIG = {
     // 📝 المعلومات الشخصية
     // ═══════════════════════════════════════════════════════════════
     personalInfo: {
-        name: "Lazy",
+        name: "ϟ〢𝑳á𝒛𝒚",
         title: "Bots & Web Developer",
         description: "Professional developer specializing in Discord bots, web applications, modern UI/UX design and creative digital solutions.",
         profileImage: "main.jpg"
