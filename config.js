@@ -8,8 +8,8 @@ const PORTFOLIO_CONFIG = {
     // 📝 المعلومات الشخصية
     // ═══════════════════════════════════════════════════════════════
     personalInfo: {
-        name: "ϟ〢𝑳á𝒛𝒚",                           // اسمك
-        title: "Bots & Web Developer",                 // المسمى الوظيفي
+        name: "Lazy",                           // اسمك
+        title: "Bots Developer",                 // المسمى الوظيفي
         description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus labore dolores esse. Odit similique doloribus tenetur doloremque, sunt commodi in ipsa repudiandae debitis deleniti blanditiis quibusdam quaerat neque asperiores ea.",
         profileImage: "main.jpg"                // اسم ملف الصورة
     },
@@ -28,7 +28,7 @@ const PORTFOLIO_CONFIG = {
     // 💬 إعدادات Discord Card - عدل هنا
     // ═══════════════════════════════════════════════════════════════
     discordCard: {
-        displayName: "ϟ〢𝑳á𝒛𝒚",                    // اسم العرض
+        displayName: "Lazy",                    // اسم العرض
         avatar: "https://cdn.discordapp.com/attachments/1369976044374855753/1461506633615016061/038994609347b871e2ef5ff10346903f.jpg?ex=696acd9e&is=69697c1e&hm=52682461dc8087a01571adbe246f6768d7c451880a8535a121560d323f4e8521&",
         banner: "https://cdn.discordapp.com/attachments/1369976044374855753/1461506633900232704/9bfc635a9bbfd6858c9b1d20cf3073a2.gif?ex=696acd9f&is=69697c1f&hm=72d4d5cecfbf81672efdcc2289a94d6ef66e81df3d185336cfd00692128f9115&",
         bio: `**C/:Users/Lazy
@@ -181,10 +181,15 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if(PORTFOLIO_CONFIG.email.useMailto) {
                 // الطريقة 1: mailto (يفتح برنامج الإيميل)
-                const subject = `رسالة من ${name}`;
-                const body = `الاسم: ${name}%0D%0Aالإيميل: ${email}%0D%0A%0D%0Aالرسالة:%0D%0A${message}`;
+                const subject = encodeURIComponent(`Message from ${name}`);
+                const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
                 window.location.href = `mailto:${PORTFOLIO_CONFIG.email.recipientEmail}?subject=${subject}&body=${body}`;
-                alert('سيتم فتح برنامج البريد الإلكتروني... ✉️');
+                alert('Opening your email client... ✉️');
+            } else if (PORTFOLIO_CONFIG.email.emailJS.serviceID) {
+                // الطريقة 3: EmailJS
+                alert('Sending email via EmailJS...');
+                // You would implement EmailJS here
+                contactForm.reset();
             } else {
                 // الطريقة 2: FormSubmit
                 const formData = new FormData();
@@ -197,11 +202,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     body: formData
                 })
                 .then(response => {
-                    alert('شكراً! تم إرسال رسالتك بنجاح!');
+                    alert('Thank you! Your message has been sent successfully!');
                     contactForm.reset();
                 })
                 .catch(error => {
-                    alert('عذراً، حدث خطأ في الإرسال. حاول مرة أخرى.');
+                    alert('Sorry, there was an error sending your message. Please try again.');
                 });
             }
         });
@@ -229,8 +234,50 @@ document.addEventListener('DOMContentLoaded', function() {
             if (contentCards[index]) {
                 contentCards[index].classList.add('active');
             }
+            
+            // Close mobile menu on mobile
+            if (window.innerWidth <= 1024) {
+                sidebar.classList.remove('active');
+            }
         });
     });
+    
+    // Mobile menu toggle
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const sidebar = document.querySelector('.sidebar');
+    
+    if (mobileMenuToggle && sidebar) {
+        mobileMenuToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('active');
+        });
+        
+        // Close sidebar when clicking outside
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth <= 1024) {
+                if (!sidebar.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                    sidebar.classList.remove('active');
+                }
+            }
+        });
+    }
+    
+    // Hire Me button - navigate to contact
+    const hireBtn = document.querySelector('.hire-btn');
+    if (hireBtn) {
+        hireBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Remove active from all
+            sidebarLinks.forEach(l => l.classList.remove('active'));
+            contentCards.forEach(c => c.classList.remove('active'));
+            // Show contact card (last card)
+            if (sidebarLinks[4]) sidebarLinks[4].classList.add('active');
+            if (contentCards[4]) contentCards[4].classList.add('active');
+            // Close mobile menu
+            if (window.innerWidth <= 1024) {
+                sidebar.classList.remove('active');
+            }
+        });
+    }
     
     // ═══════════════════════════════════════════════════════════════
     // ✨ إنشاء الجزيئات المتحركة (Particles)
