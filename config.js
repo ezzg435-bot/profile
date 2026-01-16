@@ -8,7 +8,7 @@ const PORTFOLIO_CONFIG = {
     // 📝 المعلومات الشخصية
     // ═══════════════════════════════════════════════════════════════
     personalInfo: {
-        name: "Lazy",                           // اسمك
+        name: "ϟ〢𝑳á𝒛𝒚",                           // اسمك
         title: "Bots Developer",                 // المسمى الوظيفي
         description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus labore dolores esse. Odit similique doloribus tenetur doloremque, sunt commodi in ipsa repudiandae debitis deleniti blanditiis quibusdam quaerat neque asperiores ea.",
         profileImage: "main.jpg"                // اسم ملف الصورة
@@ -30,14 +30,16 @@ const PORTFOLIO_CONFIG = {
     discordCard: {
         displayName: "ϟ〢𝑳á𝒛𝒚",                    // اسم العرض
         tag: "._idc",                            // التاق
+        username: "4 || Lazy",                   // اليوزر من الصورة الثانية
+        customTag: "LAZY",                       // التاق الخاص (LAZY)
         avatar: "https://cdn.discordapp.com/attachments/1369976044374855753/1461506633615016061/038994609347b871e2ef5ff10346903f.jpg?ex=696acd9e&is=69697c1e&hm=52682461dc8087a01571adbe246f6768d7c451880a8535a121560d323f4e8521&",
         banner: "https://cdn.discordapp.com/attachments/1369976044374855753/1461506633900232704/9bfc635a9bbfd6858c9b1d20cf3073a2.gif?ex=696acd9f&is=69697c1f&hm=72d4d5cecfbf81672efdcc2289a94d6ef66e81df3d185336cfd00692128f9115&",
         bio: `**C/:Users/Lazy
 ╠ Insta : ezz44210
-   ╠ Bots : Na7la / Valhalla soon..
-      ╠ Na7la Shop Developer
-         ╠ https://lazyidc.qzz.io
-             ╚ Advance Developer
+╠ Bots : Na7la / Valhalla soon..
+╠ Na7la Shop Developer
+╠ https://lazyidc.qzz.io
+╚ Advance Developer
 **`,                                // البايو - اكتب النص هنا
         memberSince: "Jul 24,2022",                        // تاريخ الانضمام - مثل: "Jan 1, 2020"
         status: "dnd",                       // الحالة: online, idle, dnd, offline
@@ -46,13 +48,13 @@ const PORTFOLIO_CONFIG = {
         accentColor: "#09030e",              // اللون الثانوي (التدرج)
         // الشارات - ضع روابط صور الشارات هنا
         badges: [
-    { src: "https://discordresources.com/img/subscriptions/bronze.svg", title: "nitro" },
-    { src: "https://discordresources.com/img/hypesquadbalance.svg", title: "HypeSquad" },
-    { src: "https://discordresources.com/img/boosts/discordboost1.svg", title: "boost" },
-    { src: "https://discordresources.com/img/username.png", title: "Originally Known as" },
-    { src: "https://cdn3.emoji.gg/emojis/4709-quest-badge.png", title: "quest" },
-    { src: "https://cdn3.emoji.gg/emojis/51616-orbs-animated.gif", title: "orbs" },
-    // أضف المزيد...
+            { src: "https://cdn.discordapp.com/badge-icons/bf01d1073931f921909045f3a39fd264.png", title: "Nitro" },
+            { src: "https://cdn.discordapp.com/badge-icons/01257a9e7c43d7431d21374c5fc1a6c4.png", title: "HypeSquad Balance" },
+            { src: "https://cdn.discordapp.com/badge-icons/6ea3109c02f7056b6b04712c7c6d7a4c.png", title: "Server Boosting" },
+            { src: "https://cdn.discordapp.com/badge-icons/fc777c754b31b6caf2ac0d7d60a78c3b.png", title: "Bug Hunter" },
+            { src: "https://cdn.discordapp.com/badge-icons/6bdc42827a38498929a4920da12695d9.png", title: "Early Supporter" },
+            { src: "https://cdn.discordapp.com/badge-icons/0e291ab67d6b81d4e917701e2274de0b.png", title: "Active Developer" },
+            { src: "https://cdn.discordapp.com/badge-icons/3cf6a45e1b65d6d8d5c8e2e8c9c42c7c.png", title: "Discord Partner" }
         ]
     },
 
@@ -81,7 +83,7 @@ const PORTFOLIO_CONFIG = {
     // 💼 الخدمات
     // ═══════════════════════════════════════════════════════════════
     services: {
-        title: "My Expertise",
+        title: "مهاراتي",
         list: "Web Development • Graphic Design • Branding & Identity • User Research • Creative Solutions • Digital Marketing"
     },
 
@@ -262,33 +264,34 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Hire Me button - navigate to contact
-    const hireBtn = document.querySelector('.hire-me-btn');
-    if (hireBtn) {
-        hireBtn.addEventListener('click', function(e) {
+    // معالجة جميع أزرار Hire Me
+    document.querySelectorAll('.hire-me-btn, .floating-hire-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
             e.preventDefault();
-            // Find contact card index
+            
+            // البحث عن قسم Contact
             const contactCard = document.getElementById('contact');
             const contactIndex = Array.from(contentCards).indexOf(contactCard);
             
-            // Remove active from all
+            // إزالة النشطة من جميع الروابط والبطاقات
             sidebarLinks.forEach(l => l.classList.remove('active'));
             contentCards.forEach(c => c.classList.remove('active'));
             
-            // Show contact card
+            // إضافة النشط للرابط والبطاقة المقابلة
             if (contactIndex >= 0 && sidebarLinks[contactIndex + 1]) {
                 sidebarLinks[contactIndex + 1].classList.add('active');
             }
             if (contactCard) {
                 contactCard.classList.add('active');
+                contactCard.scrollIntoView({ behavior: 'smooth' });
             }
             
-            // Close mobile menu
+            // إغلاق القائمة الجانبية على الموبايل
             if (window.innerWidth <= 1024) {
                 sidebar.classList.remove('active');
             }
         });
-    }
+    });
     
     // Handle all #contact links
     document.querySelectorAll('a[href="#contact"]').forEach(link => {
@@ -322,6 +325,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // 💬 تحديث Discord Card
     // ═══════════════════════════════════════════════════════════════
     updateDiscordCard();
+    
+    // ═══════════════════════════════════════════════════════════════
+    // ✨ إنشاء العناصر العائمة
+    // ═══════════════════════════════════════════════════════════════
+    createFloatingElements();
 });
 
 // دالة إنشاء الجزيئات
@@ -355,6 +363,35 @@ function createParticles() {
     }
 }
 
+// دالة إنشاء العناصر العائمة
+function createFloatingElements() {
+    const floatingContainer = document.getElementById('floatingElements');
+    if (!floatingContainer) return;
+    
+    const elements = [
+        { class: 'el1', size: '300px', top: '10%', left: '5%', delay: '0s' },
+        { class: 'el2', size: '200px', top: '60%', right: '10%', delay: '-5s' },
+        { class: 'el3', size: '150px', bottom: '20%', left: '20%', delay: '-10s' },
+        { class: 'el4', size: '250px', top: '30%', right: '20%', delay: '-15s' },
+        { class: 'el5', size: '180px', bottom: '10%', right: '30%', delay: '-7s' }
+    ];
+    
+    elements.forEach(el => {
+        const element = document.createElement('div');
+        element.className = `floating-element ${el.class}`;
+        
+        if (el.size) element.style.width = el.size;
+        if (el.size) element.style.height = el.size;
+        if (el.top) element.style.top = el.top;
+        if (el.left) element.style.left = el.left;
+        if (el.right) element.style.right = el.right;
+        if (el.bottom) element.style.bottom = el.bottom;
+        if (el.delay) element.style.animationDelay = el.delay;
+        
+        floatingContainer.appendChild(element);
+    });
+}
+
 // دالة تحديث Discord Card
 function updateDiscordCard() {
     const config = PORTFOLIO_CONFIG.discordCard;
@@ -370,6 +407,18 @@ function updateDiscordCard() {
     const tag = document.getElementById('discord-tag');
     if (tag && config.tag) {
         tag.textContent = config.tag;
+    }
+    
+    // تحديث اليوزر (اسم المستخدم)
+    const username = document.getElementById('discord-username');
+    if (username && config.username) {
+        username.textContent = config.username;
+    }
+    
+    // تحديث التاق الخاص
+    const customTag = document.querySelector('.discord-custom-tag .tag-text');
+    if (customTag && config.customTag) {
+        customTag.textContent = config.customTag;
     }
     
     // تحديث الأفاتار
