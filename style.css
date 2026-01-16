@@ -1,4 +1,3 @@
-<DOCUMENT filename="style.css">
 * {
     margin: 0;
     padding: 0;
@@ -203,7 +202,7 @@ body {
     gap: 10px;
 }
 
-.sidebar-link, .lang-btn {
+.sidebar-link {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -215,14 +214,13 @@ body {
     cursor: pointer;
 }
 
-.sidebar-link svg, .lang-btn svg {
+.sidebar-link svg {
     width: 20px;
     height: 20px;
 }
 
 .sidebar-link:hover,
-.sidebar-link.active,
-.lang-btn:hover {
+.sidebar-link.active {
     background: var(--purple-main);
     color: var(--text-white);
 }
@@ -509,7 +507,7 @@ body {
 /* Discord Card */
 .discord-card {
     background: #111214;
-    border-radius: 20px; /* زيادة border-radius لجعل الحواف أكثر استدارة */
+    border-radius: 10px;
     width: 100%;
     max-width: 380px;
     overflow: visible;
@@ -517,11 +515,6 @@ body {
     margin: 0 auto;
     position: relative;
     border: 2px solid rgba(138, 43, 226, 0.5);
-    transition: all 0.3s ease; /* إضافة انتقال للشكل */
-}
-
-.discord-card:hover {
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(138, 43, 226, 0.5);
 }
 
 .discord-banner {
@@ -529,9 +522,7 @@ body {
     height: 120px;
     background: linear-gradient(135deg, #1a1a2e, #16213e);
     position: relative;
-    overflow: hidden;
-    border-top-left-radius: 18px; /* حواف علوية مستديرة */
-    border-top-right-radius: 18px;
+    overflow: visible;
 }
 
 .discord-banner img {
@@ -545,8 +536,7 @@ body {
     padding: 16px;
     padding-top: 50px;
     position: relative;
-    border-bottom-left-radius: 18px; /* حواف سفلية مستديرة */
-    border-bottom-right-radius: 18px;
+    border-radius: 0 0 8px 8px;
 }
 
 .discord-avatar-wrapper {
@@ -621,9 +611,6 @@ body {
 
 .discord-username {
     margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
 }
 
 .discord-username h3 {
@@ -631,11 +618,6 @@ body {
     font-weight: 700;
     color: #fff;
     margin: 0;
-}
-
-.discord-tag {
-    font-size: 16px;
-    color: rgba(255, 255, 255, 0.6);
 }
 
 .discord-section {
@@ -765,10 +747,10 @@ body {
     box-shadow: 0 10px 30px rgba(138, 43, 226, 0.4);
 }
 
-.skill-icon-img {
-    width: 60px;
-    height: 60px;
+.skill-icon {
+    font-size: 50px;
     margin-bottom: 15px;
+    color: var(--purple-main);
 }
 
 .skill-card h3 {
@@ -796,6 +778,10 @@ footer {
     position: relative;
     z-index: 2;
     margin-right: 280px;
+}
+
+footer p {
+    color: var(--text-dark-gray);
 }
 
 /* Responsive */
@@ -874,36 +860,73 @@ footer {
     }
 }
 
-body[dir="rtl"] {
-    text-align: right;
+/* Mobile Menu Toggle - نضمن إظهاره دايماً على الشاشات الصغيرة */
+.mobile-menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    background: var(--purple-main);
+    border: none;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.6);
+    transition: all 0.3s ease;
 }
 
-body[dir="rtl"] .sidebar {
-    right: auto;
-    left: 0;
-    border-left: none;
-    border-right: 1px solid rgba(138, 43, 226, 0.3);
-    transform: translateX(-100%);
+.mobile-menu-toggle:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 30px rgba(138, 43, 226, 0.8);
 }
 
-body[dir="rtl"] .sidebar.active {
-    transform: translateX(0);
+.mobile-menu-toggle svg {
+    width: 26px;
+    height: 26px;
 }
 
-body[dir="rtl"] .content-area {
-    padding-right: 40px;
-    padding-left: 320px;
-}
+/* Sidebar على الموبايل */
+@media (max-width: 1024px) {
+    .sidebar {
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.6);
+        width: 300px;           /* شوية أعرض عشان يبين أحلى */
+        right: 0;
+        z-index: 999;
+    }
 
-body[dir="rtl"] .mobile-menu-toggle {
-    right: auto;
-    left: 20px;
-}
+    .sidebar.active {
+        transform: translateX(0);
+    }
 
-@media (max-width: 1024px) and (dir="rtl") {
+    /* نصغر الـ padding في المحتوى الرئيسي عشان يطلع مكان للزر */
     .content-area {
-        padding-left: 40px;
-        padding-right: 40px;
+        padding: 70px 20px 40px;
+        padding-right: 20px !important;
+    }
+
+    footer {
+        margin-right: 0;
     }
 }
-</DOCUMENT>
+
+@media (min-width: 1025px) {
+    /* إخفاء زر الهامبرغر على الشاشات الكبيرة */
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+    
+    .sidebar {
+        transform: translateX(0) !important;
+    }
+    
+    .content-area {
+        padding-right: 320px;
+    }
+}
