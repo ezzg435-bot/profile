@@ -229,30 +229,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (contentCards[index]) {
                 contentCards[index].classList.add('active');
             }
-            
-            // Close mobile menu on mobile
-            if (window.innerWidth <= 1024) {
-                sidebar.classList.remove('active');
-            }
         });
     });
-    
-    // Mobile menu toggle
-    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-    const sidebar = document.querySelector('.sidebar');
-    
-    if (mobileMenuToggle && sidebar) {
-        mobileMenuToggle.addEventListener('click', function() {
-            sidebar.classList.toggle('active');
-        });
-        
-        // Close sidebar when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!sidebar.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
-                sidebar.classList.remove('active');
-            }
-        });
-    }
     
     // ═══════════════════════════════════════════════════════════════
     // ✨ إنشاء الجزيئات المتحركة (Particles)
