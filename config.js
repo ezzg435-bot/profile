@@ -41,8 +41,8 @@ const PORTFOLIO_CONFIG = {
         memberSince: "Jul 24,2022",                        // تاريخ الانضمام - مثل: "Jan 1, 2020"
         status: "dnd",                       // الحالة: online, idle, dnd, offline
         // ألوان الخلفية
-        primaryColor: "#09030e",             // اللون الأساسي (الخلفية)
-        accentColor: "#231646",              // اللون الثانوي (التدرج)
+        primaryColor: "#231646",             // اللون الأساسي (الخلفية)
+        accentColor: "#09030e",              // اللون الثانوي (التدرج)
         // الشارات - ضع روابط صور الشارات هنا
         badges: [
     { src: "https://discordresources.com/img/subscriptions/bronze.svg", title: "nitro" },
