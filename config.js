@@ -8,8 +8,8 @@ const PORTFOLIO_CONFIG = {
     // 📝 المعلومات الشخصية
     // ═══════════════════════════════════════════════════════════════
     personalInfo: {
-        name: "Lazy",                           // اسمك
-        title: "Bots Developer",                 // المسمى الوظيفي
+        name: "ϟ〢𝑳á𝒛𝒚",                           // اسمك
+        title: "Bots & Web Developer",                 // المسمى الوظيفي
         description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus labore dolores esse. Odit similique doloribus tenetur doloremque, sunt commodi in ipsa repudiandae debitis deleniti blanditiis quibusdam quaerat neque asperiores ea.",
         profileImage: "main.jpg"                // اسم ملف الصورة
     },
@@ -207,13 +207,27 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Smooth scrolling
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+    // Smooth scrolling & Navigation
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+    const contentCards = document.querySelectorAll('.content-card');
+    
+    // Show first card by default
+    if (contentCards[0]) {
+        contentCards[0].classList.add('active');
+    }
+    
+    sidebarLinks.forEach((link, index) => {
+        link.addEventListener('click', function(e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if(target) {
-                target.scrollIntoView({ behavior: 'smooth' });
+            
+            // Remove active class from all links and cards
+            sidebarLinks.forEach(l => l.classList.remove('active'));
+            contentCards.forEach(c => c.classList.remove('active'));
+            
+            // Add active class to clicked link and corresponding card
+            this.classList.add('active');
+            if (contentCards[index]) {
+                contentCards[index].classList.add('active');
             }
         });
     });
@@ -315,11 +329,6 @@ function updateDiscordCard() {
     const avatarEl = document.querySelector('.discord-avatar');
     if (avatarEl && config.accentColor) {
         avatarEl.style.borderColor = config.accentColor;
-    }
-    
-    // تحديث لون حدود الـ status
-    if (statusDot && config.accentColor) {
-        statusDot.style.borderColor = config.accentColor;
     }
     
     // تحديث الشارات
