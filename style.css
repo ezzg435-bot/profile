@@ -110,20 +110,20 @@ nav {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 100px 50px 50px;
     position: relative;
     background: #000000;
     flex-direction: row;
     z-index: 2;
+    gap: 80px;
 }
 
 .hero-image {
-    flex: 1;
+    flex: 0 0 auto;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     position: relative;
-    max-width: 500px;
 }
 
 .profile-container {
@@ -239,9 +239,8 @@ nav {
 }
 
 .hero-content {
-    flex: 1;
+    flex: 0 1 600px;
     max-width: 600px;
-    padding-left: 80px;
     animation: fadeInRight 0.8s ease-out;
 }
 
@@ -575,13 +574,15 @@ footer p {
 /* ═══════════════════════════════════════════════════════════════ */
 .discord-card {
     background: #111214;
-    border-radius: 8px;
+    border-radius: 10px;
     width: 340px;
-    overflow: hidden;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    overflow: visible;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(138, 43, 226, 0.3);
     font-family: 'Segoe UI', sans-serif;
     margin: 40px auto;
     animation: cardFloat 3s ease-in-out infinite;
+    position: relative;
+    border: 2px solid rgba(138, 43, 226, 0.5);
 }
 
 @keyframes cardFloat {
@@ -590,14 +591,15 @@ footer p {
 }
 
 .discord-card:hover {
-    box-shadow: 0 15px 50px rgba(138, 43, 226, 0.3);
+    box-shadow: 0 15px 50px rgba(138, 43, 226, 0.4), 0 0 30px rgba(138, 43, 226, 0.5);
 }
 
 .discord-banner {
     width: 100%;
     height: 120px;
-    background: linear-gradient(135deg, var(--purple-main), var(--purple-dark));
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
     position: relative;
+    overflow: hidden;
 }
 
 .discord-banner img {
@@ -606,19 +608,28 @@ footer p {
     object-fit: cover;
 }
 
+.discord-card-body {
+    background: linear-gradient(180deg, #7c3aed, #6d28d9, #5b21b6);
+    padding: 16px;
+    position: relative;
+    border-radius: 0 0 8px 8px;
+}
+
 .discord-avatar-wrapper {
     position: absolute;
-    bottom: -40px;
+    bottom: -30px;
     left: 16px;
+    z-index: 10;
 }
 
 .discord-avatar {
-    width: 92px;
-    height: 92px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    border: 6px solid #111214;
+    border: 5px solid #111214;
     background: #111214;
     position: relative;
+    overflow: hidden;
 }
 
 .discord-avatar img {
@@ -630,13 +641,13 @@ footer p {
 
 .discord-status {
     position: absolute;
-    bottom: 4px;
-    right: 4px;
-    width: 24px;
-    height: 24px;
+    bottom: 2px;
+    right: 2px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     background: #23a55a;
-    border: 4px solid #111214;
+    border: 3px solid #111214;
 }
 
 .discord-status.idle {
@@ -651,22 +662,17 @@ footer p {
     background: #80848e;
 }
 
-.discord-body {
-    padding: 48px 16px 16px;
-}
-
 .discord-badges {
     display: flex;
     gap: 6px;
-    position: absolute;
-    right: 16px;
-    top: 136px;
+    justify-content: flex-end;
+    margin-bottom: 10px;
 }
 
 .discord-badge {
-    width: 24px;
-    height: 24px;
-    background: #1e1f22;
+    width: 26px;
+    height: 26px;
+    background: rgba(0, 0, 0, 0.3);
     border-radius: 6px;
     display: flex;
     align-items: center;
@@ -678,42 +684,35 @@ footer p {
 
 .discord-badge:hover {
     transform: scale(1.2);
-    background: #2b2d31;
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .discord-username {
-    display: flex;
-    align-items: center;
-    gap: 4px;
     margin-bottom: 12px;
 }
 
 .discord-username h3 {
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 22px;
+    font-weight: 700;
     color: #fff;
     margin: 0;
-}
-
-.discord-username span {
-    color: #b5bac1;
-    font-size: 14px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .discord-divider {
     height: 1px;
-    background: #2e2f34;
+    background: rgba(255, 255, 255, 0.2);
     margin: 12px 0;
 }
 
 .discord-section {
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 }
 
 .discord-section-title {
     font-size: 12px;
     font-weight: 700;
-    color: #b5bac1;
+    color: rgba(255, 255, 255, 0.8);
     text-transform: uppercase;
     margin-bottom: 6px;
     letter-spacing: 0.02em;
@@ -721,8 +720,8 @@ footer p {
 
 .discord-section-content {
     font-size: 14px;
-    color: #dbdee1;
-    line-height: 1.4;
+    color: #fff;
+    line-height: 1.5;
 }
 
 .discord-member-since {
@@ -732,19 +731,19 @@ footer p {
 }
 
 .discord-member-since svg {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     fill: #5865f2;
 }
 
 .discord-member-since span {
     font-size: 14px;
-    color: #dbdee1;
+    color: #fff;
 }
 
 .discord-note {
-    background: #1e1f22;
-    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
     padding: 10px;
 }
 
@@ -752,17 +751,17 @@ footer p {
     width: 100%;
     background: transparent;
     border: none;
-    color: #b5bac1;
+    color: rgba(255, 255, 255, 0.7);
     font-size: 12px;
     outline: none;
 }
 
 .discord-note input::placeholder {
-    color: #6d6f78;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .discord-message-box {
-    background: #1e1f22;
+    background: rgba(0, 0, 0, 0.25);
     border-radius: 8px;
     padding: 12px;
     margin-top: 12px;
@@ -772,13 +771,13 @@ footer p {
     width: 100%;
     background: transparent;
     border: none;
-    color: #dbdee1;
+    color: #fff;
     font-size: 14px;
     outline: none;
 }
 
 .discord-message-box input::placeholder {
-    color: #6d6f78;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 /* ═══════════════════════════════════════════════════════════════ */
