@@ -28,7 +28,8 @@ const PORTFOLIO_CONFIG = {
     // 💬 إعدادات Discord Card - عدل هنا
     // ═══════════════════════════════════════════════════════════════
     discordCard: {
-        displayName: "Lazy",                    // اسم العرض
+        displayName: "ϟ〢𝑳á𝒛𝒚",                    // اسم العرض
+        tag: "._idc",                            // التاق
         avatar: "https://cdn.discordapp.com/attachments/1369976044374855753/1461506633615016061/038994609347b871e2ef5ff10346903f.jpg?ex=696acd9e&is=69697c1e&hm=52682461dc8087a01571adbe246f6768d7c451880a8535a121560d323f4e8521&",
         banner: "https://cdn.discordapp.com/attachments/1369976044374855753/1461506633900232704/9bfc635a9bbfd6858c9b1d20cf3073a2.gif?ex=696acd9f&is=69697c1f&hm=72d4d5cecfbf81672efdcc2289a94d6ef66e81df3d185336cfd00692128f9115&",
         bio: `**C/:Users/Lazy
@@ -262,22 +263,55 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Hire Me button - navigate to contact
-    const hireBtn = document.querySelector('.hire-btn');
+    const hireBtn = document.querySelector('.hire-me-btn');
     if (hireBtn) {
         hireBtn.addEventListener('click', function(e) {
             e.preventDefault();
+            // Find contact card index
+            const contactCard = document.getElementById('contact');
+            const contactIndex = Array.from(contentCards).indexOf(contactCard);
+            
             // Remove active from all
             sidebarLinks.forEach(l => l.classList.remove('active'));
             contentCards.forEach(c => c.classList.remove('active'));
-            // Show contact card (last card)
-            if (sidebarLinks[4]) sidebarLinks[4].classList.add('active');
-            if (contentCards[4]) contentCards[4].classList.add('active');
+            
+            // Show contact card
+            if (contactIndex >= 0 && sidebarLinks[contactIndex + 1]) {
+                sidebarLinks[contactIndex + 1].classList.add('active');
+            }
+            if (contactCard) {
+                contactCard.classList.add('active');
+            }
+            
             // Close mobile menu
             if (window.innerWidth <= 1024) {
                 sidebar.classList.remove('active');
             }
         });
     }
+    
+    // Handle all #contact links
+    document.querySelectorAll('a[href="#contact"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const contactCard = document.getElementById('contact');
+            const contactIndex = Array.from(contentCards).indexOf(contactCard);
+            
+            sidebarLinks.forEach(l => l.classList.remove('active'));
+            contentCards.forEach(c => c.classList.remove('active'));
+            
+            if (contactIndex >= 0 && sidebarLinks[contactIndex + 1]) {
+                sidebarLinks[contactIndex + 1].classList.add('active');
+            }
+            if (contactCard) {
+                contactCard.classList.add('active');
+            }
+            
+            if (window.innerWidth <= 1024) {
+                sidebar.classList.remove('active');
+            }
+        });
+    });
     
     // ═══════════════════════════════════════════════════════════════
     // ✨ إنشاء الجزيئات المتحركة (Particles)
@@ -330,6 +364,12 @@ function updateDiscordCard() {
     const displayName = document.getElementById('discord-displayname');
     if (displayName && config.displayName) {
         displayName.textContent = config.displayName;
+    }
+    
+    // تحديث التاق
+    const tag = document.getElementById('discord-tag');
+    if (tag && config.tag) {
+        tag.textContent = config.tag;
     }
     
     // تحديث الأفاتار
