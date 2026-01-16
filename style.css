@@ -1438,25 +1438,3 @@ footer p {
     border-color: var(--purple-main);
     box-shadow: 0 15px 40px rgba(138, 43, 226, 0.35);
 }
-/* أهم التعديلات الجديدة/المهمة */
-html {
-    direction: rtl;
-    text-align: right;
-}
-
-.sidebar-nav {
-    text-align: right;
-}
-
-.sidebar-link {
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-    gap: 12px;
-}
-
-.mobile-menu-toggle {
-    left: 15px;
-    right: auto;
-}
-
-/* باقي الـ css كما هو مع التعديلات السابقة للـ discord card والـ skills */
