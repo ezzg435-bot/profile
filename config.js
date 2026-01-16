@@ -40,14 +40,17 @@ const PORTFOLIO_CONFIG = {
 **`,                                // البايو - اكتب النص هنا
         memberSince: "Jul 24,2022",                        // تاريخ الانضمام - مثل: "Jan 1, 2020"
         status: "dnd",                       // الحالة: online, idle, dnd, offline
+        // ألوان الخلفية
+        primaryColor: "#09030e",             // اللون الأساسي (الخلفية)
+        accentColor: "#231646",              // اللون الثانوي (التدرج)
         // الشارات - ضع روابط صور الشارات هنا
         badges: [
-    { src: "https://cdn3.emoji.gg/emojis/313518-nitro.png", title: "nitro" },
-    { src: "https://cdn3.emoji.gg/emojis/9913-hypesquad-balance.png", title: "HypeSquad" },
-    { src: "https://cdn3.emoji.gg/emojis/33411-boosterbadges.gif", title: "boost" },
+    { src: "https://discordresources.com/img/subscriptions/bronze.svg", title: "nitro" },
+    { src: "https://discordresources.com/img/hypesquadbalance.svg", title: "HypeSquad" },
+    { src: "https://discordresources.com/img/boosts/discordboost1.svg", title: "boost" },
     { src: "https://discordresources.com/img/username.png", title: "Originally Known as" },
-    { src: "https://cdn3.emoji.gg/emojis/51616-orbs-animated.gif", title: "orbs" },
     { src: "https://cdn3.emoji.gg/emojis/4709-quest-badge.png", title: "quest" },
+    { src: "https://cdn3.emoji.gg/emojis/51616-orbs-animated.gif", title: "orbs" },
     // أضف المزيد...
         ]
     },
@@ -300,6 +303,23 @@ function updateDiscordCard() {
     const statusDot = document.querySelector('.discord-status');
     if (statusDot && config.status) {
         statusDot.className = 'discord-status ' + config.status;
+    }
+    
+    // تحديث ألوان الخلفية
+    const cardBody = document.querySelector('.discord-card-body');
+    if (cardBody && config.primaryColor && config.accentColor) {
+        cardBody.style.background = `linear-gradient(180deg, ${config.accentColor}, ${config.primaryColor})`;
+    }
+    
+    // تحديث لون حدود الأفاتار
+    const avatarEl = document.querySelector('.discord-avatar');
+    if (avatarEl && config.accentColor) {
+        avatarEl.style.borderColor = config.accentColor;
+    }
+    
+    // تحديث لون حدود الـ status
+    if (statusDot && config.accentColor) {
+        statusDot.style.borderColor = config.accentColor;
     }
     
     // تحديث الشارات
