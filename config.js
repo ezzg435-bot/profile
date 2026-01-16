@@ -273,10 +273,14 @@ function updateDiscordCard() {
         banner.src = config.banner;
     }
     
-    // تحديث البايو
+    // تحديث البايو - مع دعم السطور الجديدة
     const bio = document.getElementById('discord-bio');
     if (bio && config.bio) {
-        bio.textContent = config.bio;
+        // تحويل السطور الجديدة إلى <br> وإزالة ** 
+        let formattedBio = config.bio
+            .replace(/\*\*/g, '')
+            .replace(/\n/g, '<br>');
+        bio.innerHTML = formattedBio;
     }
     
     // تحديث تاريخ الانضمام
@@ -289,19 +293,6 @@ function updateDiscordCard() {
     const statusDot = document.querySelector('.discord-status');
     if (statusDot && config.status) {
         statusDot.className = 'discord-status ' + config.status;
-    }
-    
-    // تحديث الشارات
-    const badgesContainer = document.querySelector('.discord-badges');
-    if (badgesContainer && config.badges && config.badges.length > 0) {
-        badgesContainer.innerHTML = '';
-        config.badges.forEach(badge => {
-            const badgeEl = document.createElement('div');
-            badgeEl.className = 'discord-badge bounce-hover';
-            badgeEl.title = badge.title;
-            badgeEl.textContent = badge.emoji;
-            badgesContainer.appendChild(badgeEl);
-        });
     }
     
     // تحديث placeholder الرسالة
