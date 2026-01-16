@@ -59,83 +59,6 @@ body {
     100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
 }
 
-/* إضافة الأشكال العائمة */
-.floating-elements {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.floating-element {
-    position: absolute;
-    background: linear-gradient(135deg, var(--purple-main), var(--purple-light));
-    border-radius: 50%;
-    filter: blur(40px);
-    opacity: 0.08;
-    animation: floatElement 20s infinite linear;
-}
-
-.el1 { width: 300px; height: 300px; top: 10%; left: 5%; animation-delay: 0s; }
-.el2 { width: 200px; height: 200px; top: 60%; right: 10%; animation-delay: -5s; }
-.el3 { width: 150px; height: 150px; bottom: 20%; left: 20%; animation-delay: -10s; }
-.el4 { width: 250px; height: 250px; top: 30%; right: 20%; animation-delay: -15s; }
-.el5 { width: 180px; height: 180px; bottom: 10%; right: 30%; animation-delay: -7s; }
-
-@keyframes floatElement {
-    0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 0.08; }
-    25% { transform: translate(100px, 50px) rotate(90deg) scale(1.1); opacity: 0.1; }
-    50% { transform: translate(50px, 100px) rotate(180deg) scale(1); opacity: 0.08; }
-    75% { transform: translate(-50px, 50px) rotate(270deg) scale(0.9); opacity: 0.06; }
-}
-
-/* زر Hire Me العائم */
-.floating-hire-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 300px;
-    z-index: 100;
-    background: linear-gradient(135deg, var(--purple-main), var(--purple-light));
-    color: white;
-    padding: 12px 25px;
-    border-radius: 50px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 600;
-    box-shadow: 0 10px 30px rgba(138, 43, 226, 0.4);
-    transition: all 0.3s ease;
-    animation: pulse 2s infinite;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-.floating-hire-btn:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(138, 43, 226, 0.6);
-    background: linear-gradient(135deg, var(--purple-light), var(--purple-main));
-}
-
-.floating-hire-btn svg {
-    width: 20px;
-    height: 20px;
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-
-@media (max-width: 1024px) {
-    .floating-hire-btn {
-        right: 20px;
-        bottom: 20px;
-    }
-}
-
 /* Main Layout */
 .main-layout {
     display: flex;
@@ -220,17 +143,6 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes cardAppear {
-    from {
-        opacity: 0;
-        transform: translateY(20px) scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
 /* Mobile Menu Toggle */
 .mobile-menu-toggle {
     display: none;
@@ -311,7 +223,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: auto;
 }
 
 .sidebar-link {
@@ -339,16 +250,6 @@ body {
 
 .sidebar-link.active {
     box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
-}
-
-.sidebar-footer {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(138, 43, 226, 0.2);
-    text-align: center;
-    font-style: italic;
-    color: var(--text-gray);
-    font-size: 14px;
 }
 
 /* Profile Section */
@@ -509,29 +410,6 @@ body {
     box-shadow: 0 10px 25px rgba(138, 43, 226, 0.4);
 }
 
-.hire-me-btn {
-    position: relative;
-    overflow: hidden;
-    display: block;
-    margin: 0 auto;
-    width: fit-content;
-}
-
-.hire-me-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
-}
-
-.hire-me-btn:hover::before {
-    left: 100%;
-}
-
 /* Background decorative circles for skills section */
 #services .card-inner {
     position: relative;
@@ -565,16 +443,6 @@ body {
 #services .skills-grid {
     position: relative;
     z-index: 1;
-}
-
-.services-description {
-    text-align: center;
-    margin-top: 40px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    color: var(--text-gray);
-    line-height: 1.6;
 }
 
 /* About */
@@ -630,20 +498,13 @@ body {
     margin-top: 5px;
 }
 
-/* Contact Container */
-.contact-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
 /* Contact Form */
 .contact-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 .form-group {
@@ -680,54 +541,12 @@ body {
     min-height: 120px;
 }
 
-/* Contact Info */
-.contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.info-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 15px;
-    padding: 20px;
-    background: rgba(35, 22, 70, 0.3);
-    border-radius: 15px;
-    border: 1px solid rgba(138, 43, 226, 0.2);
-    transition: all 0.3s;
-}
-
-.info-item:hover {
-    transform: translateX(5px);
-    border-color: var(--purple-main);
-    background: rgba(138, 43, 226, 0.1);
-}
-
-.info-item svg {
-    width: 24px;
-    height: 24px;
-    color: var(--purple-main);
-    flex-shrink: 0;
-    margin-top: 3px;
-}
-
-.info-item h4 {
-    color: var(--purple-light);
-    margin-bottom: 5px;
-}
-
-.info-item p {
-    color: var(--text-gray);
-    font-size: 14px;
-}
-
 /* Discord Card */
 .discord-card {
     background: #111214;
     border-radius: 10px;
     width: 100%;
-    max-width: 500px;
+    max-width: 400px;
     overflow: visible;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(138, 43, 226, 0.3);
     margin: 0 auto;
@@ -743,10 +562,10 @@ body {
 
 .discord-banner {
     width: 100%;
-    height: 150px;
+    height: 120px;
     background: linear-gradient(135deg, #1a1a2e, #16213e);
     position: relative;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .discord-banner img {
@@ -755,22 +574,13 @@ body {
     object-fit: cover;
 }
 
-.banner-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, transparent 70%, var(--primary-color) 100%);
-}
-
 .discord-card-body {
     background: linear-gradient(180deg, var(--accent-color), var(--primary-color));
     padding: 16px;
     padding-top: 50px;
     position: relative;
     border-radius: 0 0 8px 8px;
-    min-height: 250px;
+    min-height: 200px;
 }
 
 .discord-avatar-wrapper {
@@ -794,24 +604,6 @@ body {
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-}
-
-.discord-level {
-    position: absolute;
-    bottom: -10px;
-    right: -10px;
-    background: var(--purple-main);
-    color: white;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: bold;
-    border: 3px solid var(--primary-color);
-    z-index: 30;
 }
 
 .discord-status {
@@ -857,7 +649,6 @@ body {
     margin-bottom: 12px;
     gap: 6px;
     flex-wrap: wrap;
-    align-items: center;
 }
 
 .discord-username-section {
@@ -867,7 +658,11 @@ body {
     flex-wrap: wrap;
 }
 
-.discord-username-section h3 {
+.discord-username {
+    margin: 0;
+}
+
+.discord-username h3 {
     font-size: 20px;
     font-weight: 700;
     color: #fff;
@@ -880,17 +675,6 @@ body {
     color: rgba(255, 255, 255, 0.7);
     font-weight: 400;
     font-family: 'Courier New', monospace;
-}
-
-.discord-username {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.7);
-    font-weight: 400;
-    margin-left: 8px;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 2px 8px;
-    border-radius: 10px;
-    border: 1px solid rgba(138, 43, 226, 0.3);
 }
 
 .discord-custom-tag {
@@ -931,24 +715,20 @@ body {
     gap: 6px;
     align-items: center;
     flex-wrap: wrap;
+    justify-content: flex-end;
 }
 
 .discord-badge-img {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 2px;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(138, 43, 226, 0.3);
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    transition: transform 0.2s;
     cursor: pointer;
     object-fit: contain;
 }
 
 .discord-badge-img:hover {
-    transform: scale(1.2);
-    border-color: var(--purple-main);
-    box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+    transform: scale(1.15);
 }
 
 .discord-section {
@@ -971,15 +751,6 @@ body {
     word-break: break-word;
 }
 
-.discord-info-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-top: 20px;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
 .discord-member-since {
     display: flex;
     align-items: center;
@@ -997,50 +768,75 @@ body {
     color: #fff;
 }
 
-.discord-message-box {
-    display: flex;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 20px;
+/* Services Grid */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.service-card {
+    background: rgba(138, 43, 226, 0.1);
     border: 1px solid rgba(138, 43, 226, 0.3);
-    overflow: hidden;
-    min-width: 200px;
-}
-
-.discord-message-box input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    padding: 10px 15px;
-    color: white;
-    font-size: 14px;
-}
-
-.discord-message-box input:focus {
-    outline: none;
-}
-
-.discord-message-box .send-btn {
-    background: var(--purple-main);
-    border: none;
-    color: white;
-    padding: 0 15px;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    transition: all 0.3s ease;
     cursor: pointer;
-    transition: background 0.3s;
 }
 
-.discord-message-box .send-btn:hover {
-    background: var(--purple-light);
+.service-card:hover {
+    transform: translateY(-10px);
+    background: rgba(138, 43, 226, 0.2);
+    border-color: var(--purple-main);
+    box-shadow: 0 15px 35px rgba(138, 43, 226, 0.4);
 }
 
-.discord-message-box .send-btn svg {
-    width: 20px;
-    height: 20px;
+.service-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(138, 43, 226, 0.2);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+    background: var(--purple-main);
+    transform: scale(1.1);
+}
+
+.service-icon svg {
+    width: 35px;
+    height: 35px;
+    fill: var(--purple-light);
+}
+
+.service-card:hover .service-icon svg {
+    fill: white;
+}
+
+.service-card h3 {
+    font-size: 20px;
+    color: var(--text-white);
+    margin-bottom: 12px;
+}
+
+.service-card p {
+    font-size: 14px;
+    color: var(--text-gray);
+    line-height: 1.6;
+    margin: 0;
 }
 
 /* Skills Grid */
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 25px;
     margin-top: 40px;
     max-width: 900px;
@@ -1074,21 +870,6 @@ body {
 
 .skill-card:hover::before {
     opacity: 1;
-}
-
-.skill-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: left 0.5s;
-}
-
-.skill-card:hover::after {
-    left: 100%;
 }
 
 .skill-card:hover {
@@ -1159,17 +940,10 @@ body {
 }
 
 .skill-card h3 {
-    font-size: 18px;
+    font-size: 16px;
     color: var(--text-white);
-    margin: 15px 0 10px;
-    font-weight: 600;
-}
-
-.skill-card p {
-    font-size: 14px;
-    color: var(--text-gray);
-    line-height: 1.5;
     margin: 0;
+    font-weight: 600;
 }
 
 /* Glow Text Effect */
@@ -1207,7 +981,6 @@ footer p {
     
     .content-area {
         padding-right: 40px;
-        padding-top: 80px;
     }
     
     .sidebar {
@@ -1222,21 +995,11 @@ footer p {
     footer {
         margin-right: 0;
     }
-    
-    .floating-hire-btn {
-        right: 20px;
-        bottom: 20px;
-    }
-    
-    .contact-container {
-        grid-template-columns: 1fr;
-    }
 }
 
 @media (max-width: 768px) {
     .content-area {
         padding: 20px;
-        padding-top: 80px;
     }
     
     .card-inner {
@@ -1267,29 +1030,13 @@ footer p {
     }
     
     .skills-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
         gap: 15px;
     }
     
-    .skill-card {
-        padding: 20px 15px;
-    }
-    
-    .skill-card h3 {
-        font-size: 16px;
-    }
-    
-    .skill-card p {
-        font-size: 12px;
-    }
-    
-    .discord-info-row {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .discord-message-box {
-        width: 100%;
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
     
     .mobile-menu-toggle {
@@ -1297,15 +1044,5 @@ footer p {
         right: 15px;
         width: 45px;
         height: 45px;
-    }
-    
-    .discord-username-section {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 5px;
-    }
-    
-    .discord-username {
-        margin-left: 0;
     }
 }
