@@ -40,8 +40,15 @@ const PORTFOLIO_CONFIG = {
 **`,                                // البايو - اكتب النص هنا
         memberSince: "Jul 24,2022",                        // تاريخ الانضمام - مثل: "Jan 1, 2020"
         status: "dnd",                       // الحالة: online, idle, dnd, offline
-        // الشارات مع الايموجيات
+        // الشارات - ضع روابط صور الشارات هنا
         badges: [
+    { src: "https://cdn3.emoji.gg/emojis/313518-nitro.png", title: "nitro" },
+    { src: "https://cdn3.emoji.gg/emojis/9913-hypesquad-balance.png", title: "HypeSquad" },
+    { src: "https://cdn3.emoji.gg/emojis/33411-boosterbadges.gif", title: "boost" },
+    { src: "https://discordresources.com/img/username.png", title: "Originally Known as" },
+    { src: "https://cdn3.emoji.gg/emojis/51616-orbs-animated.gif", title: "orbs" },
+    { src: "https://cdn3.emoji.gg/emojis/4709-quest-badge.png", title: "quest" },
+    // أضف المزيد...
         ]
     },
 
@@ -293,6 +300,20 @@ function updateDiscordCard() {
     const statusDot = document.querySelector('.discord-status');
     if (statusDot && config.status) {
         statusDot.className = 'discord-status ' + config.status;
+    }
+    
+    // تحديث الشارات
+    const badgesContainer = document.getElementById('discord-badges');
+    if (badgesContainer && config.badges && config.badges.length > 0) {
+        badgesContainer.innerHTML = '';
+        config.badges.forEach(badge => {
+            const badgeImg = document.createElement('img');
+            badgeImg.className = 'discord-badge-img bounce-hover';
+            badgeImg.src = badge.src;
+            badgeImg.alt = badge.title || 'Badge';
+            badgeImg.title = badge.title || 'Badge';
+            badgesContainer.appendChild(badgeImg);
+        });
     }
     
     // تحديث placeholder الرسالة

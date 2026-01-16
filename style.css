@@ -599,7 +599,7 @@ footer p {
     height: 120px;
     background: linear-gradient(135deg, #1a1a2e, #16213e);
     position: relative;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .discord-banner img {
@@ -611,23 +611,23 @@ footer p {
 .discord-card-body {
     background: linear-gradient(180deg, #7c3aed, #6d28d9, #5b21b6);
     padding: 16px;
-    padding-bottom: 60px;
+    padding-top: 50px;
     position: relative;
     border-radius: 0 0 8px 8px;
 }
 
 .discord-avatar-wrapper {
     position: absolute;
-    bottom: -35px;
+    bottom: -40px;
     left: 16px;
     z-index: 10;
 }
 
 .discord-avatar {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    border: 4px solid #5b21b6;
+    border: 5px solid #7c3aed;
     background: #111214;
     position: relative;
     overflow: hidden;
