@@ -86,6 +86,24 @@ body {
     animation: fadeInUp 0.6s ease-out;
     box-shadow: 0 0 30px rgba(138, 43, 226, 0.1);
     display: none;
+    position: relative;
+}
+
+.content-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(138, 43, 226, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.content-card:hover::before {
+    opacity: 1;
 }
 
 .content-card.active {
@@ -103,9 +121,14 @@ body {
 
 .card-title {
     font-size: 32px;
-    color: var(--purple-main);
+    color: var(--purple-light);
     margin-bottom: 10px;
     text-align: center;
+    font-weight: 600;
+}
+
+.card-title.glow-text {
+    color: var(--purple-light);
 }
 
 .card-subtitle {
@@ -387,25 +410,39 @@ body {
     box-shadow: 0 10px 25px rgba(138, 43, 226, 0.4);
 }
 
-/* Services */
-.services-list {
+/* Background decorative circles for skills section */
+#services .card-inner {
+    position: relative;
+    overflow: hidden;
+}
+
+#services .card-inner::before,
+#services .card-inner::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
     background: rgba(138, 43, 226, 0.1);
-    padding: var(--spacing-md);
-    border-radius: 15px;
-    border: 1px solid rgba(138, 43, 226, 0.2);
-    text-align: center;
+    pointer-events: none;
+    z-index: 0;
 }
 
-.services-list h3 {
-    font-size: 24px;
-    margin-bottom: 15px;
-    color: var(--purple-main);
+#services .card-inner::before {
+    width: 300px;
+    height: 300px;
+    top: -100px;
+    right: -100px;
 }
 
-.services-list p {
-    color: var(--text-gray);
-    line-height: 1.8;
-    font-size: 16px;
+#services .card-inner::after {
+    width: 200px;
+    height: 200px;
+    bottom: -50px;
+    left: -50px;
+}
+
+#services .skills-grid {
+    position: relative;
+    z-index: 1;
 }
 
 /* About */
@@ -509,12 +546,18 @@ body {
     background: #111214;
     border-radius: 10px;
     width: 100%;
-    max-width: 380px;
+    max-width: 400px;
     overflow: visible;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(138, 43, 226, 0.3);
     margin: 0 auto;
     position: relative;
     border: 2px solid rgba(138, 43, 226, 0.5);
+    transition: all 0.3s ease;
+}
+
+.discord-card:hover {
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(138, 43, 226, 0.4);
+    border-color: rgba(138, 43, 226, 0.7);
 }
 
 .discord-banner {
@@ -537,6 +580,7 @@ body {
     padding-top: 50px;
     position: relative;
     border-radius: 0 0 8px 8px;
+    min-height: 200px;
 }
 
 .discord-avatar-wrapper {
@@ -590,34 +634,101 @@ body {
     background: #80848e;
 }
 
-.discord-badges {
+.discord-user-row {
     display: flex;
-    gap: 4px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.discord-badges-row {
+    display: flex;
     justify-content: flex-end;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    gap: 6px;
+    flex-wrap: wrap;
 }
 
-.discord-badge-img {
-    width: 22px;
-    height: 22px;
-    border-radius: 4px;
-    transition: transform 0.2s;
-    cursor: pointer;
-}
-
-.discord-badge-img:hover {
-    transform: scale(1.2);
+.discord-username-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .discord-username {
-    margin-bottom: 12px;
+    margin: 0;
 }
 
 .discord-username h3 {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
     color: #fff;
     margin: 0;
+    display: inline-block;
+}
+
+.discord-tag {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+    font-family: 'Courier New', monospace;
+}
+
+.discord-custom-tag {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 5px 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(138, 43, 226, 0.4);
+    margin-left: auto;
+    transition: all 0.2s ease;
+}
+
+.discord-custom-tag:hover {
+    background: rgba(0, 0, 0, 0.6);
+    border-color: rgba(138, 43, 226, 0.6);
+}
+
+.discord-custom-tag .tag-icon {
+    width: 14px;
+    height: 14px;
+    fill: #7dd3fc;
+    filter: drop-shadow(0 0 2px rgba(125, 211, 252, 0.8));
+}
+
+.discord-custom-tag .tag-text {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.discord-badges {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.discord-badge-img {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    transition: transform 0.2s;
+    cursor: pointer;
+    object-fit: contain;
+}
+
+.discord-badge-img:hover {
+    transform: scale(1.15);
 }
 
 .discord-section {
@@ -725,38 +836,114 @@ body {
 /* Skills Grid */
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px;
-    margin-top: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .skill-card {
-    background: rgba(138, 43, 226, 0.1);
-    border: 1px solid rgba(138, 43, 226, 0.3);
+    background: rgba(35, 22, 70, 0.4);
+    border: 2px solid rgba(138, 43, 226, 0.5);
     border-radius: 15px;
     padding: 30px 20px;
     text-align: center;
     transition: all 0.3s ease;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.skill-card:hover::before {
+    opacity: 1;
 }
 
 .skill-card:hover {
-    transform: translateY(-10px);
-    background: rgba(138, 43, 226, 0.2);
+    transform: translateY(-5px);
+    background: rgba(138, 43, 226, 0.15);
     border-color: var(--purple-main);
-    box-shadow: 0 10px 30px rgba(138, 43, 226, 0.4);
+    box-shadow: 0 0 25px rgba(138, 43, 226, 0.6), 0 0 50px rgba(138, 43, 226, 0.3);
 }
 
 .skill-icon {
-    font-size: 50px;
-    margin-bottom: 15px;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--purple-light);
+    transition: all 0.3s ease;
+}
+
+.skill-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+}
+
+/* Node.js icon styling */
+.skill-card:nth-child(1) .skill-icon {
+    color: #339933;
+}
+
+/* React icon styling */
+.skill-card:nth-child(2) .skill-icon {
+    color: #61DAFB;
+}
+
+/* Python icon styling */
+.skill-card:nth-child(3) .skill-icon {
+    color: #3776AB;
+}
+
+/* JavaScript icon styling */
+.skill-card:nth-child(4) .skill-icon {
+    color: #F7DF1E;
+}
+
+.skill-card:nth-child(4) .skill-icon svg rect {
+    fill: #F7DF1E;
+}
+
+.skill-card:nth-child(4) .skill-icon svg path {
+    fill: #000;
+}
+
+/* CSS3 icon styling */
+.skill-card:nth-child(5) .skill-icon {
+    color: #1572B6;
+}
+
+/* HTML5 icon styling */
+.skill-card:nth-child(6) .skill-icon {
+    color: #E34F26;
+}
+
+.skill-card:hover .skill-icon {
     color: var(--purple-main);
+    transform: scale(1.1);
 }
 
 .skill-card h3 {
-    font-size: 18px;
+    font-size: 16px;
     color: var(--text-white);
     margin: 0;
+    font-weight: 600;
 }
 
 /* Glow Text Effect */
@@ -857,6 +1044,219 @@ footer p {
         right: 15px;
         width: 45px;
         height: 45px;
+    }
+}
+.particle:nth-child(even) {
+    background: var(--purple-light);
+    animation-duration: 18s;
+    width: 5px;
+    height: 5px;
+}
+
+/* Service cards with real images */
+.service-icon {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.2);
+}
+
+.service-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Projects grid */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 35px;
+}
+
+.project-card {
+    background: rgba(138, 43, 226, 0.12);
+    border: 1px solid rgba(138, 43, 226, 0.35);
+    border-radius: 16px;
+    padding: 20px;
+    transition: all 0.35s ease;
+    overflow: hidden;
+}
+
+.project-card:hover {
+    transform: translateY(-12px);
+    background: rgba(138, 43, 226, 0.22);
+    border-color: var(--purple-main);
+    box-shadow: 0 18px 40px rgba(138, 43, 226, 0.35);
+}
+
+.project-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 16px;
+}
+
+/* Discord card fine-tuning to be more compact like the second image */
+.discord-username-section {
+    gap: 6px;
+}
+
+.discord-custom-tag {
+    padding: 4px 12px;
+    font-size: 11px;
+}
+
+.discord-badge-img {
+    width: 20px;
+    height: 20px;
+}
+
+/* Pulse effect on buttons */
+.btn:hover {
+    animation: pulse 1.4s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+}
+
+
+/* ────────────────────────────────────────────────
+   Services Section - Enhanced + Mobile Optimized
+───────────────────────────────────────────────── */
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+}
+
+.service-card {
+    background: rgba(35, 22, 70, 0.35);
+    border: 1px solid rgba(138, 43, 226, 0.25);
+    border-radius: 16px;
+    padding: 28px 20px;
+    text-align: center;
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(138,43,226,0.12) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.service-card:hover::before {
+    opacity: 1;
+}
+
+.service-card:hover {
+    transform: translateY(-12px);
+    border-color: #da70d6;
+    box-shadow: 0 20px 40px rgba(138, 43, 226, 0.35);
+    background: rgba(35, 22, 70, 0.5);
+}
+
+.service-icon {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.25);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    transition: transform 0.4s ease;
+}
+
+.service-card:hover .service-icon {
+    transform: scale(1.08) rotate(2deg);
+}
+
+.service-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.service-card:hover .service-icon img {
+    transform: scale(1.12);
+}
+
+.service-card h3 {
+    font-size: 1.35rem;
+    margin: 0 0 10px;
+    color: #da70d6;
+    font-weight: 600;
+}
+
+.service-card p {
+    font-size: 0.95rem;
+    color: #bbbbbb;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* ────────────────────────────────────────────────
+   Mobile Responsiveness (very important improvements)
+───────────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .service-icon {
+        width: 110px;
+        height: 110px;
+    }
+}
+
+@media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 0 10px;
+    }
+    
+    .service-card {
+        padding: 24px 18px;
+    }
+    
+    .service-icon {
+        width: 130px;
+        height: 130px;
+        margin-bottom: 24px;
+    }
+    
+    .card-title {
+        font-size: 2.2rem;
+    }
+    
+    .card-subtitle {
+        font-size: 1.1rem;
+    }
+}
+
+/* Extra touch: subtle scale animation on mobile tap */
+@media (hover: none) {
+    .service-card:active {
+        transform: scale(0.97);
     }
 }
 
