@@ -44,11 +44,12 @@ const PORTFOLIO_CONFIG = {
         primaryColor: "#231646",
         accentColor: "#09030e",
         badges: [
-            { src: "https://cdn.imgbin.com/1/10/13/imgbin-discord-computer-icons-social-media-social-media-MRxpXcugcd3UTUAJin9yMCtyR.jpg", title: "PC" },
-            { src: "https://png.pngtree.com/png-vector/20220711/ourmid/pngtree-set-of-down-arrow-icons-triangle-pointer-element-vector-png-image_8644278.png", title: "Down Triangle" },
-            { src: "https://png.pngtree.com/png-vector/20191029/ourmid/pngtree-triangle-pink-abstract-background-vector-png-image_1872540.jpg", title: "Pink Triangle" },
-            { src: "https://www.pngall.com/wp-content/uploads/5/Green-Hashtag-PNG-Image.png", title: "Green Hash" },
-            { src: "https://www.pngall.com/wp-content/uploads/5/Purple-Diamond-PNG-Image.png", title: "Purple Diamond" }
+    { src: "https://discordresources.com/img/subscriptions/bronze.svg", title: "nitro" },
+    { src: "https://discordresources.com/img/hypesquadbalance.svg", title: "HypeSquad" },
+    { src: "https://discordresources.com/img/boosts/discordboost1.svg", title: "boost" },
+    { src: "https://discordresources.com/img/username.png", title: "Originally Known as" },
+    { src: "https://cdn3.emoji.gg/emojis/4709-quest-badge.png", title: "quest" },
+    { src: "https://cdn3.emoji.gg/emojis/51616-orbs-animated.gif", title: "orbs" },
         ]
     },
 
