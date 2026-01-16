@@ -8,10 +8,10 @@ const PORTFOLIO_CONFIG = {
     // 📝 المعلومات الشخصية
     // ═══════════════════════════════════════════════════════════════
     personalInfo: {
-        name: "Lazy",                           // اسمك
-        title: "Bots Developer",                 // المسمى الوظيفي
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus labore dolores esse. Odit similique doloribus tenetur doloremque, sunt commodi in ipsa repudiandae debitis deleniti blanditiis quibusdam quaerat neque asperiores ea.",
-        profileImage: "main.jpg"                // اسم ملف الصورة
+        name: "Lazy",
+        title: "Bots & Web Developer",
+        description: "Professional developer specializing in Discord bots, web applications, modern UI/UX design and creative digital solutions.",
+        profileImage: "main.jpg"
     },
 
     // ═══════════════════════════════════════════════════════════════
@@ -25,11 +25,11 @@ const PORTFOLIO_CONFIG = {
     },
 
     // ═══════════════════════════════════════════════════════════════
-    // 💬 إعدادات Discord Card - عدل هنا
+    // 💬 إعدادات Discord Card - تم تهيئتها لتشبه الشكل المطلوب
     // ═══════════════════════════════════════════════════════════════
     discordCard: {
-        displayName: "ϟ〢𝑳á𝒛𝒚",                    // اسم العرض
-        tag: "._idc",                            // التاق
+        displayName: "ϟ〢𝑳á𝒛𝒚",
+        tag: "._idc",
         avatar: "https://cdn.discordapp.com/attachments/1369976044374855753/1461506633615016061/038994609347b871e2ef5ff10346903f.jpg?ex=696acd9e&is=69697c1e&hm=52682461dc8087a01571adbe246f6768d7c451880a8535a121560d323f4e8521&",
         banner: "https://cdn.discordapp.com/attachments/1369976044374855753/1461506633900232704/9bfc635a9bbfd6858c9b1d20cf3073a2.gif?ex=696acd9f&is=69697c1f&hm=72d4d5cecfbf81672efdcc2289a94d6ef66e81df3d185336cfd00692128f9115&",
         bio: `**C/:Users/Lazy
@@ -38,38 +38,27 @@ const PORTFOLIO_CONFIG = {
       ╠ Na7la Shop Developer
          ╠ https://lazyidc.qzz.io
              ╚ Advance Developer
-**`,                                // البايو - اكتب النص هنا
-        memberSince: "Jul 24,2022",                        // تاريخ الانضمام - مثل: "Jan 1, 2020"
-        status: "dnd",                       // الحالة: online, idle, dnd, offline
-        // ألوان الخلفية
-        primaryColor: "#231646",             // اللون الأساسي (الخلفية)
-        accentColor: "#09030e",              // اللون الثانوي (التدرج)
-        // الشارات - ضع روابط صور الشارات هنا
+**`,
+        memberSince: "Jul 24, 2022",
+        status: "dnd",
+        primaryColor: "#231646",
+        accentColor: "#09030e",
         badges: [
-    { src: "https://discordresources.com/img/subscriptions/bronze.svg", title: "nitro" },
-    { src: "https://discordresources.com/img/hypesquadbalance.svg", title: "HypeSquad" },
-    { src: "https://discordresources.com/img/boosts/discordboost1.svg", title: "boost" },
-    { src: "https://discordresources.com/img/username.png", title: "Originally Known as" },
-    { src: "https://cdn3.emoji.gg/emojis/4709-quest-badge.png", title: "quest" },
-    { src: "https://cdn3.emoji.gg/emojis/51616-orbs-animated.gif", title: "orbs" },
-    // أضف المزيد...
+            { src: "https://cdn.imgbin.com/1/10/13/imgbin-discord-computer-icons-social-media-social-media-MRxpXcugcd3UTUAJin9yMCtyR.jpg", title: "PC" },
+            { src: "https://png.pngtree.com/png-vector/20220711/ourmid/pngtree-set-of-down-arrow-icons-triangle-pointer-element-vector-png-image_8644278.png", title: "Down Triangle" },
+            { src: "https://png.pngtree.com/png-vector/20191029/ourmid/pngtree-triangle-pink-abstract-background-vector-png-image_1872540.jpg", title: "Pink Triangle" },
+            { src: "https://www.pngall.com/wp-content/uploads/5/Green-Hashtag-PNG-Image.png", title: "Green Hash" },
+            { src: "https://www.pngall.com/wp-content/uploads/5/Purple-Diamond-PNG-Image.png", title: "Purple Diamond" }
         ]
     },
 
     // ═══════════════════════════════════════════════════════════════
-    // 📧 إعدادات الإيميل للـ Contact Form
+    // 📧 إعدادات الإيميل
     // ═══════════════════════════════════════════════════════════════
     email: {
-        // الطريقة 1: إرسال مباشر عبر mailto (سهلة لكن محدودة)
         useMailto: true,
         recipientEmail: "alikalbouneh268@gmail.com",
-        
-        // الطريقة 2: استخدام خدمة خارجية مثل FormSubmit أو EmailJS
-        // إذا تبي تستخدم FormSubmit، حط الإيميل هنا وغير useMailto إلى false
-        formSubmitEmail: "alikalbouneh268@gmail.com",  // FormSubmit.co
-        
-        // الطريقة 3: EmailJS (أكثر احترافية)
-        // سجل في emailjs.com وحط المعلومات هنا
+        formSubmitEmail: "alikalbouneh268@gmail.com",
         emailJS: {
             serviceID: "service_h4pze6l",
             templateID: "template_4m1ow82",
@@ -82,7 +71,7 @@ const PORTFOLIO_CONFIG = {
     // ═══════════════════════════════════════════════════════════════
     services: {
         title: "My Expertise",
-        list: "Web Development • Graphic Design • Branding & Identity • User Research • Creative Solutions • Digital Marketing"
+        list: "Web Development • Discord Bot Development • Graphic Design • Branding & Identity • UI/UX Design • Creative Solutions"
     },
 
     // ═══════════════════════════════════════════════════════════════
@@ -90,10 +79,8 @@ const PORTFOLIO_CONFIG = {
     // ═══════════════════════════════════════════════════════════════
     about: {
         title: "Let me introduce myself",
-        paragraph1: "I have a strong passion for design and development. I specialize in Design and my passion is all about building elegant and professional user interfaces and websites.",
-        paragraph2: "I also do branding and identity design such as logo design, letterhead and business card, along with photo editing, image cropping and other graphic design services.",
-        
-        // الإحصائيات
+        paragraph1: "I have a strong passion for design and development. I specialize in Discord bots and modern web development with focus on elegant, professional user interfaces.",
+        paragraph2: "I also provide branding services, logo design, business card design, photo editing and various graphic design solutions.",
         stats: {
             projects: "250+",
             clients: "290+",
@@ -102,12 +89,12 @@ const PORTFOLIO_CONFIG = {
     },
 
     // ═══════════════════════════════════════════════════════════════
-    // 🎨 الألوان (اختياري - إذا تبي تغير الألوان)
+    // 🎨 الألوان
     // ═══════════════════════════════════════════════════════════════
     colors: {
-        purpleMain: "#8a2be2",      // اللون البنفسجي الرئيسي
-        purpleLight: "#da70d6",     // البنفسجي الفاتح
-        purpleDark: "#6a1bb2"       // البنفسجي الغامق
+        purpleMain: "#8a2be2",
+        purpleLight: "#da70d6",
+        purpleDark: "#6a1bb2"
     }
 };
 
