@@ -8,7 +8,7 @@ const PORTFOLIO_CONFIG = {
     // 📝 المعلومات الشخصية
     // ═══════════════════════════════════════════════════════════════
     personalInfo: {
-        name: "Lazy",                           // اسمك
+        name: "ϟ〢𝑳á𝒛𝒚",                           // اسمك
         title: "Bots Developer",                 // المسمى الوظيفي
         description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus labore dolores esse. Odit similique doloribus tenetur doloremque, sunt commodi in ipsa repudiandae debitis deleniti blanditiis quibusdam quaerat neque asperiores ea.",
         profileImage: "main.jpg"                // اسم ملف الصورة
@@ -28,7 +28,7 @@ const PORTFOLIO_CONFIG = {
     // 💬 إعدادات Discord Card - عدل هنا
     // ═══════════════════════════════════════════════════════════════
     discordCard: {
-        displayName: "Lazy",                    // اسم العرض
+        displayName: "ϟ〢𝑳á𝒛𝒚",                    // اسم العرض
         avatar: "https://cdn.discordapp.com/attachments/1369976044374855753/1461506633615016061/038994609347b871e2ef5ff10346903f.jpg?ex=696acd9e&is=69697c1e&hm=52682461dc8087a01571adbe246f6768d7c451880a8535a121560d323f4e8521&",
         banner: "https://cdn.discordapp.com/attachments/1369976044374855753/1461506633900232704/9bfc635a9bbfd6858c9b1d20cf3073a2.gif?ex=696acd9f&is=69697c1f&hm=72d4d5cecfbf81672efdcc2289a94d6ef66e81df3d185336cfd00692128f9115&",
         bio: `**C/:Users/Lazy
