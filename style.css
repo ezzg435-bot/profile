@@ -544,7 +544,7 @@ body {
 /* Discord Card */
 .discord-card {
     background: #111214;
-    border-radius: 12px;
+    border-radius: 10px;
     width: 100%;
     max-width: 450px;
     overflow: visible;
