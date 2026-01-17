@@ -575,6 +575,8 @@ body {
     height: 100%;
     object-fit: cover;
     display: block;
+    object-position: top right;
+    transform: translateY(-20px) translateX(20px);
 }
 
 .neon-eyes {
@@ -608,16 +610,16 @@ body {
 .discord-content-wrapper {
     display: flex;
     gap: 20px;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .discord-left-section {
     flex-shrink: 0;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    margin-top: -70px;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 15px;
+    margin-top: 0;
 }
 
 .discord-avatar-large {
@@ -626,7 +628,7 @@ body {
     border-radius: 50%;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 0 15px rgba(125, 211, 252, 0.5);
+    box-shadow: 0 0 15px rgba(35, 22, 70, 1.0);
 }
 
 .discord-avatar-large img {
