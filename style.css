@@ -553,11 +553,13 @@ body {
     position: relative;
     border: 2px solid rgba(138, 43, 226, 0.5);
     transition: all 0.3s ease;
+    z-index: 5;
 }
 
 .discord-card:hover {
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(138, 43, 226, 0.4);
-    border-color: rgba(138, 43, 226, 0.7);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(138, 43, 226, 0.6), inset 0 0 20px rgba(138, 43, 226, 0.3);
+    border-color: rgba(138, 43, 226, 1);
+    z-index: 15;
 }
 
 /* Neon Banner */
@@ -568,6 +570,7 @@ body {
     position: relative;
     overflow: hidden;
     border-bottom: none;
+    z-index: 10;
 }
 
 .banner-img {
@@ -577,6 +580,11 @@ body {
     display: block;
     object-position: center top;
     transform: translateY(-60px);
+    transition: transform 0.3s ease;
+}
+
+.discord-card:hover .banner-img {
+    transform: translateY(-50px);
 }
 
 .neon-eyes {
@@ -874,8 +882,8 @@ body {
 }
 
 .skill-card {
-    background: rgba(35, 22, 70, 0.4);
-    border: 2px solid rgba(138, 43, 226, 0.5);
+    background: rgba(138, 43, 226, 0.1);
+    border: 1px solid rgba(138, 43, 226, 0.3);
     border-radius: 12px;
     padding: 20px 15px;
     text-align: center;
@@ -885,44 +893,33 @@ body {
     overflow: hidden;
 }
 
+.skill-card:hover {
+    transform: translateY(-8px);
+    background: rgba(138, 43, 226, 0.2);
+    border-color: var(--purple-main);
+    box-shadow: 0 10px 30px rgba(138, 43, 226, 0.4);
+}
+
 @media (max-width: 480px) {
     .skill-card {
         padding: 15px 10px;
     }
 }
 
-.skill-card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.skill-card:hover::before {
-    opacity: 1;
-}
-
-.skill-card:hover {
-    transform: translateY(-5px);
-    background: rgba(138, 43, 226, 0.15);
-    border-color: var(--purple-main);
-    box-shadow: 0 0 25px rgba(138, 43, 226, 0.6), 0 0 50px rgba(138, 43, 226, 0.3);
-}
-
 .skill-icon {
-    width: 60px;
-    height: 60px;
-    margin: 0 auto 15px;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--purple-light);
     transition: all 0.3s ease;
+}
+
+.skill-card:hover .skill-icon {
+    transform: scale(1.15);
+    color: var(--purple-main);
 }
 
 .skill-icon svg {
