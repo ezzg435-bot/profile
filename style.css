@@ -589,12 +589,14 @@ body {
     background: linear-gradient(135deg, #1a1a2e, #16213e);
     position: relative;
     overflow: visible;
+    border-radius: 10px 10px 0 0;
 }
 
 .discord-banner img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 10px 10px 0 0;
 }
 
 .discord-card-body {
@@ -602,7 +604,7 @@ body {
     padding: 16px;
     padding-top: 50px;
     position: relative;
-    border-radius: 0 0 8px 8px;
+    border-radius: 0 0 10px 10px;
     min-height: 200px;
 }
 
@@ -661,7 +663,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     gap: 12px;
     flex-wrap: wrap;
     margin-top: 7px;
@@ -670,9 +672,10 @@ body {
 .discord-badges-row {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 12px;
+    margin-bottom: 0;
     gap: 6px;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 .discord-username-section {
@@ -691,7 +694,7 @@ body {
     font-weight: 700;
     color: #fff;
     margin: 0;
-    display: inline;
+    display: block;
 }
 
 .discord-tag {
@@ -699,8 +702,8 @@ body {
     color: rgba(255, 255, 255, 0.7);
     font-weight: 400;
     font-family: 'Courier New', monospace;
-    display: inline;
-    margin-left: 0;
+    display: inline-block;
+    margin: 0;
 }
 
 .discord-custom-tag {
@@ -874,12 +877,15 @@ body {
     background: rgba(35, 22, 70, 0.4);
     border: 2px solid rgba(138, 43, 226, 0.5);
     border-radius: 15px;
-    padding: 18px 15px;
+    padding: 30px 20px;
     text-align: center;
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .skill-card::before {
@@ -906,9 +912,9 @@ body {
 }
 
 .skill-icon {
-    width: 45px;
-    height: 45px;
-    margin: 0 auto 8px;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 15px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -968,8 +974,8 @@ body {
 .skill-card h3 {
     font-size: 16px;
     color: var(--text-white);
-    margin: 0;
-    font-weight: 600;
+    margin: 0 0 15px 0;
+    font-weight: 400;
 }
 
 /* Glow Text Effect */
