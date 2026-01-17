@@ -58,7 +58,7 @@ const PORTFOLIO_CONFIG = {
     email: {
         useMailto: true,
         recipientEmail: "alikalbouneh268@gmail.com",
-        formSubmitEmail: "alikalbouneh268@gmail.com",
+        formSubmitEmail: "84280d3c6773682edc7339e16490b02d",
         emailJS: {
             serviceID: "service_h4pze6l",
             templateID: "template_4m1ow82",
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const subject = encodeURIComponent(`Message from ${name}`);
                 const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
                 window.location.href = `mailto:${PORTFOLIO_CONFIG.email.recipientEmail}?subject=${subject}&body=${body}`;
-                alert('Opening your email client... ✉️');
+                alert('يرجى الانتظار...');
             } else if (PORTFOLIO_CONFIG.email.emailJS.serviceID) {
                 // الطريقة 3: EmailJS
                 alert('Sending email via EmailJS...');

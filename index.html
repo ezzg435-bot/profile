@@ -14,6 +14,7 @@
     
     <!-- Optional (Embed color) -->
     <meta name="theme-color" content="#231646">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='50' font-size='50' fill='%23231646' text-anchor='middle' dominant-baseline='middle'>ϟ</text></svg>">
     <link rel="stylesheet" href="style.css">
     <script src="config.js"></script>
 </head>
@@ -292,25 +293,21 @@
                     <h2 class="card-title">Contact</h2>
                     <p class="card-subtitle">Get in touch</p>
                     
-                    <form class="contact-form" id="contactForm">
-    <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" placeholder="Your Name" required>
-    </div>
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
-    </div>
-    <div class="form-group">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" placeholder="Your message here..." required></textarea>
-    </div>
-    
-    <button type="submit" class="btn">Send Message</button>
-</form>
-
-<!-- مكان رسالة النجاح (اختياري - يظهر تحت الزر) -->
-<div id="form-message" style="margin-top: 15px; color: #da70d6; font-weight: bold; text-align: center; display: none;"></div>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="your.email@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" placeholder="Your message here..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
                 </div>
             </section>
         </main>
@@ -439,40 +436,30 @@ document.addEventListener('DOMContentLoaded', () => {
 });
     </script>
 
-
-<script>
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // يمنع إعادة التحميل أو التوجيه
-
+    <script>
+document.querySelector('.contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
     const form = this;
     const formData = new FormData(form);
     
-    // أضف _subject إذا بدك عنوان الإيميل يجيك مرتب
-    formData.append('_subject', 'رسالة جديدة من Portfolio - ' + formData.get('name'));
-    formData.append('_captcha', 'false'); // لو ما بدك كابتشا (اختياري)
-
-    fetch('https://formsubmit.co/alikalbouneh268@gmail.com', {
+    fetch(form.action, {
         method: 'POST',
         body: formData
     })
     .then(response => {
         if (response.ok) {
-            // نجاح → نظهر رسالة ونمسح الحقول
-            document.getElementById('form-message').textContent = 'تم إرسال الرسالة بنجاح! شكراً لك ✉️';
-            document.getElementById('form-message').style.display = 'block';
-            form.reset(); // يمسح النموذج
+            alert('تم إرسال الرسالة بنجاح! شكراً لك ✉️');
+            form.reset(); // يمسح الحقول
         } else {
-            throw new Error('فشل الإرسال');
+            alert('فشل الإرسال، حاول مرة أخرى');
         }
     })
     .catch(error => {
-        document.getElementById('form-message').textContent = 'حدث خطأ، حاول مرة أخرى لاحقاً';
-        document.getElementById('form-message').style.display = 'block';
-        document.getElementById('form-message').style.color = '#ff6b6b';
+        alert('حدث خطأ: ' + error);
     });
 });
 </script>
-
 
 </body>
 </html>
