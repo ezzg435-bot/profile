@@ -563,10 +563,10 @@ body {
 /* Neon Banner */
 .discord-banner-neon {
     width: 100%;
-    height: 140px;
-    background: #000;
+    height: 120px;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     border-bottom: 1px solid rgba(138, 43, 226, 0.3);
 }
 
@@ -575,7 +575,7 @@ body {
     height: 100%;
     object-fit: cover;
     display: block;
-    object-position: center top;
+    object-position: center;
 }
 
 .neon-eyes {
