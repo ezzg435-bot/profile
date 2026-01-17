@@ -157,49 +157,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.documentElement.style.setProperty('--purple-dark', PORTFOLIO_CONFIG.colors.purpleDark);
     }
     
-    // معالجة نموذج الاتصال
-    const contactForm = document.querySelector('.contact-form');
-    if(contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            if(PORTFOLIO_CONFIG.email.useMailto) {
-                // الطريقة 1: mailto (يفتح برنامج الإيميل)
-                const subject = encodeURIComponent(`Message from ${name}`);
-                const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-                window.location.href = `mailto:${PORTFOLIO_CONFIG.email.recipientEmail}?subject=${subject}&body=${body}`;
-                alert('Opening your email client... ✉️');
-            } else if (PORTFOLIO_CONFIG.email.emailJS.serviceID) {
-                // الطريقة 3: EmailJS
-                alert('Sending email via EmailJS...');
-                // You would implement EmailJS here
-                contactForm.reset();
-            } else {
-                // الطريقة 2: FormSubmit
-                const formData = new FormData();
-                formData.append('name', name);
-                formData.append('email', email);
-                formData.append('message', message);
-                
-                fetch(`https://formsubmit.co/${PORTFOLIO_CONFIG.email.formSubmitEmail}`, {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => {
-                    alert('Thank you! Your message has been sent successfully!');
-                    contactForm.reset();
-                })
-                .catch(error => {
-                    alert('Sorry, there was an error sending your message. Please try again.');
-                });
-            }
-        });
-    }
-    
     // Smooth scrolling & Navigation
     const sidebarLinks = document.querySelectorAll('.sidebar-link');
     const contentCards = document.querySelectorAll('.content-card');
