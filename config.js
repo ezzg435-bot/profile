@@ -44,11 +44,11 @@ const PORTFOLIO_CONFIG = {
         accentColor: "#09030e",
         badges: [
     { src: "https://discordresources.com/img/subscriptions/bronze.svg", title: "nitro" },
-    { src: "https://discordresources.com/img/hypesquadbalance.svg", title: "HypeSquad" },
+    { src: "https://cdn3.emoji.gg/emojis/33499-hypesquadbalance.png", title: "HypeSquad" },
     { src: "https://discordresources.com/img/boosts/discordboost1.svg", title: "boost" },
     { src: "https://discordresources.com/img/username.png", title: "Originally Known as" },
     { src: "https://cdn3.emoji.gg/emojis/4709-quest-badge.png", title: "quest" },
-    { src: "https://cdn3.emoji.gg/emojis/51616-orbs-animated.gif", title: "orbs" },
+    { src: "https://cdn.discordapp.com/emojis/1404466478601998366.webp?size=128", title: "orbs" },
         ]
     },
 
