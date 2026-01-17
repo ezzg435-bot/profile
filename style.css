@@ -567,7 +567,7 @@ body {
     background: #000;
     position: bottom;
     overflow: visible;
-    border-bottom: 5px solid rgba(138, 43, 226, 0.3);
+    border-bottom: 0px solid rgba(138, 43, 226, 0.3);
 }
 
 .banner-img {
@@ -862,7 +862,7 @@ body {
     background: rgba(35, 22, 70, 0.4);
     border: 2px solid rgba(138, 43, 226, 0.5);
     border-radius: 15px;
-    padding: 30px 20px;
+    padding: 25px 20px;
     text-align: center;
     transition: all 0.3s ease;
     cursor: pointer;
