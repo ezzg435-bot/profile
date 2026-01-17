@@ -1467,3 +1467,76 @@ footer {
         height: 45px;
     }
 }
+
+
+/* Skills Section Improvements */
+.skills-grid {  /* غير الاسم إذا كان مختلف */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 24px;
+  padding: 30px;
+  position: relative;
+}
+
+.skill-card {  /* غير إذا كان .service-card */
+  position: relative;
+  isolation: isolate;  /* يمنع تداخل الـ effects */
+  background: linear-gradient(135deg, rgba(35, 22, 70, 0.5), rgba(9, 3, 14, 0.7));
+  border: 1px solid rgba(138, 43, 226, 0.2);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  transition: all 0.4s ease;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.skill-card::before {  /* الـ glow layer */
+  content: '';
+  position: absolute;
+  inset: -10px;  /* لتوسيع الـ glow خارج الكارت */
+  background: radial-gradient(circle, rgba(138, 43, 226, 0.3), transparent 60%);
+  opacity: 0;
+  filter: blur(20px);
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.skill-card:hover {
+  transform: translateY(-6px) scale(1.05);
+  border-color: var(--purple-light);
+  box-shadow: 0 12px 32px rgba(138, 43, 226, 0.4);
+  z-index: 10;  /* يرفع الكارت فوق الآخرين */
+}
+
+.skill-card:hover::before {
+  opacity: 1;
+}
+
+.skill-card img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 12px;
+  transition: transform 0.4s ease;
+}
+
+.skill-card:hover img {
+  transform: scale(1.2) rotate(5deg);  /* إضافة حركة لطيفة */
+}
+
+.skill-card span {
+  display: block;
+  font-size: 1rem;
+  color: var(--text-gray);
+  font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+    padding: 20px 10px;
+  }
+}
