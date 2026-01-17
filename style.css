@@ -913,22 +913,26 @@ body {
     justify-content: center;
     background: rgba(138, 43, 226, 0.2);
     border-radius: 50%;
-    transition: all 0.3s ease;
+    transition: all 0.6s ease;
 }
 
 .service-card:hover .service-icon {
     background: var(--purple-main);
-    transform: scale(1.1);
+    transform: scale(1.2) rotate(10deg);
 }
 
-.service-icon svg {
-    width: 35px;
-    height: 35px;
+.service-icon svg,
+.service-icon img {
+    width: 100%;
+    height: 100%;
     fill: var(--purple-light);
+    transition: transform 0.6s;
 }
 
-.service-card:hover .service-icon svg {
+.service-card:hover .service-icon svg,
+.service-card:hover .service-icon img {
     fill: white;
+    transform: scale(1.25) rotate(10deg);
 }
 
 .service-card h3 {
@@ -945,30 +949,54 @@ body {
 }
 
 /* Skills Grid */
-.skills-grid,
-.services-grid {
+.skills-grid {
+  perspective: 1000px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: clamp(1.25rem, 3vw, 2rem);     /* فجوة تتكيف مع حجم الشاشة */
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  padding: 3rem 1rem;
   margin-top: 2.5rem;
-  padding: 0 1rem;                     /* حماية صغيرة من الجوانب في الشاشات الصغيرة */
-  justify-content: center;             /* توسيط الكروت إذا كان عددها قليل */
 }
 
-.skill-card,
-.service-card {
-  min-height: 220px;                   /* ارتفاع أدنى عشان ما تبقاش الكروت متفاوتة جدًا */
-  background: rgba(35, 22, 70, 0.35);
-  border: 1px solid rgba(138, 43, 226, 0.35);
+.skill-card {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+  background: linear-gradient(135deg, rgba(35,22,70,0.6), rgba(9,3,14,0.8));
+  border: 1px solid rgba(218,112,214,0.3);
   border-radius: 16px;
-  padding: clamp(1.25rem, 2.5vw, 1.75rem);
-  transition: all 0.35s ease;
-  backdrop-filter: blur(8px);
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.services-grid {
+  perspective: 1000px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  padding: 3rem 1rem;
+  margin-top: 2.5rem;
+}
+
+.service-card {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+  background: linear-gradient(135deg, rgba(35,22,70,0.6), rgba(9,3,14,0.8));
+  border: 1px solid rgba(218,112,214,0.3);
+  border-radius: 16px;
+  padding: 2rem;
   text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* عندما تكون الشاشة كبيرة جدًا أو صغيرة جدًا */
@@ -997,27 +1025,44 @@ body {
   }
 }
 
-.skill-card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
+.skill-card::after {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(circle at 30% 20%, rgba(138,43,226,0.4), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.6s;
+  pointer-events: none;
 }
 
-.skill-card:hover::before {
-    opacity: 1;
+.skill-card:hover::after {
+  opacity: 1;
 }
 
 .skill-card:hover {
-    transform: translateY(-5px);
-    background: rgba(138, 43, 226, 0.15);
-    border-color: var(--purple-main);
-    box-shadow: 0 0 25px rgba(138, 43, 226, 0.6), 0 0 50px rgba(138, 43, 226, 0.3);
+  transform: translateY(-15px) rotateX(10deg) rotateY(10deg) scale(1.08);
+  box-shadow: 0 30px 60px rgba(138,43,226,0.5);
+  border-color: #da70d6;
+}
+
+.service-card::after {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(circle at 30% 20%, rgba(138,43,226,0.4), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.6s;
+  pointer-events: none;
+}
+
+.service-card:hover::after {
+  opacity: 1;
+}
+
+.service-card:hover {
+  transform: translateY(-15px) rotateX(10deg) rotateY(10deg) scale(1.08);
+  box-shadow: 0 30px 60px rgba(138,43,226,0.5);
+  border-color: #da70d6;
 }
 
 .skill-icon {
@@ -1028,13 +1073,20 @@ body {
     align-items: center;
     justify-content: center;
     color: var(--purple-light);
-    transition: all 0.3s ease;
+    transition: transform 0.6s;
 }
 
-.skill-icon svg {
+.skill-icon svg,
+.skill-icon img {
     width: 100%;
     height: 100%;
     fill: currentColor;
+    transition: transform 0.6s;
+}
+
+.skill-card:hover .skill-icon img,
+.skill-card:hover .skill-icon svg {
+    transform: scale(1.25) rotate(10deg);
 }
 
 /* Node.js icon styling */
@@ -1106,44 +1158,6 @@ footer {
     position: relative;
     z-index: 2;
     margin-right: 280px;
-}
-
-/* Responsive for Services & Projects */
-@media (max-width: 1024px) {
-    .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-    
-    .service-icon {
-        width: 110px;
-        height: 110px;
-    }
-}
-
-@media (max-width: 768px) {
-    .services-grid,
-    .projects-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-        padding: 0 10px;
-    }
-    
-    .service-card,
-    .project-card {
-        padding: 24px 18px;
-    }
-    
-    .service-icon {
-        width: 130px;
-        height: 130px;
-        margin-bottom: 24px;
-    }
-    
-    .service-card h3,
-    .project-card h3 {
-        font-size: 1.2rem;
-    }
 }
 
 /* Responsive */
@@ -1246,68 +1260,43 @@ footer {
 
 /* Projects grid */
 .projects-grid {
+    perspective: 1000px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 25px;
     margin-top: 35px;
-    perspective: 1000px;
 }
 
 .project-card {
     position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
     background: linear-gradient(135deg, rgba(35,22,70,0.6), rgba(9,3,14,0.8));
     border: 1px solid rgba(218,112,214,0.3);
     border-radius: 16px;
     padding: 20px;
-    transition: all 0.5s ease;
     overflow: hidden;
-    transform-style: preserve-3d;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-.project-card::before {
-    content: '';
-    position: absolute;
-    inset: -20px;
-    background: radial-gradient(circle at 30% 20%, rgba(138,43,226,0.4), transparent 60%);
-    opacity: 0;
-    transition: opacity 0.6s;
-    pointer-events: none;
-    z-index: 1;
+.project-card::after {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(circle at 30% 20%, rgba(138,43,226,0.4), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.6s;
+  pointer-events: none;
 }
 
-.project-card::after {
-    content: attr(data-title);
-    position: fixed;
-    background: rgba(35, 22, 70, 0.95);
-    color: #da70d6;
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: 1px solid rgba(218,112,214,0.5);
-    font-size: 12px;
-    font-weight: 600;
-    white-space: nowrap;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 10000;
-    box-shadow: 0 0 15px rgba(138,43,226,0.3);
+.project-card:hover::after {
+  opacity: 1;
 }
 
 .project-card:hover {
     transform: translateY(-15px) rotateX(10deg) rotateY(10deg) scale(1.08);
-    background: rgba(35,22,70,0.8);
-    border-color: #da70d6;
     box-shadow: 0 30px 60px rgba(138,43,226,0.5);
-    z-index: 10;
-}
-
-.project-card:hover::before {
-    opacity: 1;
-}
-
-.project-card:hover::after {
-    opacity: 1;
+    border-color: #da70d6;
 }
 
 .project-card img {
@@ -1317,25 +1306,10 @@ footer {
     border-radius: 12px;
     margin-bottom: 16px;
     transition: transform 0.6s;
-    position: relative;
-    z-index: 2;
 }
 
 .project-card:hover img {
-    transform: scale(1.25) rotate(10deg);
-}
-
-.project-card h3 {
-    position: relative;
-    z-index: 2;
-    color: #da70d6;
-    font-weight: 600;
-}
-
-.project-card p {
-    position: relative;
-    z-index: 2;
-    color: #bbbbbb;
+    transform: scale(1.1) rotate(2deg);
 }
 
 /* Discord card fine-tuning to be more compact like the second image */
@@ -1373,64 +1347,39 @@ footer {
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
     margin-top: 40px;
-    perspective: 1000px;
 }
 
 .service-card {
-    position: relative;
-    background: linear-gradient(135deg, rgba(35,22,70,0.6), rgba(9,3,14,0.8));
-    border: 1px solid rgba(218,112,214,0.3);
+    background: rgba(35, 22, 70, 0.35);
+    border: 1px solid rgba(138, 43, 226, 0.25);
     border-radius: 16px;
     padding: 28px 20px;
     text-align: center;
-    transition: all 0.5s ease;
-    transform-style: preserve-3d;
+    transition: all 0.35s ease;
+    position: relative;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
 }
 
 .service-card::before {
     content: '';
     position: absolute;
-    inset: -20px;
-    background: radial-gradient(circle at 30% 20%, rgba(138,43,226,0.4), transparent 60%);
+    inset: 0;
+    background: linear-gradient(135deg, rgba(138,43,226,0.12) 0%, transparent 60%);
     opacity: 0;
-    transition: opacity 0.6s;
+    transition: opacity 0.4s ease;
     pointer-events: none;
-    z-index: 1;
-}
-
-.service-card::after {
-    content: attr(data-title);
-    position: fixed;
-    background: rgba(35, 22, 70, 0.95);
-    color: #da70d6;
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: 1px solid rgba(218,112,214,0.5);
-    font-size: 12px;
-    font-weight: 600;
-    white-space: nowrap;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 10000;
-    box-shadow: 0 0 15px rgba(138,43,226,0.3);
-}
-
-.service-card:hover {
-    transform: translateY(-15px) rotateX(10deg) rotateY(10deg) scale(1.08);
-    border-color: #da70d6;
-    box-shadow: 0 30px 60px rgba(138,43,226,0.5);
-    z-index: 10;
 }
 
 .service-card:hover::before {
     opacity: 1;
 }
 
-.service-card:hover::after {
-    opacity: 1;
+.service-card:hover {
+    transform: translateY(-12px);
+    border-color: #da70d6;
+    box-shadow: 0 20px 40px rgba(138, 43, 226, 0.35);
+    background: rgba(35, 22, 70, 0.5);
 }
 
 .service-icon {
@@ -1442,8 +1391,6 @@ footer {
     background: rgba(0,0,0,0.25);
     box-shadow: 0 8px 24px rgba(0,0,0,0.4);
     transition: transform 0.4s ease;
-    position: relative;
-    z-index: 2;
 }
 
 .service-card:hover .service-icon {
@@ -1466,8 +1413,6 @@ footer {
     margin: 0 0 10px;
     color: #da70d6;
     font-weight: 600;
-    position: relative;
-    z-index: 2;
 }
 
 .service-card p {
@@ -1475,8 +1420,6 @@ footer {
     color: #bbbbbb;
     line-height: 1.5;
     margin: 0;
-    position: relative;
-    z-index: 2;
 }
 
 /* ────────────────────────────────────────────────
@@ -1738,7 +1681,7 @@ footer {
     transition: width 0.3s, height 0.3s;
     z-index: 9999;
     box-shadow: 0 0 15px #8a2be2;
-     animation: idleBreathe 2s ease-in-out infinite alternate;  /* animation افتراضية خفيفة */
+     animation: idleBreathe 1s ease-in-out infinite alternate;  /* animation افتراضية خفيفة */
   animation-play-state: paused;  /* تبدأ بس لو idle */
 }
 
@@ -1761,7 +1704,12 @@ footer {
     border-radius: 50%;
     pointer-events: none;
     opacity: 0.7;
-    transition: all 0.2s;
+    transition: all 0.1s ease-out;
     z-index: 9998;
-    transition: all 0.3s ease-out;  /* سرعة أقل شوية (0.3s بدل 0.2s) */
-}
+  }
+
+  /* عند التوقف - اختفاء التريل */
+  .trail.fade-out {
+    opacity: 0;
+    transition: opacity 0.1s ease-out;
+  }
