@@ -592,7 +592,7 @@ body {
 .discord-card-body {
     background: linear-gradient(180deg, var(--accent-color), var(--primary-color));
     padding: 16px;
-    padding-top: 50px;
+    padding-top: 16px;
     position: relative;
     border-radius: 0 0 8px 8px;
     min-height: 200px;
