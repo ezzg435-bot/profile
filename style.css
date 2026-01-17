@@ -603,8 +603,12 @@ body {
 
 /* New Layout Styles */
 .discord-card-body {
-    padding: 12px;
-    background: linear-gradient(180deg, rgba(35, 22, 70, 0.5), rgba(9, 3, 14, 0.8));
+    background: linear-gradient(180deg, var(--accent-color), var(--primary-color));
+    padding: 16px;
+    padding-top: 50px;
+    position: relative;
+    border-radius: 0 0 8px 8px;
+    min-height: 200px;
 }
 
 .discord-content-wrapper {
