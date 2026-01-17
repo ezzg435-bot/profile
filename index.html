@@ -68,17 +68,21 @@
                     <div class="discord-card">
                         <!-- Banner with Neon Design -->
                         <div class="discord-banner-neon">
+                            <img id="discord-banner-img" src="" alt="Banner" class="banner-img" />
                             <div class="neon-eyes"></div>
                         </div>
 
                         <!-- Card Body -->
                         <div class="discord-card-body">
                             <div class="discord-content-wrapper">
-                                <!-- Left Side: Avatar + Status -->
+                                <!-- Left Side: Status + Avatar -->
                                 <div class="discord-left-section">
+                                    <!-- Status Indicator Above Avatar -->
+                                    <div class="discord-status-large online discord-status-top"></div>
+                                    
+                                    <!-- Avatar -->
                                     <div class="discord-avatar-large">
                                         <img id="discord-avatar-img" src="https://cdn.discordapp.com/avatars/1000711739031162910/a_90e9f3f8c0b0f0f0f0f0f0f0f0f0f0.gif" alt="Avatar" />
-                                        <div class="discord-status-large online"></div>
                                     </div>
                                 </div>
 
@@ -345,8 +349,74 @@
 </button>
 
 <script>
-// JavaScript بسيط للتحكم بالقائمة على الموبايل
+// Load Discord Card Data
+function loadDiscordCard() {
+    const { discordCard } = PORTFOLIO_CONFIG;
+    
+    // Update Banner
+    const bannerImg = document.getElementById('discord-banner-img');
+    if (bannerImg && discordCard.banner) {
+        bannerImg.src = discordCard.banner;
+    }
+    
+    // Update Avatar
+    const avatarImg = document.getElementById('discord-avatar-img');
+    if (avatarImg && discordCard.avatar) {
+        avatarImg.src = discordCard.avatar;
+    }
+    
+    // Update Display Name
+    const displayName = document.getElementById('discord-displayname');
+    if (displayName && discordCard.displayName) {
+        displayName.textContent = discordCard.displayName;
+    }
+    
+    // Update Tag
+    const tag = document.getElementById('discord-tag');
+    if (tag && discordCard.tag) {
+        tag.textContent = discordCard.tag;
+    }
+    
+    // Update Bio
+    const bio = document.getElementById('discord-bio');
+    if (bio && discordCard.bio) {
+        bio.textContent = discordCard.bio;
+    }
+    
+    // Update Member Since Date
+    const date = document.getElementById('discord-date');
+    if (date && discordCard.memberSince) {
+        date.textContent = discordCard.memberSince;
+    }
+    
+    // Load Badges
+    const badgesContainer = document.getElementById('discord-badges');
+    if (badgesContainer && discordCard.badges && discordCard.badges.length > 0) {
+        badgesContainer.innerHTML = '';
+        discordCard.badges.forEach(badge => {
+            const badgeImg = document.createElement('img');
+            badgeImg.src = badge.src;
+            badgeImg.alt = badge.title;
+            badgeImg.title = badge.title;
+            badgeImg.className = 'discord-badge-img';
+            badgesContainer.appendChild(badgeImg);
+        });
+    }
+    
+    // Update Status
+    const statusEl = document.querySelector('.discord-status-large');
+    if (statusEl && discordCard.status) {
+        // Remove all status classes
+        statusEl.classList.remove('online', 'idle', 'dnd', 'offline');
+        // Add the appropriate status class
+        statusEl.classList.add(discordCard.status);
+    }
+}
+
+// Initialize when page loads
 document.addEventListener('DOMContentLoaded', () => {
+    loadDiscordCard();
+    
     const toggleBtn = document.getElementById('menu-toggle');
     const sidebar = document.querySelector('.sidebar');
 
@@ -368,7 +438,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-
     </script>
 </body>
 </html>
