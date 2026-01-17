@@ -382,3 +382,185 @@ function updateDiscordCard() {
         messageInput.placeholder = `Message @${config.displayName}`;
     }
 }
+
+
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !document.getElementById('easter-egg').style.display === 'none') return;
+
+  // مثال: اضغط Ctrl + Shift + L عشان يفتح
+  if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'l') {
+    document.getElementById('easter-egg').style.display = 'block';
+    document.getElementById('command-input').focus();
+  }
+});
+
+document.getElementById('command-input')?.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    const cmd = e.target.value.trim().toLowerCase();
+    if (cmd === '!help') {
+      alert('Available commands: !info, !bots, !secret');
+    } else if (cmd === '!info') {
+      alert('Developer: ϟ〢𝑳á𝒛𝒚 | Specializing in Discord Bots & Web');
+    } else if (cmd === '!secret') {
+      alert('You found the easter egg! 🎉 Here is a secret link: https://your-discord-server');
+    } else {
+      alert('Unknown command. Try !help');
+    }
+    e.target.value = '';
+  }
+});
+
+
+
+
+
+// Load Discord Card Data
+function loadDiscordCard() {
+    const { discordCard } = PORTFOLIO_CONFIG;
+    
+    // Update Banner
+    const bannerImg = document.getElementById('discord-banner-img');
+    if (bannerImg && discordCard.banner) {
+        bannerImg.src = discordCard.banner;
+    }
+    
+    // Update Avatar
+    const avatarImg = document.getElementById('discord-avatar-img');
+    if (avatarImg && discordCard.avatar) {
+        avatarImg.src = discordCard.avatar;
+    }
+    
+    // Update Display Name
+    const displayName = document.getElementById('discord-displayname');
+    if (displayName && discordCard.displayName) {
+        displayName.textContent = discordCard.displayName;
+    }
+    
+    // Update Tag
+    const tag = document.getElementById('discord-tag');
+    if (tag && discordCard.tag) {
+        tag.textContent = discordCard.tag;
+    }
+    
+    // Update Bio
+    const bio = document.getElementById('discord-bio');
+    if (bio && discordCard.bio) {
+        bio.textContent = discordCard.bio;
+    }
+    
+    // Update Member Since Date
+    const date = document.getElementById('discord-date');
+    if (date && discordCard.memberSince) {
+        date.textContent = discordCard.memberSince;
+    }
+    
+    // Load Badges
+    const badgesContainer = document.getElementById('discord-badges');
+    if (badgesContainer && discordCard.badges && discordCard.badges.length > 0) {
+        badgesContainer.innerHTML = '';
+        discordCard.badges.forEach(badge => {
+            const badgeImg = document.createElement('img');
+            badgeImg.src = badge.src;
+            badgeImg.alt = badge.title;
+            badgeImg.title = badge.title;
+            badgeImg.className = 'discord-badge-img';
+            badgesContainer.appendChild(badgeImg);
+        });
+    }
+    
+    // Update Status - remove all and add the correct one
+    const statusEl = document.querySelector('.discord-status-large');
+    if (statusEl && discordCard.status) {
+        // Remove all status classes
+        statusEl.classList.remove('online', 'idle', 'dnd', 'offline');
+        // Add the appropriate status class
+        statusEl.classList.add(discordCard.status);
+    }
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    loadDiscordCard();
+    
+    const toggleBtn = document.getElementById('menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+
+    toggleBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+        
+        const isActive = sidebar.classList.contains('active');
+        toggleBtn.innerHTML = isActive 
+            ? '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>'
+            : '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';
+    });
+
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+        link.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            toggleBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';
+        });
+    });
+});
+    
+
+
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault(); // يمنع أي تحميل أو توجيه
+
+    const statusDiv = document.getElementById('formStatus');
+    statusDiv.style.display = 'block';
+    statusDiv.textContent = 'جاري الإرسال...';
+    statusDiv.className = 'loading';  // class جديدة
+
+    const formData = new FormData(this);
+    
+    formData.append('_subject', 'رسالة جديدة من Portfolio - ' + (formData.get('name') || 'زائر'));
+    formData.append('_captcha', 'false');
+
+    try {
+        const response = await fetch('https://formsubmit.co/alikalbouneh268@gmail.com', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            statusDiv.textContent = 'تم إرسال الرسالة بنجاح! شكراً لك ✉️';
+            statusDiv.className = 'success';  // class للنجاح
+            this.reset();
+        } else {
+            throw new Error('فشل الإرسال');
+        }
+    } catch (error) {
+        statusDiv.textContent = 'حدث خطأ أثناء الإرسال، حاول مرة أخرى';
+        statusDiv.className = 'error';  // class للخطأ
+    }
+});
+
+
+    const cursor = document.getElementById('cursor');
+let trails = [];
+
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+
+  // إنشاء trail
+  const trail = document.createElement('div');
+  trail.className = 'trail';
+  trail.style.left = e.clientX + 'px';
+  trail.style.top = e.clientY + 'px';
+  document.body.appendChild(trail);
+  trails.push(trail);
+
+  // حذف الـ trails القديمة
+  if (trails.length > 15) {
+    const old = trails.shift();
+    old.remove();
+  }
+});
+
+document.addEventListener('mousedown', () => cursor.classList.add('active'));
+document.addEventListener('mouseup', () => cursor.classList.remove('active'));
+
+

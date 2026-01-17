@@ -1540,3 +1540,53 @@ footer {
     padding: 20px 10px;
   }
 }
+
+
+.skills-grid {
+  perspective: 1000px;          /* يعطي عمق 3D */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  padding: 3rem 1rem;
+}
+
+.skill-card {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+  background: linear-gradient(135deg, rgba(35,22,70,0.6), rgba(9,3,14,0.8));
+  border: 1px solid rgba(218,112,214,0.3);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.skill-card:hover {
+  transform: translateY(-15px) rotateX(10deg) rotateY(10deg) scale(1.08);
+  box-shadow: 0 30px 60px rgba(138,43,226,0.5);
+  border-color: #da70d6;
+}
+
+.skill-card::after {  /* glow magic */
+  content: '';
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(circle at 30% 20%, rgba(138,43,226,0.4), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.6s;
+  pointer-events: none;
+}
+
+.skill-card:hover::after {
+  opacity: 1;
+}
+
+/* للأيقونة داخل الكارت */
+.skill-card img {
+  transition: transform 0.6s;
+}
+
+.skill-card:hover img {
+  transform: scale(1.25) rotate(10deg);
+}
