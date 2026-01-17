@@ -562,11 +562,11 @@ body {
 
 /* Neon Banner */
 .discord-banner-neon {
-    width: 100%;
-    height: 100px;
+    width: 90%;
+    height: 90px;
     background: #000;
-    position: relative;
-    overflow: visible;
+    position: bottom;
+    overflow: cover;
     border-bottom: 1px solid rgba(138, 43, 226, 0.3);
 }
 
