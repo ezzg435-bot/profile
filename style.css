@@ -691,7 +691,7 @@ body {
     font-weight: 700;
     color: #fff;
     margin: 0;
-    display: block;
+    display: inline;
 }
 
 .discord-tag {
@@ -699,8 +699,8 @@ body {
     color: rgba(255, 255, 255, 0.7);
     font-weight: 400;
     font-family: 'Courier New', monospace;
-    display: block;
-    margin-top: 9px;
+    display: inline;
+    margin-left: 0;
 }
 
 .discord-custom-tag {
@@ -874,7 +874,7 @@ body {
     background: rgba(35, 22, 70, 0.4);
     border: 2px solid rgba(138, 43, 226, 0.5);
     border-radius: 15px;
-    padding: 30px 20px;
+    padding: 18px 15px;
     text-align: center;
     transition: all 0.3s ease;
     cursor: pointer;
@@ -906,9 +906,9 @@ body {
 }
 
 .skill-icon {
-    width: 60px;
-    height: 60px;
-    margin: 0 auto 15px;
+    width: 45px;
+    height: 45px;
+    margin: 0 auto 8px;
     display: flex;
     align-items: center;
     justify-content: center;
