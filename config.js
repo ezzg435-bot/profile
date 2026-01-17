@@ -44,16 +44,59 @@ const PORTFOLIO_CONFIG = {
         primaryColor: "#231646",
         accentColor: "#09030e",
         badges: [
-            { src: "https://discordresources.com/img/subscriptions/bronze.svg", title: "nitro" },
-            { src: "https://discordresources.com/img/hypesquadbalance.svg", title: "HypeSquad" },
-            { src: "https://discordresources.com/img/boosts/discordboost1.svg", title: "boost" },
-            { src: "https://discordresources.com/img/username.png", title: "Originally Known as" },
-            { src: "https://cdn3.emoji.gg/emojis/4709-quest-badge.png", title: "quest" },
-            { src: "https://cdn3.emoji.gg/emojis/51616-orbs-animated.gif", title: "orbs" },
+    { src: "https://discordresources.com/img/subscriptions/bronze.svg", title: "nitro" },
+    { src: "https://discordresources.com/img/hypesquadbalance.svg", title: "HypeSquad" },
+    { src: "https://discordresources.com/img/boosts/discordboost1.svg", title: "boost" },
+    { src: "https://discordresources.com/img/username.png", title: "Originally Known as" },
+    { src: "https://cdn3.emoji.gg/emojis/4709-quest-badge.png", title: "quest" },
+    { src: "https://cdn3.emoji.gg/emojis/51616-orbs-animated.gif", title: "orbs" },
         ]
     },
 
-    // ... (باقي الإعدادات كما هي في الملف الأصلي، مثل الإيميل, الخدمات, about, colors)
+    // ═══════════════════════════════════════════════════════════════
+    // 📧 إعدادات الإيميل
+    // ═══════════════════════════════════════════════════════════════
+    email: {
+        useMailto: true,
+        recipientEmail: "alikalbouneh268@gmail.com",
+        formSubmitEmail: "alikalbouneh268@gmail.com",
+        emailJS: {
+            serviceID: "service_h4pze6l",
+            templateID: "template_4m1ow82",
+            publicKey: "9yHG4h5JQ3gs7i1QA"
+        }
+    },
+
+    // ═══════════════════════════════════════════════════════════════
+    // 💼 الخدمات
+    // ═══════════════════════════════════════════════════════════════
+    services: {
+        title: "My Expertise",
+        list: "Web Development • Discord Bot Development • Graphic Design • Branding & Identity • UI/UX Design • Creative Solutions"
+    },
+
+    // ═══════════════════════════════════════════════════════════════
+    // 👤 قسم About Me
+    // ═══════════════════════════════════════════════════════════════
+    about: {
+        title: "Let me introduce myself",
+        paragraph1: "I have a strong passion for design and development. I specialize in Discord bots and modern web development with focus on elegant, professional user interfaces.",
+        paragraph2: "I also provide branding services, logo design, business card design, photo editing and various graphic design solutions.",
+        stats: {
+            projects: "250+",
+            clients: "290+",
+            satisfaction: "95%"
+        }
+    },
+
+    // ═══════════════════════════════════════════════════════════════
+    // 🎨 الألوان
+    // ═══════════════════════════════════════════════════════════════
+    colors: {
+        purpleMain: "#8a2be2",
+        purpleLight: "#da70d6",
+        purpleDark: "#6a1bb2"
+    }
 };
 
 // ═══════════════════════════════════════════════════════════════
@@ -114,9 +157,158 @@ document.addEventListener('DOMContentLoaded', function() {
         document.documentElement.style.setProperty('--purple-light', PORTFOLIO_CONFIG.colors.purpleLight);
         document.documentElement.style.setProperty('--purple-dark', PORTFOLIO_CONFIG.colors.purpleDark);
     }
-
-    // ... (باقي الكود التلقائي للـ navigation, particles, discord card update, etc.)
+    
+    // معالجة نموذج الاتصال
+    const contactForm = document.querySelector('.contact-form');
+    if(contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            if(PORTFOLIO_CONFIG.email.useMailto) {
+                // الطريقة 1: mailto (يفتح برنامج الإيميل)
+                const subject = encodeURIComponent(`Message from ${name}`);
+                const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+                window.location.href = `mailto:${PORTFOLIO_CONFIG.email.recipientEmail}?subject=${subject}&body=${body}`;
+                alert('Opening your email client... ✉️');
+            } else if (PORTFOLIO_CONFIG.email.emailJS.serviceID) {
+                // الطريقة 3: EmailJS
+                alert('Sending email via EmailJS...');
+                // You would implement EmailJS here
+                contactForm.reset();
+            } else {
+                // الطريقة 2: FormSubmit
+                const formData = new FormData();
+                formData.append('name', name);
+                formData.append('email', email);
+                formData.append('message', message);
+                
+                fetch(`https://formsubmit.co/${PORTFOLIO_CONFIG.email.formSubmitEmail}`, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    alert('Thank you! Your message has been sent successfully!');
+                    contactForm.reset();
+                })
+                .catch(error => {
+                    alert('Sorry, there was an error sending your message. Please try again.');
+                });
+            }
+        });
+    }
+    
+    // Smooth scrolling & Navigation
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+    const contentCards = document.querySelectorAll('.content-card');
+    
+    // Show first card by default
+    if (contentCards[0]) {
+        contentCards[0].classList.add('active');
+    }
+    
+    sidebarLinks.forEach((link, index) => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Remove active class from all links and cards
+            sidebarLinks.forEach(l => l.classList.remove('active'));
+            contentCards.forEach(c => c.classList.remove('active'));
+            
+            // Add active class to clicked link and corresponding card
+            this.classList.add('active');
+            if (contentCards[index]) {
+                contentCards[index].classList.add('active');
+            }
+            
+            // Close mobile menu on mobile
+            if (window.innerWidth <= 1024) {
+                sidebar.classList.remove('active');
+            }
+        });
+    });
+    
+    // Mobile menu toggle
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const sidebar = document.querySelector('.sidebar');
+    
+    if (mobileMenuToggle && sidebar) {
+        mobileMenuToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('active');
+        });
+        
+        // Close sidebar when clicking outside
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth <= 1024) {
+                if (!sidebar.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                    sidebar.classList.remove('active');
+                }
+            }
+        });
+    }
+    
+    // Hire Me button - navigate to contact
+    const hireBtn = document.querySelector('.hire-me-btn');
+    if (hireBtn) {
+        hireBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Find contact card index
+            const contactCard = document.getElementById('contact');
+            const contactIndex = Array.from(contentCards).indexOf(contactCard);
+            
+            // Remove active from all
+            sidebarLinks.forEach(l => l.classList.remove('active'));
+            contentCards.forEach(c => c.classList.remove('active'));
+            
+            // Show contact card
+            if (contactIndex >= 0 && sidebarLinks[contactIndex + 1]) {
+                sidebarLinks[contactIndex + 1].classList.add('active');
+            }
+            if (contactCard) {
+                contactCard.classList.add('active');
+            }
+            
+            // Close mobile menu
+            if (window.innerWidth <= 1024) {
+                sidebar.classList.remove('active');
+            }
+        });
+    }
+    
+    // Handle all #contact links
+    document.querySelectorAll('a[href="#contact"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const contactCard = document.getElementById('contact');
+            const contactIndex = Array.from(contentCards).indexOf(contactCard);
+            
+            sidebarLinks.forEach(l => l.classList.remove('active'));
+            contentCards.forEach(c => c.classList.remove('active'));
+            
+            if (contactIndex >= 0 && sidebarLinks[contactIndex + 1]) {
+                sidebarLinks[contactIndex + 1].classList.add('active');
+            }
+            if (contactCard) {
+                contactCard.classList.add('active');
+            }
+            
+            if (window.innerWidth <= 1024) {
+                sidebar.classList.remove('active');
+            }
+        });
+    });
+    
+    // ═══════════════════════════════════════════════════════════════
+    // ✨ إنشاء الجزيئات المتحركة (Particles)
+    // ═══════════════════════════════════════════════════════════════
     createParticles();
+    
+    // ═══════════════════════════════════════════════════════════════
+    // 💬 تحديث Discord Card
+    // ═══════════════════════════════════════════════════════════════
     updateDiscordCard();
 });
 
@@ -131,15 +323,19 @@ function createParticles() {
         const particle = document.createElement('div');
         particle.className = 'particle';
         
+        // موقع عشوائي
         particle.style.left = Math.random() * 100 + '%';
         
+        // حجم عشوائي
         const size = Math.random() * 4 + 2;
         particle.style.width = size + 'px';
         particle.style.height = size + 'px';
         
+        // تأخير عشوائي
         particle.style.animationDelay = Math.random() * 15 + 's';
         particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
         
+        // لون عشوائي بين البنفسجي والوردي
         const hue = Math.random() > 0.5 ? '270' : '300';
         particle.style.background = `hsl(${hue}, 70%, 60%)`;
         
@@ -152,28 +348,81 @@ function updateDiscordCard() {
     const config = PORTFOLIO_CONFIG.discordCard;
     if (!config) return;
     
-    document.getElementById('discord-displayname').textContent = config.displayName;
-    document.getElementById('discord-tag').textContent = config.tag;
-    document.getElementById('discord-avatar-img').src = config.avatar;
-    document.getElementById('discord-banner-img').src = config.banner;
-    let formattedBio = config.bio.replace(/\*\*/g, '').replace(/\n/g, '<br>');
-    document.getElementById('discord-bio').innerHTML = formattedBio;
-    document.getElementById('discord-date').textContent = config.memberSince;
-    document.querySelector('.discord-status').className = 'discord-status ' + config.status;
+    // تحديث الاسم
+    const displayName = document.getElementById('discord-displayname');
+    if (displayName && config.displayName) {
+        displayName.textContent = config.displayName;
+    }
+    
+    // تحديث التاق
+    const tag = document.getElementById('discord-tag');
+    if (tag && config.tag) {
+        tag.textContent = config.tag;
+    }
+    
+    // تحديث الأفاتار
+    const avatar = document.getElementById('discord-avatar-img');
+    if (avatar && config.avatar) {
+        avatar.src = config.avatar;
+    }
+    
+    // تحديث البانر
+    const banner = document.getElementById('discord-banner-img');
+    if (banner && config.banner) {
+        banner.src = config.banner;
+    }
+    
+    // تحديث البايو - مع دعم السطور الجديدة
+    const bio = document.getElementById('discord-bio');
+    if (bio && config.bio) {
+        // تحويل السطور الجديدة إلى <br> وإزالة ** 
+        let formattedBio = config.bio
+            .replace(/\*\*/g, '')
+            .replace(/\n/g, '<br>');
+        bio.innerHTML = formattedBio;
+    }
+    
+    // تحديث تاريخ الانضمام
+    const date = document.getElementById('discord-date');
+    if (date && config.memberSince) {
+        date.textContent = config.memberSince;
+    }
+    
+    // تحديث الحالة
+    const statusDot = document.querySelector('.discord-status');
+    if (statusDot && config.status) {
+        statusDot.className = 'discord-status ' + config.status;
+    }
+    
+    // تحديث ألوان الخلفية
     const cardBody = document.querySelector('.discord-card-body');
-    cardBody.style.background = `linear-gradient(180deg, ${config.accentColor}, ${config.primaryColor})`;
+    if (cardBody && config.primaryColor && config.accentColor) {
+        cardBody.style.background = `linear-gradient(180deg, ${config.accentColor}, ${config.primaryColor})`;
+    }
+    
+    // تحديث لون حدود الأفاتار
     const avatarEl = document.querySelector('.discord-avatar');
-    avatarEl.style.borderColor = config.accentColor;
+    if (avatarEl && config.accentColor) {
+        avatarEl.style.borderColor = config.accentColor;
+    }
+    
+    // تحديث الشارات
     const badgesContainer = document.getElementById('discord-badges');
-    badgesContainer.innerHTML = '';
-    config.badges.forEach(badge => {
-        const badgeImg = document.createElement('img');
-        badgeImg.className = 'discord-badge-img bounce-hover';
-        badgeImg.src = badge.src;
-        badgeImg.alt = badge.title || 'Badge';
-        badgeImg.title = badge.title || 'Badge';
-        badgesContainer.appendChild(badgeImg);
-    });
+    if (badgesContainer && config.badges && config.badges.length > 0) {
+        badgesContainer.innerHTML = '';
+        config.badges.forEach(badge => {
+            const badgeImg = document.createElement('img');
+            badgeImg.className = 'discord-badge-img bounce-hover';
+            badgeImg.src = badge.src;
+            badgeImg.alt = badge.title || 'Badge';
+            badgeImg.title = badge.title || 'Badge';
+            badgesContainer.appendChild(badgeImg);
+        });
+    }
+    
+    // تحديث placeholder الرسالة
     const messageInput = document.querySelector('.discord-message-box input');
-    if (messageInput) messageInput.placeholder = `Message @${config.displayName}`;
+    if (messageInput && config.displayName) {
+        messageInput.placeholder = `Message @${config.displayName}`;
+    }
 }
