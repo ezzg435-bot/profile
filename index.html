@@ -81,24 +81,24 @@
                         
                         <!-- Card Body -->
                         <div class="discord-card-body">
+                            <!-- Top badges row -->
+                            <div class="discord-badges-row">
+                                <div class="discord-badges" id="discord-badges"></div>
+                            </div>
+                            
                             <!-- Username and Tag Row -->
                             <div class="discord-user-row">
                                 <div class="discord-username-section">
                                     <h3 id="discord-displayname">ϟ〢𝑳á𝒛𝒚</h3>
-                                    <br>
                                     <span class="discord-tag" id="discord-tag">._idc</span>
                                 </div>
-                                <!-- Custom Tag Badge -->
+                                <!-- Custom Tag Badge with feather icon -->
                                 <div class="discord-custom-tag">
-                                    <svg class="tag-icon" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C7.14 19.87 7.64 20 8 20C19 20 22 3 22 3C21 5 17 8 17 8M8.5 11C9.33 11 10 10.33 10 9.5C10 8.67 9.33 8 8.5 8C7.67 8 7 8.67 7 9.5C7 10.33 7.67 11 8.5 11Z"/>
+                                    <svg class="tag-icon" viewBox="0 0 24 24" fill="#7dd3fc">
+                                        <path d="M4.5 19.5c0 .276-.224.5-.5.5s-.5-.224-.5-.5.224-.5.5-.5.5.224.5.5zm7-4c0 .276-.224.5-.5.5s-.5-.224-.5-.5.224-.5.5-.5.5.224.5.5zm7-8c0 .276-.224.5-.5.5s-.5-.224-.5-.5.224-.5.5-.5.5.224.5.5zm3-3c0 .276-.224.5-.5.5s-.5-.224-.5-.5.224-.5.5-.5.5.224.5.5z"/>
                                     </svg>
                                     <span class="tag-text">LAZY</span>
                                 </div>
-                            </div>
-                            <!-- Badges Row -->
-                            <div class="discord-badges-row">
-                                <div class="discord-badges" id="discord-badges"></div>
                             </div>
                             
                             <!-- About Me -->
@@ -342,7 +342,13 @@
             const sidebar = document.querySelector('.sidebar');
             const body = document.body;
 
-            toggleBtn.addEventListener('click', () => {
+            if (!toggleBtn || !sidebar) {
+                console.error('Mobile menu elements not found');
+                return;
+            }
+
+            toggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
                 const isActive = sidebar.classList.toggle('active');
                 body.classList.toggle('sidebar-open', isActive);
                 toggleBtn.innerHTML = isActive 
