@@ -189,6 +189,31 @@ body {
     transition: transform 0.3s ease;
 }
 
+@media (max-width: 1024px) {
+    .sidebar {
+        position: fixed;
+        right: 0;
+        top: 0;
+        width: 300px;
+        height: 100vh;
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 9999;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.6);
+    }
+}
+
+@media (min-width: 1025px) {
+    .sidebar {
+        transform: translateX(0) !important;
+        z-index: 100;
+    }
+}
+
 .sidebar-profile {
     text-align: center;
     margin-bottom: 30px;
@@ -1545,97 +1570,77 @@ body.sidebar-open {
     padding-top: 80px;
     position: relative;
     border-radius: 0 0 8px 8px;
-    min-height: 200px;
+    min-height: auto;
 }
 
-.discord-username-row {
+.discord-info-row {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin-bottom: 12px;
     gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
 }
 
 .discord-username-info {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
 }
 
 .discord-username-info h3 {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     color: #fff;
     margin: 0;
 }
 
 .discord-tag {
-    font-size: 13px;
+    font-size: 12px;
     color: rgba(255, 255, 255, 0.7);
     font-weight: 400;
     font-family: 'Courier New', monospace;
-}
-
-.discord-custom-tag-row {
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 12px;
+    margin: 0;
 }
 
 .discord-custom-tag {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
     background: rgba(0, 0, 0, 0.5);
-    padding: 4px 12px;
-    border-radius: 14px;
+    padding: 3px 10px;
+    border-radius: 12px;
     border: 1px solid rgba(138, 43, 226, 0.4);
     transition: all 0.2s ease;
-}
-
-.discord-custom-tag:hover {
-    background: rgba(0, 0, 0, 0.6);
-    border-color: rgba(138, 43, 226, 0.6);
+    white-space: nowrap;
 }
 
 .discord-custom-tag .tag-icon {
-    width: 14px;
-    height: 14px;
+    width: 13px;
+    height: 13px;
     fill: #7dd3fc;
-    filter: drop-shadow(0 0 2px rgba(125, 211, 252, 0.8));
 }
 
 .discord-custom-tag .tag-text {
-    font-size: 11px;
+    font-size: 10px;
     color: rgba(255, 255, 255, 0.9);
     font-weight: 600;
     font-family: 'Courier New', monospace;
-    letter-spacing: 0.8px;
+    letter-spacing: 0.6px;
     text-transform: uppercase;
-}
-
-.discord-badges-section {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 12px;
 }
 
 .discord-badges {
     display: flex;
-    gap: 8px;
+    gap: 6px;
     align-items: center;
     flex-wrap: wrap;
 }
 
 .discord-badge-img {
-    width: 24px;
-    height: 24px;
-    border-radius: 4px;
+    width: 22px;
+    height: 22px;
+    border-radius: 3px;
+    object-fit: contain;
     transition: transform 0.2s;
     cursor: pointer;
-    object-fit: contain;
-    font-size: 18px;
-    line-height: 24px;
-    text-align: center;
 }
