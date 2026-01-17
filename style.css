@@ -603,12 +603,8 @@ body {
 
 /* New Layout Styles */
 .discord-card-body {
-    background: linear-gradient(180deg, var(--accent-color), var(--primary-color));
-    padding: 16px;
-    padding-top: 50px;
-    position: relative;
-    border-radius: 0 0 8px 8px;
-    min-height: 200px;
+    padding: 10px;
+    background: linear-gradient(180deg, rgba(35, 22, 70, 0.5), rgba(9, 3, 14, 0.8));
 }
 
 .discord-content-wrapper {
@@ -627,12 +623,12 @@ body {
 }
 
 .discord-avatar-large {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    overflow: visible;
+    border: 5px solid var(--accent-color);
+    background: #111214;
     position: relative;
-    box-shadow: 0 0 15px rgba(35, 22, 70, 1.0);
 }
 
 .discord-avatar-large img {
