@@ -543,6 +543,96 @@ body {
     min-height: 120px;
 }
 
+/* Contact Form Enhancements */
+.contact-form {
+    max-width: 500px;  /* عشان ما يتوسع كثير */
+    margin: 0 auto;    /* مركز في الوسط */
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--purple-light);
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(35, 22, 70, 0.5);  /* خلفية داكنة متطابقة مع الثيم */
+    border: 1px solid rgba(138, 43, 226, 0.4);
+    border-radius: 12px;
+    color: var(--text-white);
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--purple-light);
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
+    outline: none;
+}
+
+.btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--purple-main), var(--purple-dark));
+    border: none;
+    border-radius: 12px;
+    color: var(--text-white);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(138, 43, 226, 0.6);
+}
+
+/* Styling for Status Message - جديد عشان الشكل يصير أحلى */
+#formStatus {
+    margin-top: 20px;
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-size: 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+    animation: fadeIn 0.5s ease-in-out;
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.2);
+}
+
+#formStatus.success {
+    background: rgba(138, 43, 226, 0.15);  /* خلفية بنفسجية خفيفة */
+    color: var(--purple-light);
+    border: 1px solid var(--purple-light);
+}
+
+#formStatus.error {
+    background: rgba(255, 107, 107, 0.15);  /* أحمر خفيف للخطأ */
+    color: #ff6b6b;
+    border: 1px solid #ff6b6b;
+}
+
+#formStatus.loading {
+    background: rgba(35, 22, 70, 0.5);
+    color: var(--text-white);
+    border: 1px solid rgba(138, 43, 226, 0.4);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
 /* Discord Card */
 .discord-card {
     display: flex;
@@ -563,6 +653,8 @@ body {
     box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(138, 43, 226, 0.4);
     border-color: rgba(138, 43, 226, 0.7);
 }
+
+
 
 /* Neon Banner */
 .discord-banner-neon {
