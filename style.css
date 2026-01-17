@@ -601,13 +601,14 @@ body {
 
 /* New Layout Styles */
 .discord-card-body {
-    padding: 20px;
+    padding: 16px;
     background: linear-gradient(180deg, rgba(35, 22, 70, 0.5), rgba(9, 3, 14, 0.8));
 }
 
 .discord-content-wrapper {
     display: flex;
     gap: 20px;
+    flex-direction: row-reverse;
 }
 
 .discord-left-section {
@@ -658,7 +659,7 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
 }
 
 .discord-username-large {
@@ -743,7 +744,8 @@ body {
 /* Sections */
 .discord-section-large {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 12px;
+    padding-top: 8px;
+    margin-top: 8px;
 }
 
 .discord-section-title-large {
