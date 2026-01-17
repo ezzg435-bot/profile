@@ -546,7 +546,7 @@ body {
     background: #111214;
     border-radius: 12px;
     width: 100%;
-    max-width: 550px;
+    max-width: 450px;
     overflow: visible;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(138, 43, 226, 0.3);
     margin: 0 auto;
@@ -574,8 +574,8 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
-    object-position: relative;
+    display: inline-block;
+    object-position: center;
 }
 
 .neon-eyes {
