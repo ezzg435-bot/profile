@@ -78,6 +78,8 @@ body {
 
 /* Content Cards */
 .content-card {
+    z-index: 10;
+    border-width: 2px;
     background: rgba(35, 22, 70, 0.3);
     border: 1px solid rgba(138, 43, 226, 0.3);
     border-radius: 20px;
@@ -543,6 +545,8 @@ body {
 
 /* Discord Card */
 .discord-card {
+    display: flex;
+    flex-direction: column;
     background: #111214;
     border-radius: 12px;
     width: 100%;
@@ -665,6 +669,7 @@ body {
     gap: 8px;
 }
 
+/* Username with lightning bolt */
 .discord-username-large {
     display: flex;
     align-items: center;
@@ -1049,7 +1054,7 @@ footer p {
     }
     
     .skills-grid {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        grid-template-columns: 1fr;
         gap: 15px;
     }
     
@@ -1338,7 +1343,7 @@ footer p {
     }
     
     .skills-grid {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        grid-template-columns: 1fr;
         gap: 15px;
     }
     
