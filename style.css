@@ -575,8 +575,7 @@ body {
     height: 100%;
     object-fit: cover;
     display: block;
-    object-position: top right;
-    transform: translateY(-20px) translateX(20px);
+    object-position: center top;
 }
 
 .neon-eyes {
