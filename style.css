@@ -544,46 +544,38 @@ body {
 /* Discord Card */
 .discord-card {
     background: #111214;
-    border-radius: 10px;
+    border-radius: 12px;
     width: 100%;
-    max-width: 450px;
-    overflow: visible;
+    max-width: 550px;
+    overflow: hidden;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(138, 43, 226, 0.3);
-    margin: 0 auto;
+    margin: 30px auto;
     position: relative;
     border: 2px solid rgba(138, 43, 226, 0.5);
     transition: all 0.3s ease;
-    z-index: 1;
 }
 
 .discord-card:hover {
     box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(138, 43, 226, 0.4);
     border-color: rgba(138, 43, 226, 0.7);
-    z-index: 10;
 }
 
 /* Neon Banner */
 .discord-banner-neon {
     width: 100%;
-    height: 0;
-    background: #000;
+    height: 120px;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
     position: relative;
-    overflow: hidden;
-    border-bottom: none;
-    transition: height 0.3s ease;
-}
-
-.discord-card:hover .discord-banner-neon {
-    height: 40px;
+    overflow: visible;
+    border-bottom: 1px solid rgba(138, 43, 226, 0.3);
 }
 
 .banner-img {
     width: 100%;
-    height: 140px;
+    height: 100%;
     object-fit: cover;
     display: block;
-    object-position: center top;
-    transform: translateY(-60px);
+    object-position: center;
 }
 
 .neon-eyes {
@@ -610,7 +602,7 @@ body {
 
 /* New Layout Styles */
 .discord-card-body {
-    padding: 20px;
+    padding: 12px;
     background: linear-gradient(180deg, rgba(35, 22, 70, 0.5), rgba(9, 3, 14, 0.8));
 }
 
@@ -858,38 +850,40 @@ body {
 /* Skills Grid */
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 25px;
     margin-top: 40px;
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
 }
 
-@media (max-width: 768px) {
-    .skills-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 15px;
-    }
-}
-
-@media (max-width: 480px) {
-    .skills-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-}
-
 .skill-card {
     background: rgba(35, 22, 70, 0.4);
     border: 2px solid rgba(138, 43, 226, 0.5);
-    border-radius: 12px;
-    padding: 20px 15px;
+    border-radius: 15px;
+    padding: 30px 20px;
     text-align: center;
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
     overflow: hidden;
+}
+
+.skill-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.skill-card:hover::before {
+    opacity: 1;
 }
 
 .skill-card:hover {
@@ -899,16 +893,10 @@ body {
     box-shadow: 0 0 25px rgba(138, 43, 226, 0.6), 0 0 50px rgba(138, 43, 226, 0.3);
 }
 
-@media (max-width: 480px) {
-    .skill-card {
-        padding: 15px 10px;
-    }
-}
-
 .skill-icon {
-    width: 50px;
-    height: 50px;
-    margin: 0 auto 12px;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 15px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -916,14 +904,10 @@ body {
     transition: all 0.3s ease;
 }
 
-.skill-icon img {
+.skill-icon svg {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-}
-
-.skill-card:hover .skill-icon {
-    transform: scale(1.1);
+    fill: currentColor;
 }
 
 /* Node.js icon styling */
