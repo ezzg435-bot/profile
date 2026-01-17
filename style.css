@@ -575,7 +575,7 @@ body {
     height: 100%;
     object-fit: cover;
     display: block;
-    object-position: center;
+    object-position: relative;
 }
 
 .neon-eyes {
@@ -607,10 +607,9 @@ body {
 }
 
 .discord-content-wrapper {
-    position: absolute;
-    top: 80px;
-    left: 16px;
-    z-index: 10;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
 }
 
 .discord-left-section {
