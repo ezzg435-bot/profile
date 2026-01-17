@@ -316,7 +316,7 @@
             <nav class="sidebar-nav">
                 <a href="#home" class="sidebar-link active">Home</a>
                 <a href="#discord" class="sidebar-link">Discord</a>
-                <a href="#skilles" class="sidebar-link">Skilles</a>
+                <a href="#skills" class="sidebar-link">Skills</a>
                 <a href="#services" class="sidebar-link">Services</a>
                 <a href="#projects" class="sidebar-link">Projects</a>
                 <a href="#about" class="sidebar-link">About</a>
@@ -325,71 +325,54 @@
         </aside>
     </div>
 
-    <!-- Mobile Menu Toggle -->
-    <button class="mobile-menu-toggle" id="mobileMenuToggle">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
-        </svg>
-    </button>
-
     <footer>
         <p>© 2026 – ϟ〢𝑳á𝒛𝒚 Have all rights reserved.</p>
     </footer>
 
-    <!-- Mobile Menu Toggle -->
+    <!-- Mobile Menu Toggle Button -->
     <button class="mobile-menu-toggle" id="mobileMenuToggle">
         <svg viewBox="0 0 24 24" fill="currentColor">
             <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
         </svg>
     </button>
 
-    <script src="config.js"></script>
     <script>
-        // Mobile menu toggle with body lock
         document.addEventListener('DOMContentLoaded', () => {
             const toggleBtn = document.getElementById('mobileMenuToggle');
             const sidebar = document.querySelector('.sidebar');
             const body = document.body;
 
-            if (toggleBtn && sidebar) {
-                toggleBtn.addEventListener('click', () => {
-                    const isActive = sidebar.classList.toggle('active');
-                    body.classList.toggle('sidebar-open', isActive);
-                    
-                    // Change icon to X when open
-                    toggleBtn.innerHTML = isActive 
-                        ? '<svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>'
-                        : '<svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';
-                });
+            toggleBtn.addEventListener('click', () => {
+                const isActive = sidebar.classList.toggle('active');
+                body.classList.toggle('sidebar-open', isActive);
+                toggleBtn.innerHTML = isActive 
+                    ? '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>'
+                    : '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';
+            });
 
-                // Close on outside click
-                document.addEventListener('click', (e) => {
-                    if (window.innerWidth <= 1024 &&
-                        sidebar.classList.contains('active') &&
-                        !sidebar.contains(e.target) &&
-                        !toggleBtn.contains(e.target)) {
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', (e) => {
+                if (window.innerWidth <= 1024 &&
+                    sidebar.classList.contains('active') &&
+                    !sidebar.contains(e.target) &&
+                    !toggleBtn.contains(e.target)) {
+                    sidebar.classList.remove('active');
+                    body.classList.remove('sidebar-open');
+                    toggleBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';
+                }
+            });
+
+            // Close sidebar when clicking a link on mobile
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 1024) {
                         sidebar.classList.remove('active');
                         body.classList.remove('sidebar-open');
-                        toggleBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';
+                        toggleBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';
                     }
                 });
-
-                // Close sidebar when clicking any link
-                document.querySelectorAll('.sidebar-link').forEach(link => {
-                    link.addEventListener('click', () => {
-                        if (window.innerWidth <= 1024) {
-                            sidebar.classList.remove('active');
-                            body.classList.remove('sidebar-open');
-                            toggleBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';
-                        }
-                    });
-                });
-            }
-
-            // Your existing card switching logic here...
-            // (keep your original sidebar link + content card switching code)
+            });
         });
     </script>
-    
 </body>
 </html>
