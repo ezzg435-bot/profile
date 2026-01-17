@@ -578,16 +578,7 @@ body {
 }
 
 .neon-eyes {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80px;
-    height: 60px;
-    background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg"><defs><filter id="glow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><ellipse cx="25" cy="40" rx="12" ry="18" fill="none" stroke="%23da70d6" stroke-width="2" filter="url(%23glow)" opacity="0.9"/><ellipse cx="75" cy="40" rx="12" ry="18" fill="none" stroke="%237dd3fc" stroke-width="2" filter="url(%23glow)" opacity="0.9"/><ellipse cx="25" cy="40" rx="8" ry="12" fill="%23da70d6" opacity="0.3"/><ellipse cx="75" cy="40" rx="8" ry="12" fill="%237dd3fc" opacity="0.3"/></svg>') no-repeat center;
-    background-size: contain;
-    filter: drop-shadow(0 0 15px rgba(218, 112, 214, 0.8)) drop-shadow(0 0 15px rgba(125, 211, 252, 0.8));
-    animation: neonFlicker 0.15s infinite alternate, neonPulse 3s ease-in-out infinite;
+    display: none;
 }
 
 @keyframes neonFlicker {
@@ -625,6 +616,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 12px;
+    margin-top: -40px;
 }
 
 .discord-avatar-large {
