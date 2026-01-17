@@ -563,19 +563,20 @@ body {
 /* Neon Banner */
 .discord-banner-neon {
     width: 100%;
-    height: 100px;
+    height: 40px;
     background: #000;
-    position: bottom;
-    overflow: visible;
-    border-bottom: 0px solid rgba(138, 43, 226, 0.3);
+    position: relative;
+    overflow: hidden;
+    border-bottom: none;
 }
 
 .banner-img {
     width: 100%;
-    height: 100%;
+    height: 140px;
     object-fit: cover;
     display: block;
-    object-position: relative;
+    object-position: center top;
+    transform: translateY(-60px);
 }
 
 .neon-eyes {
@@ -850,24 +851,44 @@ body {
 /* Skills Grid */
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
     margin-top: 40px;
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
 }
 
+@media (max-width: 768px) {
+    .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+}
+
 .skill-card {
     background: rgba(35, 22, 70, 0.4);
     border: 2px solid rgba(138, 43, 226, 0.5);
-    border-radius: 15px;
-    padding: 25px 20px;
+    border-radius: 12px;
+    padding: 20px 15px;
     text-align: center;
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
     overflow: hidden;
+}
+
+@media (max-width: 480px) {
+    .skill-card {
+        padding: 15px 10px;
+    }
 }
 
 .skill-card::before {
