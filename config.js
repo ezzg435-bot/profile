@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Mobile menu toggle
-    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const sidebar = document.querySelector('.sidebar');
     
     if (mobileMenuToggle && sidebar) {
@@ -374,13 +374,12 @@ function updateDiscordCard() {
     
     // تحديث البايو - مع دعم السطور الجديدة
     const bio = document.getElementById('discord-bio');
-    if (bio && config.bio) {
-        // تحويل السطور الجديدة إلى <br> وإزالة ** 
-        let formattedBio = config.bio
-            .replace(/\*\*/g, '')
-            .replace(/\n/g, '<br>');
-        bio.innerHTML = formattedBio;
-    }
+if (bio && config.bio) {
+            let formattedBio = config.bio
+                .replace(/\*\*/g, '')
+                .replace(/\n/g, '<br>');
+            bio.innerHTML = formattedBio;
+        }
     
     // تحديث تاريخ الانضمام
     const date = document.getElementById('discord-date');
