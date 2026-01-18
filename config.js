@@ -25,7 +25,7 @@ const PORTFOLIO_CONFIG = {
     },
 
     // ═══════════════════════════════════════════════════════════════
-    // 💬 إعدادات Discord Card - تم تهيئتها لتشبه الشكل المطلوب
+    // 💬 إعدادات Discord Card
     // ═══════════════════════════════════════════════════════════════
     discordCard: {
         displayName: "ϟ〢𝑳á𝒛𝒚",
@@ -43,12 +43,12 @@ const PORTFOLIO_CONFIG = {
         primaryColor: "#231646",
         accentColor: "#09030e",
         badges: [
-    { src: "https://discordresources.com/img/subscriptions/bronze.svg", title: "nitro" },
-    { src: "https://cdn3.emoji.gg/emojis/33499-hypesquadbalance.png", title: "HypeSquad" },
-    { src: "https://discordresources.com/img/boosts/discordboost1.svg", title: "boost" },
-    { src: "https://discordresources.com/img/username.png", title: "Originally Known as" },
-    { src: "https://cdn3.emoji.gg/emojis/4709-quest-badge.png", title: "quest" },
-    { src: "https://cdn.discordapp.com/emojis/1404466478601998366.webp?size=128", title: "orbs" },
+            { src: "https://discordresources.com/img/subscriptions/bronze.svg", title: "nitro" },
+            { src: "https://cdn3.emoji.gg/emojis/33499-hypesquadbalance.png", title: "HypeSquad" },
+            { src: "https://discordresources.com/img/boosts/discordboost1.svg", title: "boost" },
+            { src: "https://discordresources.com/img/username.png", title: "Originally Known as" },
+            { src: "https://cdn3.emoji.gg/emojis/4709-quest-badge.png", title: "quest" },
+            { src: "https://cdn.discordapp.com/emojis/1404466478601998366.webp?size=128", title: "orbs" },
         ]
     },
 
@@ -194,6 +194,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (mobileMenuToggle && sidebar) {
         mobileMenuToggle.addEventListener('click', function() {
             sidebar.classList.toggle('active');
+            
+            // تغيير أيقونة القائمة عند النقر
+            const svg = mobileMenuToggle.querySelector('svg');
+            if (sidebar.classList.contains('active')) {
+                svg.innerHTML = '<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>';
+            } else {
+                svg.innerHTML = '<path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>';
+            }
         });
         
         // Close sidebar when clicking outside
@@ -201,6 +209,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (window.innerWidth <= 1024) {
                 if (!sidebar.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
                     sidebar.classList.remove('active');
+                    const svg = mobileMenuToggle.querySelector('svg');
+                    svg.innerHTML = '<path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>';
                 }
             }
         });
@@ -230,6 +240,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Close mobile menu
             if (window.innerWidth <= 1024) {
                 sidebar.classList.remove('active');
+                const svg = mobileMenuToggle.querySelector('svg');
+                if (svg) svg.innerHTML = '<path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>';
             }
         });
     }
@@ -253,6 +265,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (window.innerWidth <= 1024) {
                 sidebar.classList.remove('active');
+                const svg = mobileMenuToggle.querySelector('svg');
+                if (svg) svg.innerHTML = '<path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>';
             }
         });
     });
@@ -266,6 +280,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // 💬 تحديث Discord Card
     // ═══════════════════════════════════════════════════════════════
     updateDiscordCard();
+    
+    // ═══════════════════════════════════════════════════════════════
+    // 🖱️ Custom Cursor
+    // ═══════════════════════════════════════════════════════════════
+    initCustomCursor();
+    
+    // ═══════════════════════════════════════════════════════════════
+    // 🎯 Custom Tooltip System للـ Service و Project Cards
+    // ═══════════════════════════════════════════════════════════════
+    initCustomTooltips();
 });
 
 // دالة إنشاء الجزيئات
@@ -347,7 +371,10 @@ function updateDiscordCard() {
     // تحديث الحالة
     const statusDot = document.querySelector('.discord-status-large');
     if (statusDot && config.status) {
-        statusDot.className = 'discord-status ' + config.status;
+        // إزالة كل كلاسات الحالة أولاً
+        statusDot.classList.remove('online', 'idle', 'dnd', 'offline');
+        // إضافة الحالة الجديدة
+        statusDot.classList.add(config.status);
     }
     
     // تحديث ألوان الخلفية
@@ -356,124 +383,91 @@ function updateDiscordCard() {
         cardBody.style.background = `linear-gradient(180deg, ${config.accentColor}, ${config.primaryColor})`;
     }
     
-    // تحديث لون حدود الأفاتار
-    const avatarEl = document.querySelector('.discord-avatar');
-    if (avatarEl && config.accentColor) {
-        avatarEl.style.borderColor = config.accentColor;
-    }
-    
     // تحديث الشارات
     const badgesContainer = document.getElementById('discord-badges');
     if (badgesContainer && config.badges && config.badges.length > 0) {
         badgesContainer.innerHTML = '';
         config.badges.forEach(badge => {
             const badgeImg = document.createElement('img');
-            badgeImg.className = 'discord-badge-img bounce-hover';
+            badgeImg.className = 'discord-badge-img';
             badgeImg.src = badge.src;
             badgeImg.alt = badge.title || 'Badge';
             badgeImg.title = badge.title || 'Badge';
             badgesContainer.appendChild(badgeImg);
         });
     }
+}
+
+// دالة تهيئة الـ Custom Cursor
+function initCustomCursor() {
+    const cursor = document.getElementById('cursor');
     
-    // تحديث placeholder الرسالة
-    const messageInput = document.querySelector('.discord-message-box input');
-    if (messageInput && config.displayName) {
-        messageInput.placeholder = `Message @${config.displayName}`;
-    }
-    
-    // Load Discord Card Data
-function loadDiscordCard() {
-    const { discordCard } = PORTFOLIO_CONFIG;
-    
-    // Update Banner
-    const bannerImg = document.getElementById('discord-banner-img');
-    if (bannerImg && discordCard.banner) {
-        bannerImg.src = discordCard.banner;
-    }
-    
-    // Update Avatar
-    const avatarImg = document.getElementById('discord-avatar-img');
-    if (avatarImg && discordCard.avatar) {
-        avatarImg.src = discordCard.avatar;
-    }
-    
-    // Update Display Name
-    const displayName = document.getElementById('discord-displayname');
-    if (displayName && discordCard.displayName) {
-        displayName.textContent = discordCard.displayName;
-    }
-    
-    // Update Tag
-    const tag = document.getElementById('discord-tag');
-    if (tag && discordCard.tag) {
-        tag.textContent = discordCard.tag;
-    }
-    
-    // Update Bio
-    const bio = document.getElementById('discord-bio');
-    if (bio && discordCard.bio) {
-        bio.textContent = discordCard.bio;
-    }
-    
-    // Update Member Since Date
-    const date = document.getElementById('discord-date');
-    if (date && discordCard.memberSince) {
-        date.textContent = discordCard.memberSince;
-    }
-    
-    // Load Badges
-    const badgesContainer = document.getElementById('discord-badges');
-    if (badgesContainer && discordCard.badges && discordCard.badges.length > 0) {
-        badgesContainer.innerHTML = '';
-        discordCard.badges.forEach(badge => {
-            const badgeImg = document.createElement('img');
-            badgeImg.src = badge.src;
-            badgeImg.alt = badge.title;
-            badgeImg.title = badge.title;
-            badgeImg.className = 'discord-badge-img';
-            badgesContainer.appendChild(badgeImg);
+    if (cursor) {
+        let trails = [];
+        let idleTimer;
+
+        document.addEventListener('mousemove', e => {
+            // تحريك الـ cursor
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+
+            // إيقاف الـ animation مؤقتًا
+            cursor.style.animationPlayState = 'paused';
+
+            // إعادة تشغيل الـ animation بعد 2 ثانية idle
+            clearTimeout(idleTimer);
+            idleTimer = setTimeout(() => {
+                cursor.style.animationPlayState = 'running';
+            }, 2000);
+
+            // إنشاء trail
+            const trail = document.createElement('div');
+            trail.className = 'trail';
+            trail.style.left = e.clientX + 'px';
+            trail.style.top = e.clientY + 'px';
+            trail.style.opacity = '0.8';
+            document.body.appendChild(trail);
+            trails.push(trail);
+
+            // إخفاء الـ trail تدريجياً
+            setTimeout(() => {
+                trail.style.opacity = '0.4';
+                setTimeout(() => {
+                    trail.style.opacity = '0.2';
+                    setTimeout(() => {
+                        trail.style.opacity = '0';
+                        setTimeout(() => {
+                            if (trail.parentNode) {
+                                trail.parentNode.removeChild(trail);
+                            }
+                            // إزالة من المصفوفة
+                            const index = trails.indexOf(trail);
+                            if (index > -1) {
+                                trails.splice(index, 1);
+                            }
+                        }, 200);
+                    }, 200);
+                }, 200);
+            }, 400);
+
+            // حذف trails القديمة
+            if (trails.length > 10) {
+                const old = trails.shift();
+                if (old.parentNode) {
+                    old.parentNode.removeChild(old);
+                }
+            }
         });
+
+        // تأثير الضغط على الماوس
+        document.addEventListener('mousedown', () => cursor.classList.add('active'));
+        document.addEventListener('mouseup', () => cursor.classList.remove('active'));
+
+        // إخفاء الـ cursor عندما يخرج من الصفحة
+        document.addEventListener('mouseleave', () => cursor.style.opacity = '0');
+        document.addEventListener('mouseenter', () => cursor.style.opacity = '1');
     }
-    
-    // Update Status - remove all and add the correct one
-    const statusEl = document.querySelector('.discord-status-large');
-    if (statusEl && discordCard.status) {
-        // Remove all status classes
-        statusEl.classList.remove('online', 'idle', 'dnd', 'offline');
-        // Add the appropriate status class
-        statusEl.classList.add(discordCard.status);
-    }
-}  
-// Initialize when page loads
-document.addEventListener('DOMContentLoaded', () => {
-    loadDiscordCard();
-    
-    const toggleBtn = document.getElementById('menu-toggle');
-    const sidebar = document.querySelector('.sidebar');
-
-    toggleBtn.addEventListener('click', () => {
-        sidebar.classList.toggle('active');
-        
-        const isActive = sidebar.classList.contains('active');
-        toggleBtn.innerHTML = isActive 
-            ? '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>'
-            : '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';
-    });
-
-    document.querySelectorAll('.sidebar-link').forEach(link => {
-        link.addEventListener('click', () => {
-            sidebar.classList.remove('active');
-            toggleBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';
-        });
-    });
-});
-
-    // ═══════════════════════════════════════════════════════════════
-    // 🎯 Custom Tooltip System للـ Service و Project Cards
-    // ═══════════════════════════════════════════════════════════════
-    initCustomTooltips();
-};
+}
 
 // دالة تهيئة الـ Custom Tooltips
 function initCustomTooltips() {
