@@ -336,7 +336,7 @@
 
 
     <!-- Mobile Menu Toggle Button -->
-<button class="mobile-menu-toggle" id="menu-toggle">
+<button class="mobile-menu-toggle" id="mobileMenuToggle"></button>
     <svg viewBox="0 0 24 24" fill="currentColor">
         <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
     </svg>
@@ -382,85 +382,105 @@ let trails = [];
 let idleTimer;
 
 document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
+  // تحريك الـ cursor
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
 
-    cursor.style.animationPlayState = 'paused';
-    clearTimeout(idleTimer);
-    idleTimer = setTimeout(() => {
-        cursor.style.animationPlayState = 'running';
-    }, 2000);
+  // إيقاف الـ animation مؤقتًا
+  cursor.style.animationPlayState = 'paused';
 
-    const trail = document.createElement('div');
-    trail.className = 'trail';
-    trail.style.left = e.clientX + 'px';
-    trail.style.top = e.clientY + 'px';
-    document.body.appendChild(trail);
-    trails.push(trail);
+  // إعادة تشغيل الـ animation بعد 2 ثانية idle
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(() => {
+    cursor.style.animationPlayState = 'running';
+  }, 2000);
+
+  // إنشاء trail
+  const trail = document.createElement('div');
+  trail.className = 'trail';
+  trail.style.left = e.clientX + 'px';
+  trail.style.top = e.clientY + 'px';
+  trail.style.opacity = '0.8';
+  document.body.appendChild(trail);
+  trails.push(trail);
+
+  // إخفاء الـ trail تدريجياً بعد ثانية ونصف
+  setTimeout(() => {
+    trail.style.opacity = '0.3';
     setTimeout(() => {
-        trail.style.opacity = '0';
-        trail.style.transform = 'scale(0.2)';  // Add shrink for gradual fade
-        setTimeout(() => {
-            trail.remove();
-            trails = trails.filter(t => t !== trail); 
-        }, 600);  // Match CSS transition duration
-    }, 800);  // ← Increased from 300ms to 800ms for longer visibility before fade
+      trail.style.opacity = '0';
+      setTimeout(() => {
+        if (trail.parentNode) {
+          trail.parentNode.removeChild(trail);
+        }
+        // إزالة من المصفوفة
+        const index = trails.indexOf(trail);
+        if (index > -1) {
+          trails.splice(index, 1);
+        }
+      }, 200);
+    }, 300);
+  }, 1500);
 
-    if (trails.length > 20) {
-        const old = trails.shift();
-        old.style.opacity = '0';
-        old.style.transform = 'scale(0.2)';
-        setTimeout(() => old.remove(), 600);
+  // حذف trails القديمة
+  if (trails.length > 15) {
+    const old = trails.shift();
+    if (old.parentNode) {
+      old.parentNode.removeChild(old);
     }
+  }
 });
 
 // تأثير الضغط على الماوس
 document.addEventListener('mousedown', () => cursor.classList.add('active'));
 document.addEventListener('mouseup', () => cursor.classList.remove('active'));
+
+// إخفاء الـ cursor عندما يخرج من الصفحة
+document.addEventListener('mouseleave', () => cursor.style.opacity = '0');
+document.addEventListener('mouseenter', () => cursor.style.opacity = '1');
 </script>
 
 <script>
-    const easterEgg = document.getElementById('easter-egg');
-    const commandInput = document.getElementById('command-input');
-    const terminalOutput = document.getElementById('terminal-output');
+    
+const easterEgg = document.getElementById('easter-egg');
+const commandInput = document.getElementById('command-input');
+const terminalOutput = document.getElementById('terminal-output');
 
-    if (easterEgg && commandInput && terminalOutput) {  // Null checks to prevent errors
-        document.addEventListener('keydown', e => {
-            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'l') {
-                easterEgg.style.display = 'block';
-                commandInput.focus();
-            }
-        });
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'l') {
+    easterEgg.style.display = 'block';
+    commandInput.focus();
+  }
+});
 
-        commandInput.addEventListener('keydown', e => {
-            if (e.key === 'Enter') {
-                const cmd = e.target.value.trim().toLowerCase();
-                terminalOutput.innerHTML += `\n> ${cmd}\n`;  // Add command to output
+commandInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    const cmd = e.target.value.trim().toLowerCase();
+    terminalOutput.innerHTML += `\n> ${cmd}\n`;  // يضيف الأمر في الـ output
 
-                if (cmd === '!help') {
-                    terminalOutput.innerHTML += 'Available commands: !info, !bots, !secret\n';
-                } else if (cmd === '!info') {
-                    terminalOutput.innerHTML += 'Developer: ϟ〢𝑳á𝒛𝒚 | Specializing in Discord Bots & Web\n';
-                } else if (cmd === '!secret') {
-                    terminalOutput.innerHTML += 'You found the easter egg! 🎉 Secret link: https://your-discord-server\n';
-                } else {
-                    terminalOutput.innerHTML += 'Unknown command. Try !help\n';
-                }
-
-                e.target.value = '';  // Clear input
-                terminalOutput.scrollTop = terminalOutput.scrollHeight;  // Scroll to bottom
-            }
-        });
-
-        // Close terminal with Esc
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape' && easterEgg.style.display === 'block') {
-                easterEgg.style.display = 'none';
-            }
-        });
+    if (cmd === '!help') {
+      terminalOutput.innerHTML += 'Available commands: !info, !bots, !secret\n';
+    } else if (cmd === '!info') {
+      terminalOutput.innerHTML += 'Developer: ϟ〢𝑳á𝒛𝒚 | Specializing in Discord Bots & Web\n';
+    } else if (cmd === '!secret') {
+      terminalOutput.innerHTML += 'You found the easter egg! 🎉 Secret link: https://your-discord-server\n';
+    } else {
+      terminalOutput.innerHTML += 'Unknown command. Try !help\n';
     }
-</script>
 
+    e.target.value = '';  // يمسح الـ input
+    terminalOutput.scrollTop = terminalOutput.scrollHeight;  // يسكرول لتحت
+  }
+});
+
+// لإغلاق الـ terminal: اضغط Esc
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && easterEgg.style.display === 'block') {
+    easterEgg.style.display = 'none';
+  }
+});
+
+</script>
 <div id="easter-egg" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); color:#da70d6; font-family:monospace; padding:2rem; z-index:10000; overflow:auto;">
   <pre id="terminal-output">
 Welcome to Lazy's Secret Terminal
