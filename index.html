@@ -332,13 +332,6 @@
 
     <footer>
         <p>© 2026 – ϟ〢𝑳á𝒛𝒚 Have all rights reserved.</p>
-        <div id="easter-egg" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); color:#da70d6; font-family:monospace; padding:2rem; z-index:10000;">
-  <pre>
-  Welcome to Lazy's Secret Terminal
-  Type a command: 
-  </pre>
-  <input type="text" id="command-input" placeholder="Type !help" style="background:#0f081a; color:#da70d6; border:1px solid #8a2be2; padding:10px; width:80%;">
-</div>
     </footer>
 
 
@@ -389,33 +382,36 @@ let trails = [];
 let idleTimer;
 
 document.addEventListener('mousemove', e => {
-  // تحريك الـ cursor
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top = e.clientY + 'px';
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
 
-  // إيقاف الـ animation مؤقتًا
-  cursor.style.animationPlayState = 'paused';
+    cursor.style.animationPlayState = 'paused';
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => {
+        cursor.style.animationPlayState = 'running';
+    }, 2000);
 
-  // إعادة تشغيل الـ animation بعد 2 ثانية idle
-  clearTimeout(idleTimer);
-  idleTimer = setTimeout(() => {
-    cursor.style.animationPlayState = 'running';
-  }, 2000);
+    const trail = document.createElement('div');
+    trail.className = 'trail';
+    trail.style.left = e.clientX + 'px';
+    trail.style.top = e.clientY + 'px';
+    document.body.appendChild(trail);
+    trails.push(trail);
+    setTimeout(() => {
+        trail.style.opacity = '0';
+        trail.style.transform = 'scale(0.2)';  // Add shrink for gradual fade
+        setTimeout(() => {
+            trail.remove();
+            trails = trails.filter(t => t !== trail); 
+        }, 600);  // Match CSS transition duration
+    }, 800);  // ← Increased from 300ms to 800ms for longer visibility before fade
 
-  // إنشاء trail
-  const trail = document.createElement('div');
-  trail.className = 'trail';
-  trail.style.left = e.clientX + 'px';
-  trail.style.top = e.clientY + 'px';
-  document.body.appendChild(trail);
-  trails.push(trail);
-
-  // حذف trails القديمة مع fade-out
-  if (trails.length > 15) {
-    const old = trails.shift();
-    old.style.opacity = 0; // تفعيل الـ transition
-    setTimeout(() => old.remove(), 300);
-  }
+    if (trails.length > 20) {
+        const old = trails.shift();
+        old.style.opacity = '0';
+        old.style.transform = 'scale(0.2)';
+        setTimeout(() => old.remove(), 600);
+    }
 });
 
 // تأثير الضغط على الماوس
@@ -424,46 +420,47 @@ document.addEventListener('mouseup', () => cursor.classList.remove('active'));
 </script>
 
 <script>
-    
-const easterEgg = document.getElementById('easter-egg');
-const commandInput = document.getElementById('command-input');
-const terminalOutput = document.getElementById('terminal-output');
+    const easterEgg = document.getElementById('easter-egg');
+    const commandInput = document.getElementById('command-input');
+    const terminalOutput = document.getElementById('terminal-output');
 
-document.addEventListener('keydown', e => {
-  if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'l') {
-    easterEgg.style.display = 'block';
-    commandInput.focus();
-  }
-});
+    if (easterEgg && commandInput && terminalOutput) {  // Null checks to prevent errors
+        document.addEventListener('keydown', e => {
+            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'l') {
+                easterEgg.style.display = 'block';
+                commandInput.focus();
+            }
+        });
 
-commandInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter') {
-    const cmd = e.target.value.trim().toLowerCase();
-    terminalOutput.innerHTML += `\n> ${cmd}\n`;  // يضيف الأمر في الـ output
+        commandInput.addEventListener('keydown', e => {
+            if (e.key === 'Enter') {
+                const cmd = e.target.value.trim().toLowerCase();
+                terminalOutput.innerHTML += `\n> ${cmd}\n`;  // Add command to output
 
-    if (cmd === '!help') {
-      terminalOutput.innerHTML += 'Available commands: !info, !bots, !secret\n';
-    } else if (cmd === '!info') {
-      terminalOutput.innerHTML += 'Developer: ϟ〢𝑳á𝒛𝒚 | Specializing in Discord Bots & Web\n';
-    } else if (cmd === '!secret') {
-      terminalOutput.innerHTML += 'You found the easter egg! 🎉 Secret link: https://your-discord-server\n';
-    } else {
-      terminalOutput.innerHTML += 'Unknown command. Try !help\n';
+                if (cmd === '!help') {
+                    terminalOutput.innerHTML += 'Available commands: !info, !bots, !secret\n';
+                } else if (cmd === '!info') {
+                    terminalOutput.innerHTML += 'Developer: ϟ〢𝑳á𝒛𝒚 | Specializing in Discord Bots & Web\n';
+                } else if (cmd === '!secret') {
+                    terminalOutput.innerHTML += 'You found the easter egg! 🎉 Secret link: https://your-discord-server\n';
+                } else {
+                    terminalOutput.innerHTML += 'Unknown command. Try !help\n';
+                }
+
+                e.target.value = '';  // Clear input
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;  // Scroll to bottom
+            }
+        });
+
+        // Close terminal with Esc
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && easterEgg.style.display === 'block') {
+                easterEgg.style.display = 'none';
+            }
+        });
     }
-
-    e.target.value = '';  // يمسح الـ input
-    terminalOutput.scrollTop = terminalOutput.scrollHeight;  // يسكرول لتحت
-  }
-});
-
-// لإغلاق الـ terminal: اضغط Esc
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && easterEgg.style.display === 'block') {
-    easterEgg.style.display = 'none';
-  }
-});
-
 </script>
+
 <div id="easter-egg" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); color:#da70d6; font-family:monospace; padding:2rem; z-index:10000; overflow:auto;">
   <pre id="terminal-output">
 Welcome to Lazy's Secret Terminal

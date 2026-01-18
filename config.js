@@ -187,24 +187,39 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Mobile menu toggle
-    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-    const sidebar = document.querySelector('.sidebar');
+document.addEventListener('DOMContentLoaded', () => {
+    loadDiscordCard();
     
-    if (mobileMenuToggle && sidebar) {
-        mobileMenuToggle.addEventListener('click', function() {
+    const toggleBtn = document.getElementById('menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+
+    if (toggleBtn && sidebar) {  // Add null check to prevent errors
+        toggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();  // Prevent bubbling
             sidebar.classList.toggle('active');
+            
+            const isActive = sidebar.classList.contains('active');
+            toggleBtn.innerHTML = isActive 
+                ? '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>'
+                : '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';
         });
-        
-        // Close sidebar when clicking outside
-        document.addEventListener('click', function(e) {
-            if (window.innerWidth <= 1024) {
-                if (!sidebar.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
-                    sidebar.classList.remove('active');
-                }
+
+        // Close sidebar when clicking outside (improved for mobile)
+        document.addEventListener('click', (e) => {
+            if (sidebar.classList.contains('active') && !sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+                sidebar.classList.remove('active');
+                toggleBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';
             }
         });
     }
+
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+        link.addEventListener('click', () => {
+            if (sidebar) sidebar.classList.remove('active');
+            if (toggleBtn) toggleBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';
+        });
+    });
+});
     
     // Hire Me button - navigate to contact
     const hireBtn = document.querySelector('.hire-me-btn');
@@ -445,30 +460,6 @@ function loadDiscordCard() {
         statusEl.classList.add(discordCard.status);
     }
 }  
-// Initialize when page loads
-document.addEventListener('DOMContentLoaded', () => {
-    loadDiscordCard();
-    
-    const toggleBtn = document.getElementById('menu-toggle');
-    const sidebar = document.querySelector('.sidebar');
-
-    toggleBtn.addEventListener('click', () => {
-        sidebar.classList.toggle('active');
-        
-        const isActive = sidebar.classList.contains('active');
-        toggleBtn.innerHTML = isActive 
-            ? '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>'
-            : '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';
-    });
-
-    document.querySelectorAll('.sidebar-link').forEach(link => {
-        link.addEventListener('click', () => {
-            sidebar.classList.remove('active');
-            toggleBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';
-        });
-    });
-});
-
     // ═══════════════════════════════════════════════════════════════
     // 🎯 Custom Tooltip System للـ Service و Project Cards
     // ═══════════════════════════════════════════════════════════════

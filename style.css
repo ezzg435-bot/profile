@@ -1149,7 +1149,7 @@ footer {
 /* Responsive */
 @media (max-width: 1024px) {
     .mobile-menu-toggle {
-        display: flex;
+        display: flex !important;
     }
     
     .content-area {
@@ -1531,7 +1531,7 @@ footer {
 /* Responsive */
 @media (max-width: 1024px) {
     .mobile-menu-toggle {
-        display: flex;
+        display: flex !important;
         align-items: center;
         justify-content: center;
     }
@@ -1635,10 +1635,10 @@ footer {
 }
 
 .skill-card:hover {
-  transform: translateY(-6px) scale(1.05);
+  transform: translateY(-6px) scale(1.03);  
   border-color: var(--purple-light);
   box-shadow: 0 12px 32px rgba(138, 43, 226, 0.4);
-  z-index: 10;  /* يرفع الكارت فوق الآخرين */
+  z-index: 10;
 }
 
 .skill-card:hover::before {
@@ -1694,8 +1694,8 @@ footer {
 }
 
 .skill-card:hover {
-  transform: translateY(-15px) rotateX(10deg) rotateY(10deg) scale(1.08);
-  box-shadow: 0 30px 60px rgba(138,43,226,0.5);
+  transform: translateY(-10px) rotateX(8deg) rotateY(8deg) scale(1.03); 
+  box-shadow: 0 20px 40px rgba(138,43,226,0.4); 
   border-color: #da70d6;
 }
 
@@ -1753,15 +1753,29 @@ footer {
     height: 40px;
     background: rgba(218,112,214,0.4);
   }
-  .trail {
+.trail {
     position: fixed;
     width: 8px;
     height: 8px;
     background: #da70d6;
     border-radius: 50%;
     pointer-events: none;
-    opacity: 0.7;
-    transition: all 0.2s;
+    opacity: 0.8;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out; 
     z-index: 9998;
-    transition: all 0.3s ease-out;  /* سرعة أقل شوية (0.3s بدل 0.2s) */
+    transform: scale(1);
+}
+.project-card .badge,                /* Common badge class */
+.project-card .overlay-button,       /* If it's a button-like box */
+.project-card .coming-soon-badge,    /* Specific for "Coming Soon" */
+.project-card span[title*="Bot"],    /* Hide spans with "Bot" in title */
+.project-card .small-box {           /* Generic */
+    display: none !important;
+}
+.service-card img + div,             /* Hide div right after image */
+.service-card .bottom-label,         /* Common bottom label */
+.service-card .overlay-text,         /* If it's overlay */
+.service-card button,                /* If it's a button */
+.service-card span[class*="label"] { /* Generic label spans */
+    display: none !important;
 }
