@@ -30,8 +30,8 @@ const PORTFOLIO_CONFIG = {
     discordCard: {
         displayName: "ϟ〢𝑳á𝒛𝒚",
         tag: "._idc",
-        avatar: "https://media.discordapp.net/attachments/1369976044374855753/1461506633615016061/038994609347b871e2ef5ff10346903f.jpg?ex=696cc7de&is=696b765e&hm=2895c6f21458a91148a35c8ab84ee5b9e7d922501630b32fe2f1e7240cf3b05a&=&format=webp&width=570&height=570",
-        banner: "https://media.discordapp.net/attachments/1369976044374855753/1461506633900232704/9bfc635a9bbfd6858c9b1d20cf3073a2.gif?ex=696cc7df&is=696b765f&hm=06ea149d26b0818347d1ecfb0945bb0bb8343957c2c08d3b7012196e5eb7c904&=&width=605&height=405",
+        avatar: "https://imgur.com/a/j-NsvLcGr",
+        banner: "https://imgur.com/a/j-EHhr0D3",
         bio: `C/:Users/Lazy
 ╠ Insta : ezz44210
    ╠ Bots : Na7la / Valhalla soon..
@@ -194,6 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (mobileMenuToggle && sidebar) {
         mobileMenuToggle.addEventListener('click', function() {
             sidebar.classList.toggle('active');
+            document.body.classList.toggle('sidebar-open');
             
             // تغيير أيقونة القائمة عند النقر
             const svg = mobileMenuToggle.querySelector('svg');
@@ -471,13 +472,15 @@ function initCustomCursor() {
 
 // دالة تهيئة الـ Custom Tooltips
 function initCustomTooltips() {
-    const cards = document.querySelectorAll('[data-title]');
+const cards = document.querySelectorAll('[data-title]:not(img):not(.project-card img):not(.service-card img)');
+    
     let tooltip = null;
     
     cards.forEach(card => {
         card.addEventListener('mouseenter', (e) => {
             const title = card.getAttribute('data-title');
             if (!title) return;
+
             
             // حذف أي tooltip قديم
             if (tooltip) tooltip.remove();

@@ -146,31 +146,41 @@ body {
 }
 
 /* Mobile Menu Toggle */
+/* تحسين الـ mobile menu toggle */
 .mobile-menu-toggle {
-    display: none;
     position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 200;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 1000;
+    width: 55px;
+    height: 55px;
+    border-radius: 14px;
     background: var(--purple-main);
     border: none;
-    width: 50px;
-    height: 50px;
-    border-radius: 10px;
     color: white;
     cursor: pointer;
-    box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
-    transition: all 0.3s;
-}
-
-.mobile-menu-toggle svg {
-    width: 24px;
-    height: 24px;
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+    transition: all 0.35s ease;
 }
 
 .mobile-menu-toggle:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 30px rgba(138, 43, 226, 0.7);
+    transform: translateY(-3px) scale(1.08);
+    box-shadow: 0 8px 25px rgba(138, 43, 226, 0.6);
+}
+
+/* السايدبار نفسه */
+.sidebar {
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sidebar.active {
+    transform: translateX(0);
+}
+
+/* عند الفتح نعطي تأثير خفيف للخلفية */
+body.sidebar-open {
+    overflow: hidden;
 }
 
 /* Sidebar */
@@ -1362,4 +1372,55 @@ body {
     animation-duration: 18s;
     width: 5px;
     height: 5px;
+}
+
+/* تحسين التوزيع على الشاشات الكبيرة */
+@media (min-width: 1400px) {
+    .content-area {
+        max-width: 1100px;          /* أو 1200px حسب ذوقك */
+        margin-left: auto;
+        margin-right: auto;
+        padding-right: 320px;       /* يبقى المسافة للسايدبار */
+    }
+    
+    .main-layout {
+        justify-content: center;
+    }
+}
+
+/* تحسين عام لمنع التمدد الزائد */
+.content-area {
+    width: 100%;
+    max-width: 1200px;              /* حد أقصى معقول */
+    margin: 0 auto;
+    padding: 40px 5vw;              /* استخدام vw بدل قيم ثابتة كبيرة */
+    padding-right: 320px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+    .content-area {
+        padding: 30px 5vw;
+        padding-right: 40px;        /* مسافة أقل للسايدبار المغلق */
+    }
+}
+
+@media (max-width: 768px) {
+    .content-area {
+        padding: 20px 4vw;
+        padding-right: 20px;
+    }
+}
+
+/* إخفاء الـ tooltip تماماً فوق الصور والكروت اللي فيها صور */
+.project-card img,
+.service-card img,
+.project-card:hover::after,
+.service-card:hover::after {
+    pointer-events: none !important;
+}
+
+.project-card::after,
+.service-card::after {
+    display: none !important;     /* الحل الأقوى والأسرع */
 }
