@@ -382,7 +382,6 @@ function updateDiscordCard() {
         messageInput.placeholder = `Message @${config.displayName}`;
     }
     
-
     // Load Discord Card Data
 function loadDiscordCard() {
     const { discordCard } = PORTFOLIO_CONFIG;
@@ -445,7 +444,30 @@ function loadDiscordCard() {
         // Add the appropriate status class
         statusEl.classList.add(discordCard.status);
     }
-}
+}  
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    loadDiscordCard();
+    
+    const toggleBtn = document.getElementById('menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+
+    toggleBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+        
+        const isActive = sidebar.classList.contains('active');
+        toggleBtn.innerHTML = isActive 
+            ? '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>'
+            : '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';
+    });
+
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+        link.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            toggleBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';
+        });
+    });
+});
 
     // ═══════════════════════════════════════════════════════════════
     // 🎯 Custom Tooltip System للـ Service و Project Cards
@@ -518,18 +540,3 @@ function initCustomTooltips() {
         });
     });
 }
-
-
-
-document.querySelectorAll('.service-card, .project-card').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = (e.clientX - rect.left - rect.width / 2) / 20;  // حساب الإمالة
-    const y = (e.clientY - rect.top - rect.height / 2) / 20;
-    card.style.transform = `rotateY(${x}deg) rotateX(${y * -1}deg) translateZ(20px)`;
-  });
-
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = 'rotateY(0deg) rotateX(0deg) translateZ(0px)';
-  });
-});
