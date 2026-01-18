@@ -194,7 +194,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (mobileMenuToggle && sidebar) {
         mobileMenuToggle.addEventListener('click', function() {
             sidebar.classList.toggle('active');
-            document.body.classList.toggle('sidebar-open');
             
             // تغيير أيقونة القائمة عند النقر
             const svg = mobileMenuToggle.querySelector('svg');
@@ -480,7 +479,7 @@ const cards = document.querySelectorAll('[data-title]:not(img):not(.project-card
         card.addEventListener('mouseenter', (e) => {
             const title = card.getAttribute('data-title');
             if (!title) return;
-
+            
             
             // حذف أي tooltip قديم
             if (tooltip) tooltip.remove();
