@@ -30,8 +30,8 @@ const PORTFOLIO_CONFIG = {
     discordCard: {
         displayName: "ϟ〢𝑳á𝒛𝒚",
         tag: "._idc",
-        avatar: "https://imgur.com/a/j-NsvLcGr",
-        banner: "https://imgur.com/a/j-EHhr0D3",
+        avatar: "https://i.postimg.cc/9fJ8Dmtf/038994609347b871e2ef5ff10346903f.jpg",  
+        banner: "https://i.postimg.cc/3x3zNc54/j_Imgur.gif",
         bio: `C/:Users/Lazy
 ╠ Insta : ezz44210
    ╠ Bots : Na7la / Valhalla soon..
@@ -187,22 +187,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Mobile menu toggle
-    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-    const sidebar = document.querySelector('.sidebar');
-    
-    if (mobileMenuToggle && sidebar) {
-        mobileMenuToggle.addEventListener('click', function() {
-            sidebar.classList.toggle('active');
-            
-            // تغيير أيقونة القائمة عند النقر
-            const svg = mobileMenuToggle.querySelector('svg');
-            if (sidebar.classList.contains('active')) {
-                svg.innerHTML = '<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>';
-            } else {
-                svg.innerHTML = '<path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>';
-            }
-        });
+// Mobile Menu Toggle (موجود جزئياً، أضف ده)
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const sidebar = document.querySelector('.sidebar');
+const body = document.body;
+
+mobileMenuToggle.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    body.classList.toggle('sidebar-open');  // toggle class على body
+
+    // تغيير أيقونة الـ toggle (اختياري، لو عايز يتحول إلى X عند الفتح)
+    if (sidebar.classList.contains('active')) {
+        this.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>';  // أيقونة close
+    } else {
+        this.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';  // أيقونة hamburger
+    }
+});
         
         // Close sidebar when clicking outside
         document.addEventListener('click', function(e) {
@@ -214,7 +214,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
-    }
     
     // Hire Me button - navigate to contact
     const hireBtn = document.querySelector('.hire-me-btn');
