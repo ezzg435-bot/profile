@@ -383,88 +383,75 @@ function updateDiscordCard() {
     }
     
     // ═══════════════════════════════════════════════════════════════
-    // 🖱️ Custom Cursor with Trail
+    // 🎯 Custom Tooltip System للـ Service و Project Cards
     // ═══════════════════════════════════════════════════════════════
-    initializeCustomCursor();
-};
+    initCustomTooltips();
+});
 
-// Custom Cursor Function
-function initializeCustomCursor() {
-    const customCursor = document.createElement('div');
-    customCursor.className = 'custom-cursor';
-    document.body.appendChild(customCursor);
+// دالة تهيئة الـ Custom Tooltips
+function initCustomTooltips() {
+    const cards = document.querySelectorAll('[data-title]');
+    let tooltip = null;
     
-    let lastX = 0;
-    let lastY = 0;
-    let idleTimeout;
-    let isIdle = false;
-    const trails = new Set();
-    
-    // Mouse move event
-    document.addEventListener('mousemove', (e) => {
-        lastX = e.clientX;
-        lastY = e.clientY;
-        
-        // تحديث موقع الـ custom cursor
-        customCursor.style.left = lastX + 'px';
-        customCursor.style.top = lastY + 'px';
-        
-        // إذا كانت الماوس متحركة، احذف الـ idle state
-        if (isIdle) {
-            isIdle = false;
-            // فعّل جميع التريلات عند الحركة
-            trails.forEach(trail => {
-                trail.classList.remove('fade-out');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', (e) => {
+            const title = card.getAttribute('data-title');
+            if (!title) return;
+            
+            // حذف أي tooltip قديم
+            if (tooltip) tooltip.remove();
+            
+            // إنشاء tooltip جديد
+            tooltip = document.createElement('div');
+            tooltip.className = 'custom-tooltip';
+            tooltip.textContent = title;
+            tooltip.style.cssText = `
+                position: fixed;
+                background: rgba(35, 22, 70, 0.95);
+                color: #da70d6;
+                padding: 8px 16px;
+                border-radius: 8px;
+                border: 1px solid rgba(218,112,214,0.5);
+                font-size: 12px;
+                font-weight: 600;
+                white-space: nowrap;
+                pointer-events: none;
+                z-index: 10000;
+                box-shadow: 0 0 15px rgba(138,43,226,0.3);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            `;
+            document.body.appendChild(tooltip);
+            
+            // تأخير صغير لتفعيل الـ transition
+            setTimeout(() => {
+                tooltip.style.opacity = '1';
+            }, 10);
+            
+            // تحديث موقع الـ tooltip مع حركة الماوس
+            const updateTooltipPosition = (event) => {
+                if (tooltip) {
+                    tooltip.style.left = (event.clientX + 10) + 'px';
+                    tooltip.style.top = (event.clientY + 10) + 'px';
+                }
+            };
+            
+            card.addEventListener('mousemove', updateTooltipPosition);
+            
+            card.addEventListener('mouseleave', () => {
+                if (tooltip) {
+                    tooltip.style.opacity = '0';
+                    setTimeout(() => {
+                        if (tooltip) {
+                            tooltip.remove();
+                            tooltip = null;
+                        }
+                    }, 300);
+                }
+                card.removeEventListener('mousemove', updateTooltipPosition);
             });
-        }
-        
-        // امسح الـ idle timeout السابق
-        clearTimeout(idleTimeout);
-        
-        // ضع timeout جديد (2 ثانية بدون حركة = idle)
-        idleTimeout = setTimeout(() => {
-            isIdle = true;
-            // أخفِ جميع التريلات عند التوقف
-            trails.forEach(trail => {
-                trail.classList.add('fade-out');
-            });
-        }, 2000);
-        
-        // إنشاء trail
-        createTrail(lastX, lastY);
+        });
     });
-    
-    // Mouse down event
-    document.addEventListener('mousedown', () => {
-        customCursor.classList.add('active');
-    });
-    
-    // Mouse up event
-    document.addEventListener('mouseup', () => {
-        customCursor.classList.remove('active');
-    });
-    
-    // Function to create trail
-    function createTrail(x, y) {
-        const trail = document.createElement('div');
-        trail.className = 'trail';
-        trail.style.left = x + 'px';
-        trail.style.top = y + 'px';
-        
-        // إذا كانت الماوس في حالة idle، أضف fade-out class مباشرة
-        if (isIdle) {
-            trail.classList.add('fade-out');
-        }
-        
-        document.body.appendChild(trail);
-        trails.add(trail);
-        
-        // احذف التريل بعد انتهاء الـ animation
-        setTimeout(() => {
-            trail.remove();
-            trails.delete(trail);
-        }, 600);
-    }
 }
 
 
