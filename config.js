@@ -187,22 +187,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-// Mobile Menu Toggle (موجود جزئياً، أضف ده)
-const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-const sidebar = document.querySelector('.sidebar');
-const body = document.body;
-
-mobileMenuToggle.addEventListener('click', function() {
-    sidebar.classList.toggle('active');
-    body.classList.toggle('sidebar-open');  // toggle class على body
-
-    // تغيير أيقونة الـ toggle (اختياري، لو عايز يتحول إلى X عند الفتح)
-    if (sidebar.classList.contains('active')) {
-        this.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>';  // أيقونة close
-    } else {
-        this.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>';  // أيقونة hamburger
-    }
-});
+    // Mobile menu toggle
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const sidebar = document.querySelector('.sidebar');
+    
+    if (mobileMenuToggle && sidebar) {
+        mobileMenuToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('active');
+            
+            // تغيير أيقونة القائمة عند النقر
+            const svg = mobileMenuToggle.querySelector('svg');
+            if (sidebar.classList.contains('active')) {
+                svg.innerHTML = '<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>';
+            } else {
+                svg.innerHTML = '<path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>';
+            }
+        });
         
         // Close sidebar when clicking outside
         document.addEventListener('click', function(e) {
@@ -214,6 +214,7 @@ mobileMenuToggle.addEventListener('click', function() {
                 }
             }
         });
+    }
     
     // Hire Me button - navigate to contact
     const hireBtn = document.querySelector('.hire-me-btn');
@@ -535,3 +536,49 @@ const cards = document.querySelectorAll('[data-title]:not(img):not(.project-card
         });
     });
 }
+// في ملف config.js، أضف هذه الدالة في نهاية الملف
+function optimizeForMobile() {
+    if (window.innerWidth <= 768) {
+        // تقليل عدد الجزيئات للهواتف
+        const particles = document.querySelectorAll('.particle');
+        if (particles.length > 30) {
+            particles.forEach((particle, index) => {
+                if (index > 30) {
+                    particle.remove();
+                }
+            });
+        }
+        
+        // تبسيط الأنيميشن للهواتف
+        document.querySelectorAll('.service-card, .project-card, .skill-card').forEach(card => {
+            card.style.transformStyle = 'flat';
+        });
+    }
+}
+
+// ثم أضف استدعاء الدالة في DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+    // ... الكود الحالي ...
+    
+    // تحسين للهواتف
+    optimizeForMobile();
+    
+    // تحديث عند تغيير حجم الشاشة
+    window.addEventListener('resize', optimizeForMobile);
+});
+
+// دالة لتحسين أداء الـ cursor على الهواتف
+function optimizeCursorForMobile() {
+    const cursor = document.getElementById('cursor');
+    if (window.innerWidth <= 768 && cursor) {
+        cursor.style.display = 'none';
+        document.body.style.cursor = 'auto';
+    } else if (cursor) {
+        cursor.style.display = 'block';
+        document.body.style.cursor = 'none';
+    }
+}
+
+// استدعاء الدالة
+optimizeCursorForMobile();
+window.addEventListener('resize', optimizeCursorForMobile);

@@ -1425,52 +1425,490 @@ body {
     display: none !important;     /* الحل الأقوى والأسرع */
 }
 
-/* جعل الـ grids auto-fit لكل الأقسام */
-.skills-grid,
-.services-grid,
-.projects-grid {  /* افترض إن projects لها grid مشابه */
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));  /* auto-fit عشان يتوزع تلقائي، minmax للحد الأدنى */
-    gap: 20px;
-    justify-content: center;  /* يرتب في الوسط */
-}
-
-/* لو في progress bar في discord card (زي 33% في الصورة)، اجعله 100% عرض */
-.discord-progress, .progress-bar {  /* غير الأسماء لو مختلفة */
-    width: 100% !important;  /* يملأ العرض كامل */
-    max-width: 100%;
-    min-width: auto;
-}
-
-/* تحسين عام للـ content-area عشان يتكيف مع كل الشاشات */
-.content-area {
-    width: 100%;
-    max-width: 100vw;  /* حد أقصى 100% من الشاشة */
-    margin: 0 auto;
-    padding: 40px 5%;  /* % بدل px عشان يتكيف */
-    box-sizing: border-box;
-}
-
-/* للشاشات الكبيرة (أكبر من 1400px) */
-@media (min-width: 1400px) {
+/* تحسين Responsive للأحجام المختلفة */
+@media (max-width: 1600px) {
     .content-area {
-        max-width: 1200px;  /* حد معقول، مش يتمدد زيادة */
-        padding-right: 320px;  /* مسافة للسايدبار */
+        max-width: 1400px;
+        padding: 40px 60px;
+        padding-right: 320px;
     }
 }
 
-/* للموبايل (صغير) */
+@media (max-width: 1400px) {
+    .content-area {
+        max-width: 1200px;
+        padding: 40px 50px;
+        padding-right: 320px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .content-area {
+        max-width: 1000px;
+        padding: 40px 40px;
+        padding-right: 320px;
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .content-area {
+        padding-right: 40px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    
+    .sidebar {
+        transform: translateX(100%);
+        width: 300px;
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+        box-shadow: -15px 0 30px rgba(0, 0, 0, 0.7);
+    }
+    
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    footer {
+        margin-right: 0;
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .profile-container {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .profile-name {
+        font-size: 32px;
+    }
+}
+
 @media (max-width: 768px) {
     .content-area {
-        padding: 20px 3%;  /* مسافات أصغر */
+        padding: 25px 20px;
     }
-    .skills-grid, .services-grid, .projects-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));  /* أصغر للموبايل */
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+    
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .card-inner {
+        padding: 30px 25px;
+    }
+    
+    .card-title {
+        font-size: 28px;
+    }
+    
+    .profile-container {
+        width: 160px;
+        height: 160px;
+    }
+    
+    .profile-name {
+        font-size: 28px;
+    }
+    
+    .discord-card {
+        max-width: 100%;
+        margin: 20px 0;
     }
 }
 
-/* للعناصر زي الـ discord-card، اجعلها 100% عرض دائماً */
-.discord-card {
-    width: 100% !important;
-    max-width: 100%;
+@media (max-width: 576px) {
+    .content-area {
+        padding: 20px 15px;
+    }
+    
+    .services-grid,
+    .projects-grid {
+        gap: 15px;
+    }
+    
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .card-inner {
+        padding: 25px 20px;
+    }
+    
+    .card-title {
+        font-size: 24px;
+    }
+    
+    .profile-container {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .profile-name {
+        font-size: 24px;
+    }
+    
+    .stat-item {
+        min-width: 100px;
+        padding: 15px;
+    }
+    
+    .stat-number {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-area {
+        padding: 15px 12px;
+    }
+    
+    .card-inner {
+        padding: 20px 15px;
+    }
+    
+    .card-title {
+        font-size: 22px;
+    }
+    
+    .profile-name {
+        font-size: 22px;
+    }
+    
+    .social-links a {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .btn {
+        padding: 12px 25px;
+        font-size: 14px;
+    }
+    
+    .discord-username-large h2 {
+        font-size: 24px;
+    }
+    
+    .discord-avatar-large {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+@media (max-width: 360px) {
+    .content-area {
+        padding: 12px 10px;
+    }
+    
+    .card-inner {
+        padding: 18px 12px;
+    }
+    
+    .card-title {
+        font-size: 20px;
+    }
+    
+    .profile-name {
+        font-size: 20px;
+    }
+    
+    .services-grid,
+    .projects-grid {
+        gap: 12px;
+    }
+}
+
+/* إخفاء زر القائمة في شاشات الكمبيوتر */
+@media (min-width: 1025px) {
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+    
+    .sidebar {
+        transform: translateX(0) !important;
+    }
+}
+
+/* تحسين تنسيق العناصر داخل الكروت للأحجام الصغيرة */
+.service-card,
+.project-card,
+.skill-card {
+    min-height: auto;
+    padding: 20px 15px;
+}
+
+.service-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 12px;
+}
+
+.service-card h3,
+.project-card h3 {
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+/* تحسين النصوص للأحجام الصغيرة */
+@media (max-width: 768px) {
+    .about-text p {
+        font-size: 15px;
+        line-height: 1.6;
+    }
+    
+    .card-subtitle {
+        font-size: 14px;
+    }
+    
+    .profile-subtitle {
+        font-size: 16px;
+    }
+}
+
+/* تحسين العناوين للأحجام الصغيرة */
+@media (max-width: 576px) {
+    .about-text h3 {
+        font-size: 20px;
+    }
+    
+    .card-subtitle {
+        font-size: 13px;
+    }
+    
+    .profile-subtitle {
+        font-size: 15px;
+    }
+}
+
+/* تحسين الـ Discord Card للأحجام الصغيرة */
+@media (max-width: 768px) {
+    .discord-card {
+        border-width: 1px;
+    }
+    
+    .discord-username-large h2 {
+        font-size: 22px;
+    }
+    
+    .discord-banner-neon {
+        height: 120px;
+    }
+    
+    .discord-badge-img {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+/* تحسين الـ Particles للأحجام الصغيرة */
+@media (max-width: 768px) {
+    .particle {
+        width: 3px;
+        height: 3px;
+    }
+    
+    .particle:nth-child(even) {
+        width: 4px;
+        height: 4px;
+    }
+}
+
+/* تحسين التمرير الناعم */
+html {
+    scroll-behavior: smooth;
+}
+
+/* تحسين أداء الأنيميشن للأجهزة المحمولة */
+@media (max-width: 768px) {
+    .service-card,
+    .project-card,
+    .skill-card {
+        transform-style: flat;
+        animation: none;
+    }
+    
+    .service-card:hover,
+    .project-card:hover,
+    .skill-card:hover {
+        transform: translateY(-5px) scale(1.03);
+    }
+    
+    .service-card:hover::before,
+    .project-card:hover::before,
+    .skill-card:hover::before {
+        opacity: 0;
+    }
+}
+
+/* تحسين عرض الكروت لشاشات صغيرة جداً */
+@media (max-width: 400px) {
+    .service-card,
+    .project-card {
+        padding: 18px 12px;
+    }
+    
+    .service-icon {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .discord-username-large h2 {
+        font-size: 20px;
+    }
+}
+
+/* إصلاح مشكلة المسافات في شاشات ضيقة */
+@media (max-width: 320px) {
+    .content-area {
+        padding: 10px 8px;
+    }
+    
+    .card-inner {
+        padding: 15px 10px;
+    }
+    
+    .service-card,
+    .project-card {
+        padding: 15px 10px;
+    }
+}
+
+/* تحسينات خاصة للنسب الصغيرة جداً */
+@media (max-width: 500px) and (min-height: 800px) {
+    .content-area {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        gap: 25px;
+    }
+    
+    .content-card {
+        margin-bottom: 15px;
+    }
+    
+    .service-card,
+    .project-card {
+        padding: 18px 15px;
+        min-height: 140px;
+    }
+    
+    .service-icon {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+/* تحسينات للشاشات الضيقة والطويلة (مثل 33% عرض) */
+@media (max-width: 420px) {
+    .main-layout {
+        flex-direction: column;
+    }
+    
+    .content-area {
+        padding-left: 10px;
+        padding-right: 10px;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    
+    .services-grid,
+    .projects-grid,
+    .skills-grid {
+        grid-template-columns: 1fr;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 300px;
+    }
+    
+    .discord-card {
+        margin: 15px auto;
+        width: 95%;
+    }
+}
+
+/* تحسين الفجوات بين العناصر في الشاشات الصغيرة */
+@media (max-width: 576px) {
+    .content-area {
+        gap: 25px;
+    }
+    
+    .services-grid,
+    .projects-grid {
+        gap: 12px;
+    }
+}
+
+/* تحسين الأزرار في الشاشات الصغيرة */
+@media (max-width: 480px) {
+    .btn {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+    
+    .social-links {
+        gap: 10px;
+    }
+    
+    .social-links a {
+        width: 38px;
+        height: 38px;
+    }
+}
+
+/* منع التمدد الزائد للنصوص */
+.profile-name,
+.card-title,
+.discord-username-large h2 {
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+/* تحسين خط الـ Discord Card للنصوص العربية */
+.discord-section-content-large {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+
+/* إزالة الـ tooltip تماماً */
+.service-card::after,
+.project-card::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* بدلاً من ذلك، نضيف تأثير hover بسيط */
+.service-card:hover h3,
+.project-card:hover h3 {
+    color: var(--purple-light);
+    text-shadow: 0 0 10px rgba(218, 112, 214, 0.5);
+    transition: all 0.3s ease;
 }
