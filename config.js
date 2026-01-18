@@ -382,11 +382,76 @@ function updateDiscordCard() {
         messageInput.placeholder = `Message @${config.displayName}`;
     }
     
+
+    // Load Discord Card Data
+function loadDiscordCard() {
+    const { discordCard } = PORTFOLIO_CONFIG;
+    
+    // Update Banner
+    const bannerImg = document.getElementById('discord-banner-img');
+    if (bannerImg && discordCard.banner) {
+        bannerImg.src = discordCard.banner;
+    }
+    
+    // Update Avatar
+    const avatarImg = document.getElementById('discord-avatar-img');
+    if (avatarImg && discordCard.avatar) {
+        avatarImg.src = discordCard.avatar;
+    }
+    
+    // Update Display Name
+    const displayName = document.getElementById('discord-displayname');
+    if (displayName && discordCard.displayName) {
+        displayName.textContent = discordCard.displayName;
+    }
+    
+    // Update Tag
+    const tag = document.getElementById('discord-tag');
+    if (tag && discordCard.tag) {
+        tag.textContent = discordCard.tag;
+    }
+    
+    // Update Bio
+    const bio = document.getElementById('discord-bio');
+    if (bio && discordCard.bio) {
+        bio.textContent = discordCard.bio;
+    }
+    
+    // Update Member Since Date
+    const date = document.getElementById('discord-date');
+    if (date && discordCard.memberSince) {
+        date.textContent = discordCard.memberSince;
+    }
+    
+    // Load Badges
+    const badgesContainer = document.getElementById('discord-badges');
+    if (badgesContainer && discordCard.badges && discordCard.badges.length > 0) {
+        badgesContainer.innerHTML = '';
+        discordCard.badges.forEach(badge => {
+            const badgeImg = document.createElement('img');
+            badgeImg.src = badge.src;
+            badgeImg.alt = badge.title;
+            badgeImg.title = badge.title;
+            badgeImg.className = 'discord-badge-img';
+            badgesContainer.appendChild(badgeImg);
+        });
+    }
+    
+    // Update Status - remove all and add the correct one
+    const statusEl = document.querySelector('.discord-status-large');
+    if (statusEl && discordCard.status) {
+        // Remove all status classes
+        statusEl.classList.remove('online', 'idle', 'dnd', 'offline');
+        // Add the appropriate status class
+        statusEl.classList.add(discordCard.status);
+    }
+}
+
     // ═══════════════════════════════════════════════════════════════
     // 🎯 Custom Tooltip System للـ Service و Project Cards
     // ═══════════════════════════════════════════════════════════════
     initCustomTooltips();
-});
+};
 
 // دالة تهيئة الـ Custom Tooltips
 function initCustomTooltips() {
@@ -507,3 +572,5 @@ document.querySelectorAll('.service-card, .project-card').forEach(card => {
     card.style.transform = 'rotateY(0deg) rotateX(0deg) translateZ(0px)';
   });
 });
+
+
