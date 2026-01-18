@@ -381,129 +381,33 @@ function updateDiscordCard() {
     if (messageInput && config.displayName) {
         messageInput.placeholder = `Message @${config.displayName}`;
     }
-    
-    // ═══════════════════════════════════════════════════════════════
-    // 🎯 Custom Tooltip System للـ Service و Project Cards
-    // ═══════════════════════════════════════════════════════════════
-    initCustomTooltips();
-});
-
-// دالة تهيئة الـ Custom Tooltips
-function initCustomTooltips() {
-    const cards = document.querySelectorAll('[data-title]');
-    let tooltip = null;
-    
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', (e) => {
-            const title = card.getAttribute('data-title');
-            if (!title) return;
-            
-            // حذف أي tooltip قديم
-            if (tooltip) tooltip.remove();
-            
-            // إنشاء tooltip جديد
-            tooltip = document.createElement('div');
-            tooltip.className = 'custom-tooltip';
-            tooltip.textContent = title;
-            tooltip.style.cssText = `
-                position: fixed;
-                background: rgba(35, 22, 70, 0.95);
-                color: #da70d6;
-                padding: 8px 16px;
-                border-radius: 8px;
-                border: 1px solid rgba(218,112,214,0.5);
-                font-size: 12px;
-                font-weight: 600;
-                white-space: nowrap;
-                pointer-events: none;
-                z-index: 10000;
-                box-shadow: 0 0 15px rgba(138,43,226,0.3);
-                opacity: 0;
-                transition: opacity 0.3s ease;
-            `;
-            document.body.appendChild(tooltip);
-            
-            // تأخير صغير لتفعيل الـ transition
-            setTimeout(() => {
-                tooltip.style.opacity = '1';
-            }, 10);
-            
-            // تحديث موقع الـ tooltip مع حركة الماوس
-            const updateTooltipPosition = (event) => {
-                if (tooltip) {
-                    tooltip.style.left = (event.clientX + 10) + 'px';
-                    tooltip.style.top = (event.clientY + 10) + 'px';
-                }
-            };
-            
-            card.addEventListener('mousemove', updateTooltipPosition);
-            
-            card.addEventListener('mouseleave', () => {
-                if (tooltip) {
-                    tooltip.style.opacity = '0';
-                    setTimeout(() => {
-                        if (tooltip) {
-                            tooltip.remove();
-                            tooltip = null;
-                        }
-                    }, 300);
-                }
-                card.removeEventListener('mousemove', updateTooltipPosition);
-            });
-        });
-    });
 }
 
 
 
-const easterEgg = document.getElementById('easter-egg');
-const commandInput = document.getElementById('command-input');
-const terminalOutput = document.getElementById('terminal-output');
-
 document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !document.getElementById('easter-egg').style.display === 'none') return;
+
+  // مثال: اضغط Ctrl + Shift + L عشان يفتح
   if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'l') {
-    easterEgg.style.display = 'block';
-    commandInput.focus();
+    document.getElementById('easter-egg').style.display = 'block';
+    document.getElementById('command-input').focus();
   }
 });
 
-commandInput.addEventListener('keydown', e => {
+document.getElementById('command-input')?.addEventListener('keydown', e => {
   if (e.key === 'Enter') {
     const cmd = e.target.value.trim().toLowerCase();
-    terminalOutput.innerHTML += `\n> ${cmd}\n`;  // يضيف الأمر في الـ output
-
     if (cmd === '!help') {
-      terminalOutput.innerHTML += 'Available commands: !info, !bots, !secret\n';
+      alert('Available commands: !info, !bots, !secret');
     } else if (cmd === '!info') {
-      terminalOutput.innerHTML += 'Developer: ϟ〢𝑳á𝒛𝒚 | Specializing in Discord Bots & Web\n';
+      alert('Developer: ϟ〢𝑳á𝒛𝒚 | Specializing in Discord Bots & Web');
     } else if (cmd === '!secret') {
-      terminalOutput.innerHTML += 'You found the easter egg! 🎉 Secret link: https://your-discord-server\n';
+      alert('You found the easter egg! 🎉 Here is a secret link: https://your-discord-server');
     } else {
-      terminalOutput.innerHTML += 'Unknown command. Try !help\n';
+      alert('Unknown command. Try !help');
     }
-
-    e.target.value = '';  // يمسح الـ input
-    terminalOutput.scrollTop = terminalOutput.scrollHeight;  // يسكرول لتحت
+    e.target.value = '';
   }
 });
 
-// لإغلاق الـ terminal: اضغط Esc
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && easterEgg.style.display === 'block') {
-    easterEgg.style.display = 'none';
-  }
-});
-
-
-document.querySelectorAll('.service-card, .project-card').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = (e.clientX - rect.left - rect.width / 2) / 20;  // حساب الإمالة
-    const y = (e.clientY - rect.top - rect.height / 2) / 20;
-    card.style.transform = `rotateY(${x}deg) rotateX(${y * -1}deg) translateZ(20px)`;
-  });
-
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = 'rotateY(0deg) rotateX(0deg) translateZ(0px)';
-  });
-});

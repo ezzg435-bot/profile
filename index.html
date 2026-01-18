@@ -21,7 +21,6 @@
 <body>
     <!-- Particles Background -->
     <div class="particles" id="particles"></div>
-    <div class="custom-cursor" id="cursor"></div>
     
     <div class="main-layout">
         <!-- Main Content Area -->
@@ -204,21 +203,21 @@
                     <p class="card-subtitle">خدماتي</p>
                     
                     <div class="services-grid">
-                        <div class="service-card" data-title="Web Development">
+                        <div class="service-card">
                             <div class="service-icon">
                                 <img src="https://makelinkit.com/img/web-development/web-development.webp" alt="Web Development">
                             </div>
                             <h3>Web Development</h3>
                             <p>Responsive websites, modern UI/UX, full-stack solutions</p>
                         </div>
-                        <div class="service-card" data-title="Discord Bot Development">
+                        <div class="service-card">
                             <div class="service-icon">
                                 <img src="https://cdn.writebots.com/wp-content/uploads/2022/02/5_How-Discord-Bots-Work-API-Diagram_1386.jpg" alt="Bot Development">
                             </div>
                             <h3>Discord Bot Development</h3>
                             <p>Advanced bots, automation, shop systems, custom features</p>
                         </div>
-                        <div class="service-card" data-title="Graphic Design">
+                        <div class="service-card">
                             <div class="service-icon">
                                 <img src="https://www.shutterstock.com/image-vector/programmer-engineering-development-illustration-developer-260nw-1095220631.jpg" alt="Graphic Design">
                             </div>
@@ -236,12 +235,12 @@
                     <p class="card-subtitle">مشاريعي</p>
                     
                     <div class="projects-grid">
-                        <div class="project-card" data-title="Na7la Bot">
+                        <div class="project-card">
                             <img src="https://cdn.discordapp.com/attachments/1369976044374855753/1462135049313845280/image.png?ex=696d16e0&is=696bc560&hm=130675e3997efdd772ac87f09034300bfe65c043525ee092cd0741e9cef6bc7e&" alt="Na7la Bot">
                             <h3>Na7la Bot</h3>
                             <p>Advanced Discord shop & management bot</p>
                         </div>
-                        <div class="project-card" data-title="Valhalla Bot">
+                        <div class="project-card">
                             <img src="https://img.freepik.com/premium-photo/purple-neon-coming-soon_527804-252.jpg?semt=ais_hybrid&w=740&q=80" alt="Valhalla">
                             <h3>Valhalla (Coming Soon)</h3>
                             <p>Next-generation multi-purpose Discord bot</p>
@@ -473,24 +472,50 @@ document.getElementById('contactForm').addEventListener('submit', async function
 });
 </script>
 
+    <style>
+  body {
+    cursor: none;  /* إخفاء الكورسور الافتراضي */
+  }
+  .custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: rgba(138,43,226,0.6);
+    border: 2px solid #da70d6;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+    z-index: 9999;
+    box-shadow: 0 0 15px #8a2be2;
+  }
+  .custom-cursor.active {  /* عند الضغط */
+    width: 40px;
+    height: 40px;
+    background: rgba(218,112,214,0.4);
+  }
+  .trail {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: #da70d6;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.7;
+    transition: all 0.2s;
+    z-index: 9998;
+  }
+</style>
+
+<div class="custom-cursor" id="cursor"></div>
+
 <script>
-const cursor = document.getElementById('cursor');
+    const cursor = document.getElementById('cursor');
 let trails = [];
-let idleTimer;
 
 document.addEventListener('mousemove', e => {
-  // تحريك الـ cursor
   cursor.style.left = e.clientX + 'px';
   cursor.style.top = e.clientY + 'px';
-
-  // إيقاف الـ animation مؤقتًا
-  cursor.style.animationPlayState = 'paused';
-
-  // إعادة تشغيل الـ animation بعد 2 ثانية idle
-  clearTimeout(idleTimer);
-  idleTimer = setTimeout(() => {
-    cursor.style.animationPlayState = 'running';
-  }, 2000);
 
   // إنشاء trail
   const trail = document.createElement('div');
@@ -500,26 +525,18 @@ document.addEventListener('mousemove', e => {
   document.body.appendChild(trail);
   trails.push(trail);
 
-  // حذف trails القديمة مع fade-out
+  // حذف الـ trails القديمة
   if (trails.length > 15) {
     const old = trails.shift();
-    old.style.opacity = 0; // تفعيل الـ transition
-    setTimeout(() => old.remove(), 300);
+    old.remove();
   }
 });
 
-// تأثير الضغط على الماوس
 document.addEventListener('mousedown', () => cursor.classList.add('active'));
 document.addEventListener('mouseup', () => cursor.classList.remove('active'));
 </script>
 
-<div id="easter-egg" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); color:#da70d6; font-family:monospace; padding:2rem; z-index:10000; overflow:auto;">
-  <pre id="terminal-output">
-Welcome to Lazy's Secret Terminal
-Type a command like !help and press Enter:
-  </pre>
-  <input type="text" id="command-input" placeholder="Type !help" style="background:#0f081a; color:#da70d6; border:1px solid #8a2be2; padding:10px; width:80%;">
-</div>
+
 
 </body>
 </html>
